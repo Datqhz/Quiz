@@ -1,0 +1,12 @@
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\bin\Debug\net7.0\Quiz.MyUser.Contracts.deps.json
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\bin\Debug\net7.0\Quiz.MyUser.Contracts.dll
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\bin\Debug\net7.0\Quiz.MyUser.Contracts.pdb
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.csproj.AssemblyReference.cache
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.AssemblyInfoInputs.cache
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.AssemblyInfo.cs
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.dll
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\refint\Quiz.MyUser.Contracts.dll
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\Quiz.MyUser.Contracts.pdb
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.MyUser\src\Quiz.MyUser.Contracts\obj\Debug\net7.0\ref\Quiz.MyUser.Contracts.dll

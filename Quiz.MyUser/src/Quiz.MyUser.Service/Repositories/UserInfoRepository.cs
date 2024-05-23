@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Quiz.Common.Repository;
 using Quiz.MyUser.Service.Models;
 using Quiz.User.Service.DBContexts;
 
@@ -10,33 +13,42 @@ namespace Quiz.MyUser.Service.Repository
         {
             this._context = context;
         }
-        public IEnumerable<UserInfo> GetAll()
+        public async Task<IEnumerable<UserInfo>> GetAll()
         {
-
+            var data = await _context.User.ToListAsync();
+            return data;
+        }   
+        public async Task<IEnumerable<UserInfo>> GetAll(string query)
+        {
+            var data = await _context.User.ToListAsync();
+            return data;
         }
-        public IEnumerable<UserInfo> GetAll(string query)
+        public async Task<UserInfo> GetById(int id)
         {
-
+            return await _context.User.FindAsync(id);
         }
-        public UserInfo Get(string query)
+        public async Task<UserInfo> Insert(UserInfo entity)
         {
-
+            var user = await _context.User.AddAsync(entity);
+            await Save();
+            return user.Entity;
         }
-        public UserInfo Insert(UserInfo entity)
+        public async Task<UserInfo> Update(UserInfo entity)
         {
-
+            _context.Entry(entity).State = EntityState.Modified;
+            await Save();
+            return _context.Entry(entity).Entity;
         }
-        public UserInfo Update(UserInfo entity)
+        public async Task<UserInfo> Delete(int Id)
         {
-
+            var entity = await _context.User.FindAsync(Id);
+            _context.User.Remove(entity);
+            await Save();
+            return entity;
         }
-        public UserInfo Delete(int Id)
+        public async Task Save()
         {
-
-        }
-        public void Save()
-        {
-
+            await _context.SaveChangesAsync();
         }
     }
 }

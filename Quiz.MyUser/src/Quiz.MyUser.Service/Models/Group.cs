@@ -1,3 +1,5 @@
+using Quiz.Common.Models;
+
 namespace Quiz.MyUser.Service.Models
 {
     public class Group : IModel

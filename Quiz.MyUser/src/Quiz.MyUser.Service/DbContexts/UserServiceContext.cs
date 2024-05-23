@@ -11,8 +11,10 @@ namespace Quiz.User.Service.DBContexts
         public DbSet<UserInfo> User { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=127.0.0.1;port=3308;database=UserService;user=root;password=123456");
-            Database.EnsureCreated();
+            string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
+            DotNetEnv.Env.Load(rootFolderPath);
+            string ROOT_PASSWORD = Environment.GetEnvironmentVariable("DATABASE_ROOT_PASSWORD");
+            optionsBuilder.UseMySQL("server=127.0.0.1;port=3308;database=UserService;user=root;password="+ROOT_PASSWORD);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,19 +50,6 @@ namespace Quiz.User.Service.DBContexts
                     .HasForeignKey<UserInfo>(e => e.AccountId);
 
             });
-            modelBuilder.Entity<Group>().HasData(
-                new Group
-                {
-                    Name = "TEACHER",
-                    Description = "TEACHER"
-                },
-                new Group
-                {
-                    Name = "STUDENT",
-                    Description = "STUDENT"
-                }
-
-            );
         }
     }
 }
