@@ -15,7 +15,7 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Quiz.MyUser.Contracts" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    <PackageReference Include="Quiz.Common" Version="1.0.3" />
+    <PackageReference Include="Quiz.Common" Version="1.0.7" />
   </ItemGroup>
 
 </Project>

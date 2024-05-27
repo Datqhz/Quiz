@@ -54,13 +54,38 @@ namespace Quiz.Task.Service.Repositories
         // Get all Folder user has userId created
         public async Task<IEnumerable<Folder>> GetByUserId(int userId)
         {
-            return await _context.Folder.Where(c => c.UserId == userId).ToListAsync();
+            return await _context.Folder.Where(c => c.UserId == userId)
+                                        .OrderByDescending(e => e.CreateDate)
+                                        .ToListAsync();
         }
 
         public async Task<IEnumerable<Folder>> GetByClassId(int classId)
         {
-            return await _context.Folder.Where(c => c.ClassId == classId).ToListAsync();
+            return await _context.Folder.Where(c => c.ClassId == classId)
+                                        .OrderByDescending(e => e.CreateDate)
+                                        .ToListAsync();
+        }
 
+        public async Task<IEnumerable<Folder>> GetByUserIdWithPage(int userId, int page, int limit)
+        {
+            var offset = (page - 1) * limit;
+            return await _context.Folder
+                                .Where(f => f.UserId == userId)
+                                .OrderByDescending(e => e.CreateDate)
+                                .Skip(offset)
+                                .Take(limit)
+                                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Folder>> GetByClassIdWithPage(int classId, int page, int limit)
+        {
+            var offset = (page - 1) * limit;
+            return await _context.Folder
+                                .Where(c => c.ClassId == classId)
+                                .OrderByDescending(e => e.CreateDate)
+                                .Skip(offset)
+                                .Take(limit)
+                                .ToListAsync();
         }
     }
 }

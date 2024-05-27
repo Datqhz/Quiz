@@ -83,3 +83,5 @@ C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Servi
 C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Service\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Service\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Service\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Service\bin\Debug\net7.0\DotNetEnv.dll
+C:\Users\baam0\OneDrive\Documents\C#\Microservices\Quiz.Task\src\Quiz.Task.Service\bin\Debug\net7.0\Sprache.dll

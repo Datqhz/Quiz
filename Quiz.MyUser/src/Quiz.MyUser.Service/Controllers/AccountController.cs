@@ -65,8 +65,9 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = data
                 });
         }
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<Account>> Insert(CreateAccountDto accountDto)
+        public async Task<ActionResult> Insert(CreateAccountDto accountDto)
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(accountDto.Password);
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)){
@@ -95,7 +96,7 @@ namespace Quiz.MyUser.Service.Controllers
             }
         }
         [HttpPut]
-        public async Task<ActionResult<Account>> Update(UpdateAccountDto accountDto)
+        public async Task<ActionResult> Update(UpdateAccountDto accountDto)
         {
             var account = await accountRepository.GetById(accountDto.Id);
             if(account == null){
@@ -125,7 +126,7 @@ namespace Quiz.MyUser.Service.Controllers
         }
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<Account>> Login(LoginDto loginDto)
+        public async Task<ActionResult> Login(LoginDto loginDto)
         {
             var account = await accountRepository.GetByEmail(loginDto.Email);
             if(account == null){

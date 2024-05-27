@@ -17,7 +17,10 @@ namespace Quiz.Task.Service.DBContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=127.0.0.1;port=3308;database=TaskService;user=root;password=123456");
+            string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
+            DotNetEnv.Env.Load(rootFolderPath);
+            string ROOT_PASSWORD = Environment.GetEnvironmentVariable("DATABASE_ROOT_PASSWORD");
+            optionsBuilder.UseMySQL("server=127.0.0.1;port=3308;database=TaskService;user=root;password="+ROOT_PASSWORD);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -79,13 +82,15 @@ namespace Quiz.Task.Service.DBContexts
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.FolderName).IsRequired();
                 entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.ClassId).IsRequired(false);
                 entity.Property(e => e.CreateDate).HasDefaultValue<DateTime>(DateTime.Now);
                 entity.HasOne(e => e.User)
                     .WithMany(u => u.Folders)
                     .HasForeignKey(e => e.UserId);
                 entity.HasOne(e => e.Class)
                     .WithMany(u => u.Folders)
-                    .HasForeignKey(e => e.ClassId);         
+                    .HasForeignKey(e => e.ClassId)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
             modelBuilder.Entity<FolderDetail>(entity =>
             {

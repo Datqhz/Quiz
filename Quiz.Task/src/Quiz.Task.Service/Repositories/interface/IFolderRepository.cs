@@ -7,5 +7,7 @@ namespace Quiz.Task.Service.Repository
     {
         Task<IEnumerable<Folder>> GetByUserId(int userId);
         Task<IEnumerable<Folder>> GetByClassId(int classId);
+        Task<IEnumerable<Folder>> GetByUserIdWithPage(int userId, int page, int limit);
+        Task<IEnumerable<Folder>> GetByClassIdWithPage(int classId, int page, int limit);
     }
 }

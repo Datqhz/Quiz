@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {}
+    "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {
+    "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
+        "projectUniqueName": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
         "projectName": "Quiz.Task.Service",
-        "projectPath": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
+        "projectPath": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
         "packagesPath": "C:\\Users\\baam0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\obj\\",
+        "outputPath": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
@@ -32,7 +32,6 @@
           "C:\\Program Files\\dotnet\\library-packs": {},
           "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\packages": {},
           "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\packages": {},
-          "C:\\Users\\baam0\\packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -67,7 +66,7 @@
             },
             "Quiz.Common": {
               "target": "Package",
-              "version": "[1.0.3, )"
+              "version": "[1.0.7, )"
             },
             "Quiz.MyUser.Contracts": {
               "target": "Package",

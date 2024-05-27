@@ -56,7 +56,7 @@ namespace Quiz.MyUser.Service.Controllers
             });
         }
         [HttpPut]
-        public async Task<ActionResult<Account>> Update(UpdateUserDto userDto)
+        public async Task<ActionResult> Update(UpdateUserDto userDto)
         {
             var user = await repository.GetById(userDto.Id);
             if (user == null)

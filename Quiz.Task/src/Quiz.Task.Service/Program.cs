@@ -1,4 +1,6 @@
+using Quiz.Common.Authentication;
 using Quiz.Common.MassTransit;
+using Quiz.Common.Middleware;
 using Quiz.Common.Repository;
 using Quiz.MyUser.Service.Repository;
 using Quiz.Task.Service.DBContexts;
@@ -19,7 +21,10 @@ builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
 builder.Services.AddSingleton<IStudySetRepository, StudySetRepository>();
 builder.Services.AddSingleton<IRepository<Group>, GroupRepository>();
 builder.Services.AddSingleton<IRepository<UserInfo>, UserInfoRepository>();
-builder.Services.AddMassTransitWithRabbitMq();
+builder.Services
+    .AddAuthenticationSetting()
+    .AddAuthorizationSetting()
+    .AddMassTransitWithRabbitMq();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -27,16 +32,17 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// app.UseAuthorization();
 
 app.MapControllers();
 

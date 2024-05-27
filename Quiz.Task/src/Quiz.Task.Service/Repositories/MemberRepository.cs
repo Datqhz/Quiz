@@ -16,7 +16,10 @@ namespace Quiz.Task.Service.Repositories
         }
         public async Task<IEnumerable<Member>> GetAll()
         {
-            var data = await _context.Member.ToListAsync();
+            var data = await _context.Member
+                                    .Include(e => e.User)
+                                    .Include(e => e.Class)
+                                    .ToListAsync();
             return data;
         }   
         public async Task<IEnumerable<Member>> GetAll(string query)
@@ -26,7 +29,13 @@ namespace Quiz.Task.Service.Repositories
         }
         public async Task<Member> GetById(int id)
         {
-            return await _context.Member.FindAsync(id);
+#pragma warning disable CS8603 // Possible null reference return.
+            return await _context.Member
+                                    .Include(e => e.User)
+                                    .Include(e => e.Class)
+                                    .Where(e => e.Id == id)
+                                    .FirstOrDefaultAsync();
+#pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<Member> Insert(Member entity)
         {
@@ -69,7 +78,11 @@ namespace Quiz.Task.Service.Repositories
 
         public async Task<IEnumerable<Member>> GetByClassId(int classId)
         {
-            return await _context.Member.Where(c => c.ClassId == classId).ToListAsync();
+            return await _context.Member
+            .Include(e => e.User)
+            .Include(e => e.Class)
+            .Where(c => c.ClassId == classId)
+            .ToListAsync();
 
         }
     }
