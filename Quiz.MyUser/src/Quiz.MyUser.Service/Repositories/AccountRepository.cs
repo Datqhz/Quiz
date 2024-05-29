@@ -24,7 +24,11 @@ namespace Quiz.MyUser.Service.Repository
         }
         public async Task<Account> GetById(int id)
         {
-            return await _context.Account.FindAsync(id);
+#pragma warning disable CS8603 // Possible null reference return.
+            return await _context.Account
+                            .Include(e => e.User)
+                            .FirstOrDefaultAsync(e => e.Id == id);
+#pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<Account> GetByEmail(string email)
         {

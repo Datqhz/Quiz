@@ -13,8 +13,8 @@ namespace Quiz.Common.Authentication
     {
         public static IServiceCollection AddAuthenticationSetting(this IServiceCollection services)
         {
-            string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
-            DotNetEnv.Env.Load(rootFolderPath);
+            // string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
+            // DotNetEnv.Env.Load(rootFolderPath);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -22,6 +22,7 @@ namespace Quiz.Common.Authentication
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
+                Console.WriteLine($"issuer: {Environment.GetEnvironmentVariable("ISSUER")}");
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidIssuer = Environment.GetEnvironmentVariable("ISSUER"),

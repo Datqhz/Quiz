@@ -15,17 +15,27 @@ namespace Quiz.MyUser.Service.Repository
         }
         public async Task<IEnumerable<UserInfo>> GetAll()
         {
-            var data = await _context.User.ToListAsync();
+            var data = await _context.User
+                                    .Include(x => x.Account)
+                                    .Include(x => x.Group)
+                                    .ToListAsync();
             return data;
         }   
         public async Task<IEnumerable<UserInfo>> GetAll(string query)
         {
-            var data = await _context.User.ToListAsync();
+            var data = await _context.User
+            .ToListAsync();
             return data;
         }
         public async Task<UserInfo> GetById(int id)
         {
-            return await _context.User.FindAsync(id);
+#pragma warning disable CS8603 // Possible null reference return.
+            return await _context.User
+                                .Include(e => e.Account)
+                                .Include(e => e.Group)
+                                .Where(e => e.Id == id)
+                                .FirstOrDefaultAsync();
+#pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<UserInfo> Insert(UserInfo entity)
         {

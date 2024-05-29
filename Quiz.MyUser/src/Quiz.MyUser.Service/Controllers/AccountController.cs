@@ -7,8 +7,10 @@ using Quiz.Common.Authentication;
 using Quiz.Common.Global;
 using Quiz.Common.Repository;
 using Quiz.Common.Responses;
+using Quiz.MysUser.Service.ResponseDtos;
 using Quiz.MyUser.Contract;
 using Quiz.MyUser.Service.Dtos;
+using Quiz.MyUser.Service.Extensions;
 using Quiz.MyUser.Service.Models;
 using Quiz.MyUser.Service.Repository;
 namespace Quiz.MyUser.Service.Controllers
@@ -37,11 +39,11 @@ namespace Quiz.MyUser.Service.Controllers
         public async Task<IActionResult> GetAll()
         {
             var data = await accountRepository.GetAll();
-            return Ok(new ResponseModel<IEnumerable<Account>>
+            return Ok(new ResponseModel<IEnumerable<AccountDto>>
                 {
                     EC = 200,
                     EM = "Get all account successful!",
-                    DT = data
+                    DT = data.Select(account => account.AsDto()).ToList()
                 });
         }
         
@@ -58,11 +60,11 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = ""
                 });
             }
-            return Ok(new ResponseModel<Account>
+            return Ok(new ResponseModel<AccountDto>
                 {
                     EC = 200,
                     EM = "Find account has Id equal " + id + " successful!" ,
-                    DT = data
+                    DT = data.AsDto()
                 });
         }
         [AllowAnonymous]
@@ -87,11 +89,11 @@ namespace Quiz.MyUser.Service.Controllers
                 scope.Complete();
                 await publishEndpoint.Publish(new AccountCreated(account.Id, account.Email, passwordHash));
                 await publishEndpoint.Publish(new UserCreated(user.Id, user.UserName, GlobalVariable.defaultImg, user.CreateDate, user.AccountId, user.GroupId));
-                return CreatedAtAction(nameof(GetById), new {id = account.Id}, new ResponseModel<Account>
+                return CreatedAtAction(nameof(GetById), new {id = account.Id}, new ResponseModel<AccountDto>
                 {
                     EC = 200,
                     EM = "Create account successful!" ,
-                    DT = account
+                    DT = account.AsDto()
                 });
             }
         }
@@ -116,11 +118,11 @@ namespace Quiz.MyUser.Service.Controllers
                 });
                 scope.Complete();
                 await publishEndpoint.Publish(new AccountUpdated(rs_account.Id, rs_account.Email, rs_account.Password));
-                return Ok(new ResponseModel<Account>
+                return Ok(new ResponseModel<AccountDto>
                 {
                     EC = 200,
                     EM = "Update account successful!" ,
-                    DT = rs_account
+                    DT = rs_account.AsDto()
                 });
             }
         }
@@ -141,11 +143,12 @@ namespace Quiz.MyUser.Service.Controllers
             {
                 var group = await groupRepository.GetById(account.User.GroupId);
                 string token = authHandler.CreateToken(account.Email, account.Id.ToString(), group.Name);
-                return Ok(new ResponseModel<string>
+                var response = new LoginResult(account.User.Id, account.User.UserName, account.Email, token, group.Name);
+                return Ok(new ResponseModel<LoginResult>
                 {
                     EC = 200,
                     EM = "Login successful!" ,
-                    DT = token
+                    DT = response
                 });
             }else {
                 return BadRequest(new ResponseModel<string>

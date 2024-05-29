@@ -17,10 +17,11 @@ namespace Quiz.Task.Service.DBContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
-            DotNetEnv.Env.Load(rootFolderPath);
-            string ROOT_PASSWORD = Environment.GetEnvironmentVariable("DATABASE_ROOT_PASSWORD");
-            optionsBuilder.UseMySQL("server=127.0.0.1;port=3308;database=TaskService;user=root;password="+ROOT_PASSWORD);
+            if (!optionsBuilder.IsConfigured)
+            {
+                string ROOT_PASSWORD = Environment.GetEnvironmentVariable("DATABASE_ROOT_PASSWORD");
+                optionsBuilder.UseMySQL($"server=quiz-mysql;port=3306;database=TaskService;user=root;password={ROOT_PASSWORD}");
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

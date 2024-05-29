@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {}
+    "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {}
   },
   "projects": {
-    "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {
+    "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
+        "projectUniqueName": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
         "projectName": "Quiz.Task.Service",
-        "projectPath": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
+        "projectPath": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\Quiz.Task.Service.csproj",
         "packagesPath": "C:\\Users\\baam0\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\obj\\",
+        "outputPath": "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\Quiz.Task\\src\\Quiz.Task.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+          "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\NuGet.Config",
           "C:\\Users\\baam0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
@@ -30,6 +31,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\packages": {},
           "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\Microservices\\packages": {},
           "C:\\Users\\baam0\\OneDrive\\Documents\\C#\\packages": {},
           "https://api.nuget.org/v3/index.json": {}
@@ -60,13 +62,21 @@
               "target": "Package",
               "version": "[7.0.4, )"
             },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.16, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.2, )"
+            },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
             },
             "Quiz.Common": {
               "target": "Package",
-              "version": "[1.0.7, )"
+              "version": "[1.0.9, )"
             },
             "Quiz.MyUser.Contracts": {
               "target": "Package",

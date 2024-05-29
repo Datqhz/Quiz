@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Quiz.Common.Repository;
 using Quiz.Common.Responses;
@@ -9,6 +10,7 @@ using Quiz.Task.Service.ResponseDtos;
 
 namespace Quiz.Task.Service.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/folder-detail")]
     public class FolderDetailController : ControllerBase

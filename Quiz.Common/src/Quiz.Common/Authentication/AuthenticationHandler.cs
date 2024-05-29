@@ -14,8 +14,8 @@ namespace Quiz.Common.Authentication
         string AUTH_KEY;
         public AuthenticationHandler()
         {
-            string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
-            DotNetEnv.Env.Load(rootFolderPath);
+            // string rootFolderPath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, ".env");
+            // DotNetEnv.Env.Load(rootFolderPath);
             AUTH_ISSUER = Environment.GetEnvironmentVariable("ISSUER");
             AUTH_AUDIENCE = Environment.GetEnvironmentVariable("AUDIENCE");
             AUTH_KEY = Environment.GetEnvironmentVariable("KEY");

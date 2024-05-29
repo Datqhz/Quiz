@@ -1,0 +1,89 @@
+version: '3.8'
+
+networks:
+  quiz-network:
+    driver: bridge
+
+services:
+  quiz-mysql:
+    image: mysql
+    container_name: quiz-mysql
+    ports:
+      - 3308:3306
+    volumes:
+      - mysqldata:/data/db
+    environment:
+      MYSQL_ROOT_PASSWORD: $DATABASE_ROOT_PASSWORD
+    networks:
+      - quiz-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  quiz-rabbitmq:
+    image: rabbitmq:management
+    container_name: quiz-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    hostname: rabbitmq
+    networks:
+      - quiz-network
+
+  quiz-myuser-service:
+    image: $DOCKER_USERNAME/quiz-myuser-service
+    container_name: quiz-myuser-service
+    ports:
+      - "5000:80"
+    networks:
+      - quiz-network
+    depends_on:
+      - quiz-rabbitmq
+      - quiz-mysql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ISSUER=$ISSUER
+      - AUDIENCE=$AUDIENCE
+      - KEY=$KEY
+      - DATABASE_ROOT_PASSWORD=$DATABASE_ROOT_PASSWORD
+
+  quiz-task-service:
+    image: $DOCKER_USERNAME/quiz-task-service
+    container_name: quiz-task-service
+    ports:
+      - "5001:80"
+    networks:
+      - quiz-network
+    depends_on:
+      - quiz-rabbitmq
+      - quiz-mysql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ISSUER=$ISSUER
+      - AUDIENCE=$AUDIENCE
+      - KEY=$KEY
+      - DATABASE_ROOT_PASSWORD=$DATABASE_ROOT_PASSWORD
+
+  quiz-apigw:
+    image: $DOCKER_USERNAME/quiz-apigw
+    container_name: quiz-apigw
+    ports:
+      - "8000:80"
+    networks:
+      - quiz-network
+    depends_on:
+      - quiz-myuser-service
+      - quiz-task-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ISSUER=$ISSUER
+      - AUDIENCE=$AUDIENCE
+      - KEY=$KEY
+
+volumes:
+  mysqldata:
+  rabbitmqdata:

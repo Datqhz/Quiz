@@ -19,6 +19,7 @@ namespace Quiz.Common.Middleware
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"error: {ex.Message}");
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 context.Response.ContentType = "application/json";
                 var customErrorResponse = new ResponseModel<string>
