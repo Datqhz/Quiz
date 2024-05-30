@@ -1,0 +1,1257 @@
+{
+	"info": {
+		"_postman_id": "e70b51bc-c08c-4a00-9a5f-3aeb644059c5",
+		"name": "Quiz.MyUser.Service API",
+		"description": "API for imaginary api need and what you will receive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24687481"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "account",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/account/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/account/8",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account",
+												"8"
+											]
+										},
+										"description": "Service will return account infomation"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/account/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"account",
+														"1"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 01:48:44 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Find account has Id equal 1 successful!\",\n    \"dt\": {\n        \"id\": \"<Integer>\",\n        \"email\": \"<string>\",\n        \"user\": \"<UserDto>\"\n        }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/account/8",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"account",
+														"8"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 01:50:58 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Account has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								}
+							],
+							"description": "API to get account has id = id"
+						},
+						{
+							"name": "login",
+							"item": [
+								{
+									"name": "/api/account/login",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"a@gmail.com\",\n  \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/account/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account",
+												"login"
+											]
+										},
+										"description": "Service will return user infomation, group name, and jwt"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "//api/account/login",
+													"path": [
+														"",
+														"api",
+														"account",
+														"login"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"name": "Content-Type",
+													"description": "",
+													"type": "text"
+												}
+											],
+											"cookie": [],
+											"body": "{\r\n    \"ec\": 200,\r\n    \"em\": \"Login successful!\",\r\n    \"dt\": {\r\n        \"userId\": \"<integer>\",\r\n        \"userName\": \"<string>\",\r\n        \"email\": \"<string>\",\r\n        \"token\": \"<string>\",\r\n        \"groupName\": \"<string>\"\r\n    }\r\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"m@gmail.com\",\n  \"password\": \"123456\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/account/login",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"account",
+														"login"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 01:45:08 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Account has email doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"a@gmail.com\",\n  \"password\": \"12345\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/account/login",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"account",
+														"login"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 01:46:34 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 400,\n    \"em\": \"Wrong password!\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								}
+							],
+							"description": "API to handle login"
+						},
+						{
+							"name": "/api/account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/account",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"account"
+									]
+								},
+								"description": "API to get all account in database"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/account",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"c@gmail.com\",\n  \"password\": \"123456\",\n  \"username\": \"Jinbu\",\n  \"groupId\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/account",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"account"
+									]
+								},
+								"description": "API to register account, service need infomation to add new account record and user record to database"
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"c@gmail.com\",\n  \"password\": \"123456\",\n  \"username\": \"Jinbu\",\n  \"groupId\": \"1\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/account",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 01:57:02 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-myuser-service/api/account/3"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Create account successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"email\": \"<string>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64>\",\n            \"groupName\": \"<string>\"\n        }\n    }\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"c@gmail.com\",\n  \"password\": \"123456\",\n  \"username\": \"Jinbu\",\n  \"groupId\": \"1\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/account",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 03:35:26 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 400,\n    \"em\": \"Email is used!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3,\n  \"email\": \"c@gmail.com\",\n  \"password\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/account",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"account"
+									]
+								},
+								"description": "API to update infomation (password)"
+							},
+							"response": [
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 4,\n  \"email\": \"c@gmail.com\",\n  \"password\": \"12345678\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/account",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 02:59:54 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Account has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 3,\n  \"email\": \"c@gmail.com\",\n  \"password\": \"12345678\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/account",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"account"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 03:19:12 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Update account successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"email\": \"<string>\",\n        \"user\": null\n    }\n}"
+								}
+							]
+						}
+					],
+					"description": "API to handle account entity"
+				},
+				{
+					"name": "group",
+					"item": [
+						{
+							"name": "{Id}",
+							"item": [
+								{
+									"name": "/api/group/:Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/group/:Id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"group",
+												":Id"
+											],
+											"variable": [
+												{
+													"key": "Id",
+													"value": "<integer>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Get group has id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/group/:Id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"group",
+														":Id"
+													],
+													"variable": [
+														{
+															"key": "Id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/group",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/group",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"group"
+									]
+								},
+								"description": "Get all group"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"group"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/group",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/group",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"group"
+									]
+								},
+								"description": "Add group to database"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/group",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"group"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"description": "API to work with group entity"
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/user/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/user/6",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												"6"
+											]
+										},
+										"description": "API to get user infomation has id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"1"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 03:00:30 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get user by id1 successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"userName\": \"<string>\",\n        \"image\": \"<base64string>\",\n        \"createDate\": \"<datetime\",\n        \"accountId\": \"<integer>\",\n        \"groupId\": \"<integer>\",\n        \"account\": {\n            \"id\": \"<integer>\",\n            \"email\": \"<string>\",\n            \"password\": null,\n            \"user\": null\n        },\n        \"group\": {\n            \"id\": \"<integer>\",\n            \"name\": \"<string>\",\n            \"description\": null,\n            \"users\": null\n        }\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/6",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														"6"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 03:03:32 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"User has id doesn't exsits!\",\n    \"dt\": null\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 03:04:08 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all user successful!\",\n    \"dt\": \"<List<UserDto>>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3,\n  \"username\": \"Hoshino\",\n  \"image\": \"\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								},
+								"description": "API to update user infomation (username, image)"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 3,\n  \"username\": \"Hoshino\",\n  \"image\": \"\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 03:32:56 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Update user info successful!\",\n    \"dt\": {\n        \"id\": 3,\n        \"userName\": \"Hoshino\",\n        \"createDate\": \"2024-05-30T01:57:02.824485\",\n        \"image\": \"<base64string>\",\n        \"groupName\": null\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 8,\n  \"username\": \"Hoshino\",\n  \"image\": \"\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 03:34:31 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"User has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "API to work with User entity"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000"
+		}
+	]
+}

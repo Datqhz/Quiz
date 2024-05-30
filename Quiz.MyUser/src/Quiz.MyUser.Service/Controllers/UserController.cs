@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Quiz.Common.Repository;
 using Quiz.Common.Responses;
+using Quiz.MysUser.Service.ResponseDtos;
 using Quiz.MyUser.Contract;
 using Quiz.MyUser.Service.Dtos;
+using Quiz.MyUser.Service.Extensions;
 using Quiz.MyUser.Service.Models;
 
 namespace Quiz.MyUser.Service.Controllers
@@ -73,16 +75,26 @@ namespace Quiz.MyUser.Service.Controllers
             {
                 user.Image = Convert.FromBase64String(userDto.Image);
             }
+            Console.WriteLine($"account id: {user.Account.Id}");
+            Console.WriteLine($"account id: {user.Group.Id}");
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                var rs_user = await repository.Update(user);
+                var rs_user = await repository.Update(new UserInfo
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Image = user.Image,
+                    CreateDate = user.CreateDate,
+                    AccountId = user.Account.Id,
+                    GroupId = user.Group.Id
+                });
                 scope.Complete();
                 await publishEndpoint.Publish(new UserUpdated(rs_user.Id, rs_user.UserName, userDto.Image));
-                return Ok(new ResponseModel<UserInfo>
+                return Ok(new ResponseModel<UserDto>
                 {
                     EC = 200,
                     EM = "Update user info successful!",
-                    DT = rs_user
+                    DT = rs_user.AsDto()
                 });
             }
         }

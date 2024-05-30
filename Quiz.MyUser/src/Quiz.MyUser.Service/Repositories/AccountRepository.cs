@@ -19,21 +19,56 @@ namespace Quiz.MyUser.Service.Repository
         }   
         public async Task<IEnumerable<Account>> GetAll(string query)
         {
-            var data = await _context.Account.ToListAsync();
+            var data = await _context.Account
+                                .Select(e => new Account
+                                {
+                                    Id = e.Id,
+                                    Email = e.Email,
+                                    User = new UserInfo
+                                    {
+                                        Id = e.Id,
+                                        UserName = e.User.UserName,
+                                        CreateDate = e.User.CreateDate,
+                                        Image = e.User.Image,
+                                    },
+                                })
+                                .ToListAsync();
             return data;
         }
         public async Task<Account> GetById(int id)
         {
 #pragma warning disable CS8603 // Possible null reference return.
             return await _context.Account
-                            .Include(e => e.User)
+                            .Select(e => new Account
+                                {
+                                    Id = e.Id,
+                                    Email = e.Email,
+                                    User = new UserInfo
+                                    {
+                                        Id = e.Id,
+                                        UserName = e.User.UserName,
+                                        CreateDate = e.User.CreateDate,
+                                        Image = e.User.Image,
+                                    },
+                                })
                             .FirstOrDefaultAsync(e => e.Id == id);
 #pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<Account> GetByEmail(string email)
         {
             var data = await _context.Account
-                                .Include(a => a.User)
+                                .Select(e => new Account
+                                {
+                                    Id = e.Id,
+                                    Email = e.Email,
+                                    User = new UserInfo
+                                    {
+                                        Id = e.Id,
+                                        UserName = e.User.UserName,
+                                        CreateDate = e.User.CreateDate,
+                                        Image = e.User.Image,
+                                    },
+                                })
                                 .FirstOrDefaultAsync(a => a.Email == email);
             return data;
         }

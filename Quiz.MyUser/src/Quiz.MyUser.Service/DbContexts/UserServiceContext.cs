@@ -51,7 +51,9 @@ namespace Quiz.User.Service.DBContexts
                     .HasForeignKey(e => e.GroupId);
                 entity.HasOne(e => e.Account)
                     .WithOne(a => a.User)
-                    .HasForeignKey<UserInfo>(e => e.AccountId);
+                    .HasForeignKey<UserInfo>(e => e.AccountId)
+                    .OnDelete(DeleteBehavior.Cascade);;
+                
 
             });
         }

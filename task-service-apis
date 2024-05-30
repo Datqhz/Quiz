@@ -1,0 +1,3632 @@
+{
+	"info": {
+		"_postman_id": "c86c5cd8-53b5-44e1-9f37-73d25014dde1",
+		"name": "Quiz.Task.Service API",
+		"description": "API for imagine how to interact with objects in service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24687481"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "class",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/class/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/class/10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"class",
+												"10"
+											]
+										},
+										"description": "API to get class infomation of class has id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/class/9",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"class",
+														"9"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 06:54:26 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all class successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"className\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"description\": \"<string>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"numOfFolder\": \"<integer>\",\n        \"numOfMember\": \"<integer>\"\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/class/10",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"class",
+														"10"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 06:56:31 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Class has id  doesn't exsist\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/class/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/class/9",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"class",
+												"9"
+											]
+										},
+										"description": "API to delete class has id"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/class/10",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"class",
+														"10"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:27:36 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Class has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/class/9",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"class",
+														"9"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:27:49 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Delete class successful!\",\n    \"dt\": \"<ClassDto>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "user-joined",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/class/user-joined/:id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/class/user-joined/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"class",
+														"user-joined",
+														"1"
+													]
+												},
+												"description": "API to get all classes user has id join in"
+											},
+											"response": [
+												{
+													"name": "Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/class/user-joined/1",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"class",
+																"user-joined",
+																"1"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 06:57:05 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all class user join successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"className\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"description\": \"<string>\",\n            \"user\": {\n                \"id\": \"<integer>\",\n                \"userName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"image\": \"<base64string>\"\n            },\n            \"numOfFolder\": \"<integer>\",\n            \"numOfMember\": \"<integer>\"\n        },\n        ...\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							],
+							"description": "All api to interact with class by user id"
+						},
+						{
+							"name": "/api/class",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/class",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"class"
+									]
+								},
+								"description": "API to get all class without condition"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8000/api/class",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"class"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 06:35:20 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all class successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"className\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"description\": \"<string>\",\n            \"user\": {\n                \"id\": \"<integer>\",\n                \"userName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"image\": \"<string>\"\n            },\n            \"numOfFolder\": \"<integer>\",\n            \"numOfMember\": \"<integer>\"\n        },\n        ...\n        \n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/class",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"className\": \"T\",\n  \"description\": \"class for test api\",\n  \"userId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/class",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"class"
+									]
+								},
+								"description": "API to create a class"
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"className\": \"T\",\n  \"description\": \"class for test api\",\n  \"userId\": 1\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/class",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"class"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 06:40:37 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-task-service/api/class/9"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 201,\n    \"em\": \"Create study set successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"className\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"description\": \"<string>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"numOfFolder\": \"<integer>\",\n        \"numOfMember\": \"<integer>\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/class",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 10,\n  \"className\": \"T update\",\n  \"description\": \"update\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/class",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"class"
+									]
+								},
+								"description": "API to update class infomation"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 9,\n  \"className\": \"T update\",\n  \"description\": \"update\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/class",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"class"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 06:48:51 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Update class successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"className\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"description\": \"<string>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"numOfFolder\": \"<integer>\",\n        \"numOfMember\": \"<integer>\"\n    }\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 9,\n  \"description\": \"update\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/class",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"class"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 06:51:22 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",\n    \"title\": \"One or more validation errors occurred.\",\n    \"status\": 400,\n    \"traceId\": \"00-692aef8142d9a6f12de2c0b51c6ba864-9d89299ab1a30428-00\",\n    \"errors\": {\n        \"ClassName\": [\n            \"The ClassName field is required.\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 10,\n  \"className\": \"T update\",\n  \"description\": \"update\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/class",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"class"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 06:52:05 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Class has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "All API to interact with class entity"
+				},
+				{
+					"name": "folder",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/folder/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/folder/13",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder",
+												"13"
+											]
+										},
+										"description": "API to get folder infomation of folder has id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/folder/13",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"folder",
+														"13"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 07:29:28 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get Folder successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"folderName\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"class\": \"null|<ClassDto>\",\n        \"folderDetails\": null\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/folder/14",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"folder",
+														"14"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 07:32:11 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Folder has id  doesn't exsist\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/folder/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/folder/13",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder",
+												"13"
+											]
+										},
+										"description": "API to delete folder has id"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/folder/14",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"folder",
+														"14"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:26:22 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Folder has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/folder/13",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"folder",
+														"13"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:26:34 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Delete Folder successful!\",\n    \"dt\": \"<FolderDto>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "{userId}",
+									"item": [
+										{
+											"name": "/api/folder/user/:userId",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/folder/user/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"folder",
+														"user",
+														"1"
+													]
+												},
+												"description": "API to get all folders created by user has id is userId"
+											},
+											"response": [
+												{
+													"name": "Success (page)",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/folder/user/1?page=1&limit=2",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"folder",
+																"user",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1"
+																},
+																{
+																	"key": "limit",
+																	"value": "2"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 07:33:21 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<ingeter>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        },\n        ...\n    ]\n}"
+												},
+												{
+													"name": "/api/folder/user/:userId",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/folder/user/1",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"folder",
+																"user",
+																"1"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 07:35:43 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"null|<ClassDto>\",\n            \"folderDetails\": null\n        },\n        ...\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "class",
+							"item": [
+								{
+									"name": "{classId}",
+									"item": [
+										{
+											"name": "/api/folder/class/:classId",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/folder/class/2",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"folder",
+														"class",
+														"2"
+													]
+												},
+												"description": "API to get all folders in class has id is classId"
+											},
+											"response": [
+												{
+													"name": "Success (page)",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/folder/class/2?page=1&limit=1",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"folder",
+																"class",
+																"2"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1"
+																},
+																{
+																	"key": "limit",
+																	"value": "1"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 07:38:56 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        }\n    ]\n}"
+												},
+												{
+													"name": "Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/api/folder/class/2",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"folder",
+																"class",
+																"2"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 07:40:32 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        }\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/folder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/folder",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"folder"
+									]
+								},
+								"description": "API to get all folders without condition"
+							},
+							"response": [
+								{
+									"name": "/api/folder",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8000/api/folder",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:02:43 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": {\n                \"id\": \"<integer>\",\n                \"userName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"image\": \"<base64string>\"\n            },\n            \"class\": {\n                \"id\": \"<integer>\",\n                \"className\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"description\": \"<string>\",\n                \"user\": \"<UserDto>\",\n                \"numOfFolder\": \"<integer>\",\n                \"numOfMember\": \"<integer>\"\n            },\n            \"folderDetails\": null\n        },\n        ...\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/folder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"folderName\": \"F\",\n  \"userId\": 8,\n  \"classId\": 0\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/folder",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"folder"
+									]
+								},
+								"description": "API to create new folder"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"folderName\": \"F\",\n  \"userId\": 1,\n  \"classId\": 0\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/folder",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:08:37 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-task-service/api/folder/13"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 201,\n    \"em\": \"Create study set successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"folderName\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"class\": \"null|<ClassDto>\",\n        \"folderDetails\": null\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"folderName\": \"F\",\n  \"userId\": 8,\n  \"classId\": 0\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/folder",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:13:45 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"User has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"userId\": 8,\n  \"classId\": 0\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/folder",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/problem+json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:14:11 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",\n    \"title\": \"One or more validation errors occurred.\",\n    \"status\": 400,\n    \"traceId\": \"00-522098e4d6659c06b44e5e31ad3c3ab2-98afc014b984260f-00\",\n    \"errors\": {\n        \"FolderName\": [\n            \"The FolderName field is required.\"\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/folder",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"13\",\n  \"folderName\": \"F Update\",\n  \"classId\": \"3\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/folder",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"folder"
+									]
+								},
+								"description": "API to update folder infomation"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"13\",\n  \"folderName\": \"F Update\",\n  \"classId\": \"3\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/folder",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:15:07 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Update study set successful!\",\n    \"dt\": {\n        \"id\": 13,\n        \"folderName\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"user\": {\n            \"id\": \"<integer>\",\n            \"userName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"image\": \"<base64string>\"\n        },\n        \"class\": \"null|<ClassDto>\",\n        \"folderDetails\": null\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"14\",\n  \"folderName\": \"F Update\",\n  \"classId\": \"3\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/folder",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:28:38 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Folder has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "All API to interact with folder entity"
+				},
+				{
+					"name": "folder-detail",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/folder-detail/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/folder-detail/8",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder-detail",
+												"8"
+											]
+										},
+										"description": "API to get folder detail has id is id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/folder-detail/3",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"folder-detail",
+														"3"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:15:57 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get FolderDetail successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"folderId\": \"<integer>\",\n        \"studySetId\": \"<integer>\"\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/folder-detail/8",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"folder-detail",
+														"8"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:16:27 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"FolderDetail has id  doesn't exsist\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/folder-detail/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/folder-detail/3",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder-detail",
+												"3"
+											]
+										},
+										"description": "API to delete folder detail record has id is id"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/folder-detail/5",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"folder-detail",
+														"5"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:23:45 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"FolderDetail has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/folder-detail/3",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"folder-detail",
+														"3"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:23:55 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Delete FolderDetail successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"folderId\": \"<integer>\",\n        \"studySetId\": \"<integer>\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/folder-detail",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"folderId\": 13,\n  \"studySetId\": 18\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/folder-detail",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"folder-detail"
+									]
+								},
+								"description": "API to create new folder detail record"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"folderId\": 13,\n  \"studySetId\": 17\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/folder-detail",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"folder-detail"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 08:14:02 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-task-service/api/folder-detail/3"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 201,\n    \"em\": \"Create folder detail record successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"folderId\": \"<integer>\",\n        \"studySetId\": \"<integer>\"\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"folderId\": 13,\n  \"studySetId\": 18\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/folder-detail",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"folder-detail"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 08:15:01 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Study set has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "All API to interact with folder detail entity"
+				},
+				{
+					"name": "member",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/member/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/member/12",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"member",
+												"12"
+											]
+										},
+										"description": "API to get member record has id is id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/member/11",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"member",
+														"11"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:29:25 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get member successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"class\": \"<ClassDto>\",\n        \"member\": \"<UserDto>\"\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/member/12",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"member",
+														"12"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:30:18 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Member has id  doesn't exsist\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/member/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/member/11",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"member",
+												"11"
+											]
+										},
+										"description": "API to delete member record has id is id"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/member/14",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"member",
+														"14"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:30:44 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Member has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/member/11",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"member",
+														"11"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:32:26 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Delete member successful!\",\n    \"dt\": {\n        \"id\": 11,\n        \"class\": \"<ClassDto>\",\n        \"member\": \"<UserDto>\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "class",
+							"item": [
+								{
+									"name": "{classId}",
+									"item": [
+										{
+											"name": "/api/member/class/:classId",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/member/class/10",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"member",
+														"class",
+														"10"
+													]
+												},
+												"description": "API to get all member in class has classId"
+											},
+											"response": [
+												{
+													"name": "Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/member/class/2",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"member",
+																"class",
+																"2"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 07:45:41 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Member successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"class\": \"<ClassDto>\",\n            \"member\": \"<UserDto>\"\n        },\n        ...\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/member",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/member",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"member"
+									]
+								},
+								"description": "API to get all member record"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8000/api/member",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"member"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:48:03 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Member successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"class\": \"<ClassDto>\",\n            \"member\": \"<UserDto>\"\n        },\n        ...\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/member",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"classId\": 20,\n  \"userId\": 2\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/member",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"member"
+									]
+								},
+								"description": "API to create new member record"
+							},
+							"response": [
+								{
+									"name": "/api/member",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"classId\": 9,\n  \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/member",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"member"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:51:24 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-task-service/api/member/16"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 201,\n    \"em\": \"Create study set successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"class\": \"<ClassDto>\",\n        \"member\": \"<UserDto>\"\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"classId\": 20,\n  \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/member",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"member"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:52:27 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Class has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "All API to interact with Member entity"
+				},
+				{
+					"name": "study-set",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/study-set/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/study-set/18",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"study-set",
+												"18"
+											]
+										},
+										"description": "API to get study set has id equal id"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/study-set/17",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"study-set",
+														"17"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:20:57 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 17 successful!\",\n    \"dt\": {\n        \"id\": 17,\n        \"studySetName\": \"<string>\",\n        \"createDate\": \"<datetime>\",\n        \"user\": \"<UserDto>\",\n        \"cards\": [\n            \"<CardDto>\",\n            ...\n        ]\n    }\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/study-set/18",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"study-set",
+														"18"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:22:17 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Study set has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/study-set/:id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/study-set/17",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"study-set",
+												"17"
+											]
+										},
+										"description": "API to delete study set"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/study-set/18",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"study-set",
+														"18"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:25:16 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 404,\n    \"em\": \"Study set has id doesn't exsits\",\n    \"dt\": \"\"\n}"
+										},
+										{
+											"name": "/api/study-set/:id",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/study-set/17",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"study-set",
+														"17"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:25:25 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Delete study set successful!\",\n    \"dt\": \"<StudySetDto>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/study-set/user/:id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/study-set/user/1?page=1&limit=2",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"study-set",
+														"user",
+														"1"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "2"
+														}
+													]
+												},
+												"description": "API to get all study set created by user has id equal id"
+											},
+											"response": [
+												{
+													"name": "Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/study-set/user/1?page=1&limit=2",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"study-set",
+																"user",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1"
+																},
+																{
+																	"key": "limit",
+																	"value": "2"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 08:19:31 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 1 successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"cards\": [\n                \"<CardDto>\",\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "folder",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "/api/study-set/folder/:id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/study-set/folder/13?page=1&limit=1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"study-set",
+														"folder",
+														"13"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "1"
+														}
+													]
+												},
+												"description": "API to get all study set in folder has id equal id"
+											},
+											"response": [
+												{
+													"name": "Success",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "http://localhost:8000/api/study-set/folder/13?page=1&limit=1",
+															"protocol": "http",
+															"host": [
+																"localhost"
+															],
+															"port": "8000",
+															"path": [
+																"api",
+																"study-set",
+																"folder",
+																"13"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1"
+																},
+																{
+																	"key": "limit",
+																	"value": "1"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json; charset=utf-8"
+														},
+														{
+															"key": "Date",
+															"value": "Thu, 30 May 2024 08:17:40 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Kestrel"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														}
+													],
+													"cookie": [],
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 13 successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"cards\": [\n                \"<CardDto>\",\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "find",
+							"item": [
+								{
+									"name": "/api/study-set/find",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/study-set/find?userId=1&regex=te",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"study-set",
+												"find"
+											],
+											"query": [
+												{
+													"key": "userId",
+													"value": "1"
+												},
+												{
+													"key": "regex",
+													"value": "te"
+												}
+											]
+										},
+										"description": "API to find study set create by user has userId containing regex in it name"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8000/api/study-set/find?userId=1&regex=te",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8000",
+													"path": [
+														"api",
+														"study-set",
+														"find"
+													],
+													"query": [
+														{
+															"key": "userId",
+															"value": "1"
+														},
+														{
+															"key": "regex",
+															"value": "te"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 30 May 2024 08:10:49 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Kestrel"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by regex = te successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<string>\",\n            \"user\": \"<UserDto>\",\n            \"cards\": [\n                \"<CardDto>\",\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/study-set",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/study-set",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"study-set"
+									]
+								},
+								"description": "API t get all study set without condition"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8000/api/study-set",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"study-set"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:56:15 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all study-set successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"UserDto>\",\n            \"cards\": [\n                {\n                    \"id\": \"<integer>\",\n                    \"term\": \"<string>\",\n                    \"definition\": \"<string>\"\n                },\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/study-set",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"studySetName\": \"S\",\n  \"userId\": 9,\n  \"cards\": [\n    {\n      \"term\": \"<string>\",\n      \"definition\": \"<string>\"\n    },\n    {\n      \"term\": \"<string1>\",\n      \"definition\": \"<string1>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/study-set",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"study-set"
+									]
+								},
+								"description": "API to create new study set with list card"
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"studySetName\": \"S\",\n  \"userId\": 1,\n  \"cards\": [\n    {\n      \"term\": \"<string>\",\n      \"definition\": \"<string>\"\n    },\n    {\n      \"term\": \"<string1>\",\n      \"definition\": \"<string1>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/study-set",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"study-set"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 07:59:17 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Location",
+											"value": "http://quiz-task-service/api/study-set/17"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 201,\n    \"em\": \"Create study set successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"studySetName\": \"<integer>\",\n        \"createDate\": \"<datetime>\",\n        \"user\": \"<UserDto>\",\n        \"cards\": [\n            {\n                \"id\": \"<integer>\",\n                \"term\": \"<string>\",\n                \"definition\": \"<string>\"\n            },\n            ...\n        ]\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"studySetName\": \"S\",\n  \"userId\": 9,\n  \"cards\": [\n    {\n      \"term\": \"<string>\",\n      \"definition\": \"<string>\"\n    },\n    {\n      \"term\": \"<string1>\",\n      \"definition\": \"<string1>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/study-set",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"study-set"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 08:01:25 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"User doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/study-set",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 18,\n  \"studySetName\": \"S Update\",\n  \"cards\": [\n    {\n      \"id\": 19,\n      \"term\": \"test\",\n      \"definition\": \"test\",\n      \"task\": 1\n    },\n    {\n      \"id\": 0,\n      \"term\": \"term update\",\n      \"definition\": \"update\",\n      \"task\": 0\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/study-set",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"study-set"
+									]
+								},
+								"description": "API to update study set infomation and update list card"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 14,\n  \"studySetName\": \"S Update\",\n  \"cards\": [\n    {\n      \"id\": 19,\n      \"term\": \"test\",\n      \"definition\": \"test\",\n      \"task\": 1\n    },\n    {\n      \"id\": 0,\n      \"term\": \"term update\",\n      \"definition\": \"update\",\n      \"task\": 0\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8000/api/study-set",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"study-set"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 08:39:11 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 200,\n    \"em\": \"Update study set successful!\",\n    \"dt\": {\n        \"id\": \"<integer>\",\n        \"studySetName\": \"<string>\",\n        \"createDate\": \"<datetime\",\n        \"user\": \"<UserDto>\",\n        \"cards\": [\n            \"<CardDto>\",\n            ...\n        ]\n    }\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 18,\n  \"studySetName\": \"S Update\",\n  \"cards\": [\n    {\n      \"id\": 19,\n      \"term\": \"test\",\n      \"definition\": \"test\",\n      \"task\": 1\n    },\n    {\n      \"id\": 0,\n      \"term\": \"term update\",\n      \"definition\": \"update\",\n      \"task\": 0\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/study-set",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"study-set"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 May 2024 08:40:56 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ec\": 404,\n    \"em\": \"Study set has id doesn't exsits!\",\n    \"dt\": \"\"\n}"
+								}
+							]
+						}
+					],
+					"description": "All API to interact with Study Set entity"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000"
+		}
+	]
+}

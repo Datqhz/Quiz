@@ -111,7 +111,7 @@ namespace Quiz.Task.Service.Controllers
             var deleted_Member = await memberRepository.GetById(id);
             if(deleted_Member == null)
             {
-                return Ok(new ResponseModel<string>
+                return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
                     EM = "Member has id doesn't exsits!",

@@ -183,7 +183,7 @@ namespace Quiz.Task.Service.Controllers
             
         }
         // Get all folder created by user has userId
-        [HttpGet("/user/{userId}")]
+        [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetAllFolderByUserId(int userId, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
             IEnumerable<Folder> data;
@@ -201,7 +201,7 @@ namespace Quiz.Task.Service.Controllers
             });
         }
         // Get all folder in class has classId
-        [HttpGet("/class/{classId}")]
+        [HttpGet("class/{classId}")]
         public async Task<IActionResult> GetAllFolderByClassId(int classId, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
             IEnumerable<Folder> data;

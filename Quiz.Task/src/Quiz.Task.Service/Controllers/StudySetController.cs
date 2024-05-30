@@ -140,9 +140,14 @@ namespace Quiz.Task.Service.Controllers
             }
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                studySet.StudySetName = studySetDto.StudySetName;
                 // Update study set info
-                var rs_studySet = await studySetRepository.Update(studySet);
+                var rs_studySet = await studySetRepository.Update(new StudySet
+                {
+                    Id = studySet.Id,
+                    StudySetName = studySetDto.StudySetName,
+                    CreateDate = studySet.CreateDate,
+                    UserId = studySet.UserId
+                });
                 rs_studySet.Cards = new List<Card>();
                 // Update cards in study set
                 foreach (var card in studySetDto.Cards){
@@ -168,7 +173,10 @@ namespace Quiz.Task.Service.Controllers
                         }
                         updated_card.Term = card.Term;
                         updated_card.Definition = card.Definition;
-                        await cardRepository.Update(updated_card);
+                        await cardRepository.Update(new Card {
+                            Term = updated_card.Term,
+                            Definition = updated_card.Definition
+                        });
                         rs_studySet.Cards.Add(updated_card);
                     }else if(card.Task == 2)// delete card
                     {

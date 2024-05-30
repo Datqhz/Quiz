@@ -1,6 +1,7 @@
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Quiz.Common.Repository;
 using Quiz.Common.Responses;
 using Quiz.Task.Service.Extensions;
 using Quiz.Task.Service.Models;
@@ -17,10 +18,12 @@ namespace Quiz.Task.Service.Controllers
     {
         private readonly IClassRepository classRepository;
         private readonly IMemberRepository memberRepository;
-        public ClassController(IClassRepository classRepository, IMemberRepository memberRepository)
+        private readonly IRepository<UserInfo> userRepository;
+        public ClassController(IClassRepository classRepository, IMemberRepository memberRepository, IRepository<UserInfo> userRepository)
         {
             this.classRepository = classRepository;
             this.memberRepository = memberRepository;
+            this.userRepository = userRepository;
         }
 
         // Get all class without conditions
@@ -59,6 +62,16 @@ namespace Quiz.Task.Service.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClass(CreateClassDto createClassDto)
         {
+             var user = await userRepository.GetById(createClassDto.UserId);
+            if(user == null)
+            {
+                return NotFound(new ResponseModel<string>
+                {
+                    EC = 404,
+                    EM = "User has id doesn't exsits!",
+                    DT = ""
+                });
+            }
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 var created_class = await classRepository.Insert(new Class

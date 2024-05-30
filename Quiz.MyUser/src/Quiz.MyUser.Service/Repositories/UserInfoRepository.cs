@@ -16,8 +16,23 @@ namespace Quiz.MyUser.Service.Repository
         public async Task<IEnumerable<UserInfo>> GetAll()
         {
             var data = await _context.User
-                                    .Include(x => x.Account)
-                                    .Include(x => x.Group)
+                                    .Select(e => new UserInfo
+                                    {
+                                        Id = e.Id,
+                                        UserName = e.UserName,
+                                        CreateDate = e.CreateDate,
+                                        Image = e.Image,
+                                        Account = new Account
+                                        {
+                                            Id = e.Account.Id,
+                                            Email = e.Account.Email,
+                                        },
+                                        Group = new Group
+                                        {
+                                            Id = e.Group.Id,
+                                            Name = e.Group.Name,
+                                        }
+                                    })
                                     .ToListAsync();
             return data;
         }   
@@ -31,8 +46,23 @@ namespace Quiz.MyUser.Service.Repository
         {
 #pragma warning disable CS8603 // Possible null reference return.
             return await _context.User
-                                .Include(e => e.Account)
-                                .Include(e => e.Group)
+                                .Select(e => new UserInfo
+                                {
+                                    Id = e.Id,
+                                    UserName = e.UserName,
+                                    CreateDate = e.CreateDate,
+                                    Image = e.Image,
+                                    Account = new Account
+                                    {
+                                        Id = e.Account.Id,
+                                        Email = e.Account.Email,
+                                    },
+                                    Group = new Group
+                                    {
+                                        Id = e.Group.Id,
+                                        Name = e.Group.Name,
+                                    }
+                                })
                                 .Where(e => e.Id == id)
                                 .FirstOrDefaultAsync();
 #pragma warning restore CS8603 // Possible null reference return.

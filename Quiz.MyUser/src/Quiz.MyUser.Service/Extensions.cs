@@ -22,7 +22,7 @@ namespace Quiz.MyUser.Service.Extensions
             (
                 account.Id,
                 account.Email,
-                account.User.AsDto()
+                account.User?.AsDto()
             );
         }
     }

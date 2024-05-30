@@ -53,7 +53,7 @@ namespace Quiz.MyUser.Service.Controllers
             var data = await accountRepository.GetById(id);
             if(data == null)
             {
-                return Ok(new ResponseModel<string>
+                return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
                     EM = "Account has id doesn't exsits!",
@@ -71,9 +71,18 @@ namespace Quiz.MyUser.Service.Controllers
         [HttpPost]
         public async Task<ActionResult> Insert(CreateAccountDto accountDto)
         {
+            var account = await accountRepository.GetByEmail(accountDto.Email);
+            if(account != null)
+            {
+                return BadRequest(new ResponseModel<string>{
+                    EC = 400,
+                    EM = "Email is used!" ,
+                    DT = ""
+                });
+            }
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(accountDto.Password);
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)){
-                var account = await accountRepository.Insert(new Account
+                account = await accountRepository.Insert(new Account
                 {
                     Email = accountDto.Email,
                     Password = passwordHash,
@@ -109,12 +118,13 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = ""
                 });
             }
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(accountDto.Password);
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)){
                 var rs_account = await accountRepository.Update(new Account
                 {
                     Id = accountDto.Id,
                     Email = accountDto.Email,
-                    Password = accountDto.Password,
+                    Password = passwordHash,
                 });
                 scope.Complete();
                 await publishEndpoint.Publish(new AccountUpdated(rs_account.Id, rs_account.Email, rs_account.Password));
