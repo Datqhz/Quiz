@@ -25,7 +25,9 @@ class AccountService {
       return false;
     }
     final Map<String, dynamic> data = json.decode(response.body);
+
     var user = UserInfo.fromJson(data['dt']);
+    print("user name: ${user.username}");
     await storeUserInfo(user);
     var account = Account.fromJson(data['dt']);
     await storeAccount(account);
@@ -56,9 +58,11 @@ class AccountService {
 
   Future<bool> updateAccount(String newPassword, String oldPassword) async {
     Account? account = await getAccount();
+    String? token = await getToken();
+    print("token $token");
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
-      "Authorization" :"Bearer ${getToken()}"
+      "Authorization": "Bearer $token"
     };
     Response response =
         await put(Uri.parse("${GlobalVariable.url}/api/account"),

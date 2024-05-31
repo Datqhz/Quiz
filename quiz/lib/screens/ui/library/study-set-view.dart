@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz/providers/study_set_provider.dart';
 import 'package:quiz/screens/ui/study-set-screen.dart';
 import 'package:quiz/widgets/study-set.dart';
 
 class StudySetView extends StatefulWidget {
-  const StudySetView({super.key});
+  StudySetView({super.key, required this.studySetStream, required this.studySetListStream});
 
+  StudySetStream studySetStream;
+  StudySetListStream studySetListStream;
   @override
   State<StudySetView> createState() => _StudySetViewState();
 }

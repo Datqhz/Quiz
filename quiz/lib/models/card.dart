@@ -1,10 +1,9 @@
-class MyCard{
-  late String term;
-  late String defination;
-  MyCard({required this.term, required this.defination});
+class MyCard {
+  int cardId;
+  String term;
+  String definition;
+  MyCard({required this.cardId, required this.term, required this.definition});
 
-  @override
-  String toString() {
-    return 'MyCard{term: $term, defination: $defination}';
-  }
+  factory MyCard.fromJson(Map<String, dynamic> json) => MyCard(
+      cardId: json['id'], term: json['term'], definition: json['definition']);
 }

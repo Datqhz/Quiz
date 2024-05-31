@@ -1,62 +1,120 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/providers/user_provider.dart';
+import 'package:quiz/services/user_service.dart';
+import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class ChangeUsernameScreen extends StatefulWidget {
-  const ChangeUsernameScreen({super.key});
-
+  ChangeUsernameScreen({super.key, required this.userStream});
+  CurrentUserStream userStream;
   @override
   State<ChangeUsernameScreen> createState() => _ChangeUsernameScreenState();
 }
 
 class _ChangeUsernameScreenState extends State<ChangeUsernameScreen> {
+  final ValueNotifier _isEnabled = ValueNotifier(false);
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(10, 8, 45, 1),
+      backgroundColor: const Color.fromRGBO(10, 8, 45, 1),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromRGBO(10, 8, 45, 1),
-        title: Text(
+        backgroundColor: const Color.fromRGBO(10, 8, 45, 1),
+        title: const Text(
           "Đổi tên người dùng",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              "Lưu",
-              style: TextStyle(
-                  color: Color.fromRGBO(92, 78, 122, 1.0),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
-            ),
-            style: TextButton.styleFrom(backgroundColor: Colors.transparent),
+          ValueListenableBuilder(
+            valueListenable: _isEnabled,
+            builder: (context, value, child) {
+              return TextButton(
+                onPressed: value
+                    ? () async {
+                        var username = controller.text.trim();
+                        bool result = await UserService().updateUser(username);
+                        if (result) {
+                          var user = await getUserInfo();
+                          user!.username = username;
+                          await storeUserInfo(user);
+                          widget.userStream.notifyDataChanged();
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              // backgroundColor: Colors.transparent,
+                              width:
+                                  2.6 * MediaQuery.of(context).size.width / 4,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'Đổi tên hiển thị thành công.',
+                                textAlign: TextAlign.center,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14)),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              // backgroundColor: Colors.transparent,
+                              width:
+                                  2.6 * MediaQuery.of(context).size.width / 4,
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                'Xảy ra lỗi trong quá trình xử lý.',
+                                textAlign: TextAlign.center,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14)),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        }
+                      }
+                    : null,
+                style:
+                    TextButton.styleFrom(backgroundColor: Colors.transparent),
+                child: Text(
+                  "Lưu",
+                  style: TextStyle(
+                      color: value
+                          ? Colors.white
+                          : Color.fromRGBO(92, 78, 122, 1.0),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
+                ),
+              );
+            },
           )
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Text(
+              const Text(
                 "Tên người dùng của bạn chỉ có thể thay đổi một lần",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w300),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               TextFormField(
+                controller: controller,
                 decoration: InputDecoration(
-                  fillColor: Color.fromRGBO(46, 55, 86, 1),
+                  fillColor: const Color.fromRGBO(46, 55, 86, 1),
                   filled: true,
                   hintText: 'Tên người dùng mới',
                   hintStyle: TextStyle(
@@ -71,7 +129,13 @@ class _ChangeUsernameScreenState extends State<ChangeUsernameScreen> {
                   decoration: TextDecoration.none,
                   decorationThickness: 0,
                 ),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  if (value.trim().isNotEmpty) {
+                    _isEnabled.value = true;
+                  } else {
+                    _isEnabled.value = false;
+                  }
+                },
               ),
             ],
           ),

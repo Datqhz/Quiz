@@ -227,7 +227,9 @@ class _SignInState extends State<SignIn> {
                                     2.6 * MediaQuery.of(context).size.width / 4,
                                 behavior: SnackBarBehavior.floating,
                                 content: const Text(
-                                    'Tài khoản hoặc mật khẩu sai.'),
+                                  'Tài khoản hoặc mật khẩu sai.',
+                                  textAlign: TextAlign.center,
+                                ),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(14)),
                                 duration: const Duration(seconds: 3),

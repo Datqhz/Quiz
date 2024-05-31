@@ -10,7 +10,9 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationApp();
-    // return Provider.of<AuthProvider>(context).isLoggedIn == true? const NavigationApp() : const WelcomeScreen();
+    // return NavigationApp();
+    return Provider.of<AuthProvider>(context).isLoggedIn == true
+        ? const NavigationApp()
+        : const WelcomeScreen();
   }
 }

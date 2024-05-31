@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz/providers/user_provider.dart';
 import 'package:quiz/screens/ui/profile/setting.dart';
+import 'package:quiz/utilities/image_utils.dart';
+import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  CurrentUserStream userStream = CurrentUserStream();
 
   @override
   Widget build(BuildContext context) {
@@ -15,64 +20,117 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 100,),
-            Container(
-              height: 50,
-              width: 50,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25)
-              ),
-              child: CircleAvatar(
-                child: Image.asset("assets/images/img1.jpg"),
-              ),
+            const SizedBox(
+              height: 100,
             ),
-            const SizedBox(height: 20,),
-            const Text(
-              "hoqucojs1",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white
-              ),
+            StreamBuilder<void>(
+              stream: userStream.stream,
+              builder: (context, snapshot) {
+                return Container(
+                  height: 50,
+                  width: 50,
+                  clipBehavior: Clip.antiAlias,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(25)),
+                  child: FutureBuilder(
+                    future: getUserInfo(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done &&
+                          snapshot.hasData) {
+                        return CircleAvatar(
+                          child: Image.memory(
+                              convertBase64ToUint8List(snapshot.data!.image), fit: BoxFit.cover,),
+                        );
+                      }
+                      return CircleAvatar(
+                        child: Image.asset("assets/images/logo.png"),
+                      );
+                    },
+                  ),
+                );
+              }
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 20,
+            ),
+            StreamBuilder<void>(
+              stream: userStream.stream,
+              builder: (context, snapshot) {
+                return FutureBuilder(
+                  future: getUserInfo(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      return Text(
+                        snapshot.data!.username,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      );
+                    }
+                    return const Text(
+                      "",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    );
+                  },
+                );
+              }
+            ),
+            const SizedBox(
+              height: 30,
+            ),
             _option("assets/images/book-shelf-64.png", "Thêm khóa học"),
-            const SizedBox(height: 20,),
-            GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingScreen()));
-                },
-                child: _option("assets/images/user-setting-64.png", "Cài đặt của bạn")
+            const SizedBox(
+              height: 20,
             ),
-            const SizedBox(height: 30,),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingScreen(userStream: userStream,)));
+                },
+                child: _option(
+                    "assets/images/user-setting-64.png", "Cài đặt của bạn")),
+            const SizedBox(
+              height: 30,
+            ),
             _achievement()
           ],
         ),
       ),
     );
   }
-  Widget _option(String iconPath, String optionName){
+
+  Widget _option(String iconPath, String optionName) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(color: const Color.fromRGBO(46, 55, 86, 1), width: 2),
-        borderRadius: BorderRadius.circular(12)
-      ),
+          color: Colors.transparent,
+          border:
+              Border.all(color: const Color.fromRGBO(46, 55, 86, 1), width: 2),
+          borderRadius: BorderRadius.circular(12)),
       child: Row(
         children: [
-          Image.asset(iconPath, width: 40, height: 40,),
-          const SizedBox(width: 12,),
+          Image.asset(
+            iconPath,
+            width: 40,
+            height: 40,
+          ),
+          const SizedBox(
+            width: 12,
+          ),
           Text(
             optionName,
             style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.white
-            ),
+                fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
           ),
-          const Expanded(child: SizedBox(height: 1,)),
+          const Expanded(
+              child: SizedBox(
+            height: 1,
+          )),
           const Icon(
             CupertinoIcons.chevron_right,
             size: 20,
@@ -82,7 +140,8 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-  Widget _achievement(){
+
+  Widget _achievement() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -91,19 +150,17 @@ class ProfileScreen extends StatelessWidget {
           const Text(
             "Thành tựu",
             style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.white
-            ),
+                fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
           ),
-          const SizedBox(height: 8,),
+          const SizedBox(
+            height: 8,
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             width: double.infinity,
             decoration: BoxDecoration(
-                color:const Color.fromRGBO(46, 55, 86, 1),
-                borderRadius: BorderRadius.circular(8)
-            ),
+                color: const Color.fromRGBO(46, 55, 86, 1),
+                borderRadius: BorderRadius.circular(8)),
             child: const Column(
               children: [
                 Text(
@@ -111,23 +168,25 @@ class ProfileScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Icon(
                   CupertinoIcons.flame,
                   color: Colors.white,
                   size: 30,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Text(
                   "Hãy học để bắt đầu chuỗi mới của bạn!",
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -137,5 +196,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

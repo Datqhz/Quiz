@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quiz/models/account.dart';
 import 'package:quiz/providers/auth_provider.dart';
+import 'package:quiz/providers/user_provider.dart';
 import 'package:quiz/screens/ui/profile/change-password.dart';
 import 'package:quiz/screens/ui/profile/change-username.dart';
+import 'package:quiz/services/account_service.dart';
+import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class SettingScreen extends StatelessWidget {
-  SettingScreen({super.key});
-
-  List<String> _type = ["Student, Teacher"];
-
+  SettingScreen({super.key, required this.userStream});
+  CurrentUserStream userStream;
   Widget optionType2Text(String title, String content) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -113,148 +115,217 @@ class SettingScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25)),
-                                  elevation: 0,
-                                  backgroundColor:
-                                      const Color.fromRGBO(46, 55, 86, 1),
-                                  child: Container(
-                                    height: 300,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 26, vertical: 12),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        const Text(
-                                          "Đổi tên người dùng",
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        const Text(
-                                          "Để xác nhận đây thực sự là bạn, bui lòng xác minh mật khẩu Quiz của bạn",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.white),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        TextFormField(
-                                          obscureText: true,
-                                          decoration: InputDecoration(
-                                            fillColor: const Color.fromRGBO(
-                                                10, 8, 45, 1),
-                                            filled: true,
-                                            hintText: 'Mật khẩu',
-                                            hintStyle: TextStyle(
-                                                color: Colors.white
-                                                    .withOpacity(0.6),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
+                      onTap: () {
+                        TextEditingController controller =
+                            TextEditingController();
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
+                                elevation: 0,
+                                backgroundColor:
+                                    const Color.fromRGBO(46, 55, 86, 1),
+                                child: Container(
+                                  height: 300,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 26, vertical: 12),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      const Text(
+                                        "Đổi tên người dùng",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      const Text(
+                                        "Để xác nhận đây thực sự là bạn, bui lòng xác minh mật khẩu Quiz của bạn",
+                                        style: TextStyle(
                                             fontSize: 14,
-                                            decoration: TextDecoration.none,
-                                            decorationThickness: 0,
-                                          ),
-                                          onChanged: (value) {},
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      TextFormField(
+                                        controller: controller,
+                                        obscureText: true,
+                                        decoration: InputDecoration(
+                                          fillColor: const Color.fromRGBO(
+                                              10, 8, 45, 1),
+                                          filled: true,
+                                          hintText: 'Mật khẩu',
+                                          hintStyle: TextStyle(
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400),
                                         ),
-                                        const SizedBox(
-                                          height: 20,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          decoration: TextDecoration.none,
+                                          decorationThickness: 0,
                                         ),
-                                        TextButton(
-                                          onPressed: () {
+                                        onChanged: (value) {},
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          Account? account = await getAccount();
+                                          bool isConfirm =
+                                              await AccountService().signIn(
+                                                  account!.email,
+                                                  controller.text.trim());
+                                          if (isConfirm) {
                                             Navigator.pop(context);
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const ChangeUsernameScreen()));
-                                          },
-                                          style: TextButton.styleFrom(
-                                            minimumSize:
-                                                const Size(double.infinity, 30),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16, vertical: 10),
-                                            textStyle: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(
-                                                    153, 162, 232, 1)),
-                                            backgroundColor:
-                                                const Color.fromRGBO(
-                                                    67, 85, 255, 1),
-                                          ),
-                                          child: const Text(
-                                            "Gửi",
-                                          ),
+                                                        ChangeUsernameScreen(
+                                                          userStream:
+                                                              userStream,
+                                                        )));
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                // backgroundColor: Colors.transparent,
+                                                width: 2.6 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: const Text(
+                                                  'Mật khẩu không chính xác.',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14)),
+                                                duration:
+                                                    const Duration(seconds: 3),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        style: TextButton.styleFrom(
+                                          minimumSize:
+                                              const Size(double.infinity, 30),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 10),
+                                          textStyle: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  153, 162, 232, 1)),
+                                          backgroundColor: const Color.fromRGBO(
+                                              67, 85, 255, 1),
                                         ),
-                                        const SizedBox(
-                                          height: 12,
+                                        child: const Text(
+                                          "Gửi",
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                side: const BorderSide(
-                                                    width: 2,
-                                                    color: Color.fromRGBO(
-                                                        91, 95, 124, 1.0)),
-                                                borderRadius:
-                                                    BorderRadius.circular(6)),
-                                            minimumSize:
-                                                const Size(double.infinity, 30),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16, vertical: 10),
-                                            textStyle: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(
-                                                    153, 162, 232, 1)),
-                                            backgroundColor: Colors.transparent,
-                                          ),
-                                          child: const Text(
-                                            "Hủy",
-                                          ),
+                                      ),
+                                      const SizedBox(
+                                        height: 12,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: TextButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                  width: 2,
+                                                  color: Color.fromRGBO(
+                                                      91, 95, 124, 1.0)),
+                                              borderRadius:
+                                                  BorderRadius.circular(6)),
+                                          minimumSize:
+                                              const Size(double.infinity, 30),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 10),
+                                          textStyle: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  153, 162, 232, 1)),
+                                          backgroundColor: Colors.transparent,
                                         ),
-                                      ],
-                                    ),
+                                        child: const Text(
+                                          "Hủy",
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              });
-                        },
-                        child: optionType2Text("Tên người dùng", "vaicmnr123")),
+                                ),
+                              );
+                            });
+                      },
+                      child: StreamBuilder<void>(
+                          stream: userStream.stream,
+                          builder: (context, snapshot) {
+                            return FutureBuilder(
+                              future: getUserInfo(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                        ConnectionState.done &&
+                                    snapshot.hasData) {
+                                  return optionType2Text("Tên người dùng",
+                                      snapshot.data!.username);
+                                } else {
+                                  return optionType2Text("Tên người dùng", "");
+                                }
+                              },
+                            );
+                          }),
+                    ),
                     Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    width: 2,
-                                    color: Color.fromRGBO(46, 55, 86, 1)),
-                                top: BorderSide(
-                                    width: 2,
-                                    color: Color.fromRGBO(46, 55, 86, 1)))),
-                        child: optionType2Text("Email", "vaicmnr@gmail.com")),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(46, 55, 86, 1),
+                          ),
+                          top: BorderSide(
+                            width: 2,
+                            color: Color.fromRGBO(46, 55, 86, 1),
+                          ),
+                        ),
+                      ),
+                      child: FutureBuilder(
+                        future: getAccount(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
+                              snapshot.hasData) {
+                            return optionType2Text(
+                                "Email", snapshot.data!.email);
+                          } else {
+                            return optionType2Text("Email", "");
+                          }
+                        },
+                      ),
+                    ),
                     GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -274,28 +345,26 @@ class SettingScreen extends StatelessWidget {
                                     width: 2))),
                         child: GestureDetector(
                           onTap: () {
-                            Provider.of<AuthProvider>(context).logout();
+                            Provider.of<AuthProvider>(context, listen: false)
+                                .logout();
+                            Navigator.pop(context);
                           },
-                          child: Container(
-                            height: 64,
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Đăng xuất',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Icon(
-                                  CupertinoIcons.chevron_right,
-                                  size: 20,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Đăng xuất',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Icon(
+                                CupertinoIcons.chevron_right,
+                                size: 20,
+                                color: Colors.white,
+                              )
+                            ],
                           ),
                         ))
                   ],

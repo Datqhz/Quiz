@@ -181,7 +181,7 @@ class FlashCard extends StatelessWidget {
   TextEditingController _defineController = TextEditingController();
 
   MyCard getCardInfo(){
-    return MyCard(term: _termController.text, defination: _defineController.text);
+    return MyCard( cardId: 0, term: _termController.text, definition: _defineController.text);
   }
 
   @override

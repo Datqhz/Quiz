@@ -12,6 +12,12 @@ Future<void> storeUserInfo(UserInfo user) async
   await prefs.setString('user', userJson);
 }
 
+Future<void> destroyUserInfo() async
+{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove("user");
+}
+
 Future<UserInfo?> getUserInfo() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userJson = await prefs.getString('user');
@@ -34,11 +40,21 @@ Future<String?> getToken() async {
   return token;
 }
 
+Future<void> destroyToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove("token");
+}
+
 Future<void> storeAccount(Account account) async
 {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String accountJson = jsonEncode(account.toJson());
   await prefs.setString('account', accountJson);
+}
+Future<void> destroyAccount() async
+{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('account');
 }
 
 Future<Account?> getAccount() async {
