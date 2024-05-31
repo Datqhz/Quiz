@@ -152,14 +152,26 @@ namespace Quiz.Task.Service.Controllers
         }
         // Get all class user join
         [HttpGet("user-joined/{id}")]
-        public async Task<IActionResult> GetClassesUserJoin(int id)
+        public async Task<IActionResult> GetClassesUserJoin(int id, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
-            var classes = await classRepository.GetByUserId(id);
-            return Ok(new ResponseModel<IEnumerable<ClassDto>>
+            int NumOfPage = 0;
+            IEnumerable<Class> classes;
+            if(page == null || limit == null)
+            {
+                classes = await classRepository.GetByUserId(id);
+            }else {
+                NumOfPage = await classRepository.CountOfPageClassByUserId(id, (int)limit);
+                classes = await classRepository.GetByUserIdWithPage(id, (int)page, (int)limit);
+            }
+             
+            return Ok(new ResponseModel<Object>
             {
                 EC = 200,
                 EM = "Get all class user join successful!",
-                DT = classes.Select(e => e.AsDto()).ToList()
+                DT = new {
+                    TotalPage = NumOfPage,
+                    Classes = classes.Select(e => e.AsDto()).ToList()
+                }
             });
         }
     }

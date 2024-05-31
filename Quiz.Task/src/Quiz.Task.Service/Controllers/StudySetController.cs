@@ -64,19 +64,25 @@ namespace Quiz.Task.Service.Controllers
         [HttpGet("user/{id}")]
         public async Task<IActionResult> GetByUserId(int id, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
+            int totalPage = 0;
             IEnumerable<StudySet> data;
             if(page == null || limit == null)
             {
                 data  = await studySetRepository.GetByUserId(id);
             }else 
             {
+                totalPage = await studySetRepository.CountOfPageStudySetByUserId(id, (int)limit);
                 data = await studySetRepository.GetByUserIdWithPage(id, (int)page, (int)limit);
             }
-            return Ok(new ResponseModel<IEnumerable<StudySetDto>>
+            return Ok(new ResponseModel<Object>
             {
                 EC = 200,
                 EM = "Get study set by id = " + id + " successful!",
-                DT = data.Select(studySet => studySet.AsDto()).ToList()
+                DT = new 
+                {
+                    TotalPage = totalPage,
+                    StudySets = data.Select(studySet => studySet.AsDto()).ToList()
+                }
             });
         }
         // Create study set
@@ -234,19 +240,25 @@ namespace Quiz.Task.Service.Controllers
         [HttpGet("folder/{id}")]
         public async Task<IActionResult> GetByFolderId(int id, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
+            int totalPage = 0;
             IEnumerable<StudySet> data;
             if(page == null || limit == null)
             {
                 data  = await studySetRepository.GetByFolderId(id);
             }else 
             {
+                totalPage = await studySetRepository.CountOfPageStudySetByFolderId(id, (int)limit);
                 data = await studySetRepository.GetByFolderIdWithPage(id, (int)page, (int)limit);
             }
-            return Ok(new ResponseModel<IEnumerable<StudySetDto>>
+            return Ok(new ResponseModel<Object>
             {
                 EC = 200,
                 EM = "Get study set by id = " + id + " successful!",
-                DT = data.Select(studySet => studySet.AsDto()).ToList()
+                DT = new 
+                {
+                    TotalPage = 0,
+                    StudySets = data.Select(studySet => studySet.AsDto()).ToList()
+                }
             });
         }
         // find by regex

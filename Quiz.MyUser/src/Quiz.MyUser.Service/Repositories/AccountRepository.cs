@@ -43,6 +43,7 @@ namespace Quiz.MyUser.Service.Repository
                                 {
                                     Id = e.Id,
                                     Email = e.Email,
+                                    Password = e.Password,
                                     User = new UserInfo
                                     {
                                         Id = e.Id,
@@ -61,12 +62,14 @@ namespace Quiz.MyUser.Service.Repository
                                 {
                                     Id = e.Id,
                                     Email = e.Email,
+                                    Password = e.Password,
                                     User = new UserInfo
                                     {
                                         Id = e.Id,
                                         UserName = e.User.UserName,
                                         CreateDate = e.User.CreateDate,
                                         Image = e.User.Image,
+                                        GroupId = e.User.GroupId
                                     },
                                 })
                                 .FirstOrDefaultAsync(a => a.Email == email);

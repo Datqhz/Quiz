@@ -186,36 +186,48 @@ namespace Quiz.Task.Service.Controllers
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetAllFolderByUserId(int userId, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
+            int totalPages = 0;
             IEnumerable<Folder> data;
             if(page == null || limit == null)
             {
                 data = await folderRepository.GetByUserId(userId);
             }else {
+                totalPages = await folderRepository.CountOfPageFolderByUserId(userId, (int)limit);
                 data = await folderRepository.GetByUserIdWithPage(userId, (int) page, (int) limit);
             }
-            return Ok( new ResponseModel<IEnumerable<FolderDto>>
+            return Ok( new ResponseModel<Object>
             {
                 EC = 200,
                 EM = "Get all Folder by userId successful!",
-                DT = data.Select(Folder => Folder.AsDto()).ToList()
+                DT = new
+                {
+                    TotalPage = totalPages,
+                    Folders = data.Select(Folder => Folder.AsDto()).ToList()
+                }
             });
         }
         // Get all folder in class has classId
         [HttpGet("class/{classId}")]
         public async Task<IActionResult> GetAllFolderByClassId(int classId, [FromQuery] int? page = null, [FromQuery] int? limit = null)
         {
+            int totalPages = 0; 
             IEnumerable<Folder> data;
             if(page == null || limit == null)
             {
                 data = await folderRepository.GetByClassId(classId);
             }else {
+                totalPages = await folderRepository.CountOfPageFolderByClassId(classId, (int)limit);
                 data = await folderRepository.GetByClassIdWithPage(classId, (int)page, (int)limit);
             }
-            return Ok( new ResponseModel<IEnumerable<FolderDto>>
+            return Ok( new ResponseModel<Object>
             {
                 EC = 200,
                 EM = "Get all Folder by class id successful!",
-                DT = data.Select(Folder => Folder.AsDto()).ToList()
+                DT = new
+                {
+                    TotalPage= totalPages,
+                    Folders= data.Select(Folder => Folder.AsDto()).ToList()
+                }
             });
         }
     }

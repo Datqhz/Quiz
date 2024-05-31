@@ -46,7 +46,6 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = data.Select(account => account.AsDto()).ToList()
                 });
         }
-        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -118,7 +117,15 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = ""
                 });
             }
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(accountDto.Password);
+            if(!BCrypt.Net.BCrypt.Verify(accountDto.OldPassword, account.Password)){
+                return BadRequest(new ResponseModel<string>
+                {
+                    EC = 400,
+                    EM = "Your old password is wrong!" ,
+                    DT = ""
+                });
+            }
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(accountDto.NewPassword);
             using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)){
                 var rs_account = await accountRepository.Update(new Account
                 {
@@ -140,6 +147,7 @@ namespace Quiz.MyUser.Service.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
+            // Console.WriteLine("step 1");
             var account = await accountRepository.GetByEmail(loginDto.Email);
             if(account == null){
                 return NotFound(new ResponseModel<string>
@@ -153,7 +161,7 @@ namespace Quiz.MyUser.Service.Controllers
             {
                 var group = await groupRepository.GetById(account.User.GroupId);
                 string token = authHandler.CreateToken(account.Email, account.Id.ToString(), group.Name);
-                var response = new LoginResult(account.User.Id, account.User.UserName, account.Email, token, group.Name);
+                var response = new LoginResult(account.User.Id, account.User.UserName, account.User.Image, token, account.Id, account.Email, group.Name);
                 return Ok(new ResponseModel<LoginResult>
                 {
                     EC = 200,

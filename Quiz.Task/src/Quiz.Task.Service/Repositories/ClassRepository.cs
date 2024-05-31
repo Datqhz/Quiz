@@ -69,7 +69,7 @@ namespace Quiz.Task.Service.Repositories
             var query = from e_class in _context.Class
                     join member in _context.Member
                     on e_class.Id equals member.ClassId
-                    where member.UserId.Equals(userId) // Thay đổi điều kiện theo yêu cầu của bạn
+                    where member.UserId.Equals(userId) 
                     select new Class
                     {
                         Id = e_class.Id,
@@ -84,5 +84,40 @@ namespace Quiz.Task.Service.Repositories
             return await query.OrderByDescending(e => e.CreateDate).ToListAsync();
         }
 
+        public async Task<int> CountOfPageClassByUserId(int userId, int limit)
+        {
+            var totalRecords = await (from e_class in _context.Class
+                    join member in _context.Member
+                    on e_class.Id equals member.ClassId
+                    where member.UserId.Equals(userId) 
+                    select e_class).CountAsync();
+            var NumOfPage = (int)Math.Ceiling((double)totalRecords / limit);
+            return NumOfPage;
+        }
+
+        public async Task<IEnumerable<Class>> GetByUserIdWithPage(int userId, int page, int limit)
+        {
+            var offset = (page - 1) * limit;
+            var data = await(from e_class in _context.Class
+                    join member in _context.Member
+                    on e_class.Id equals member.ClassId
+                    where member.UserId.Equals(userId) 
+                    select new Class
+                    {
+                        Id = e_class.Id,
+                        ClassName = e_class.ClassName,
+                        Description = e_class.Description,
+                        CreateDate = e_class.CreateDate,
+                        User = e_class.User,
+                        Folders = e_class.Folders,
+                        Members = e_class.Members,
+                    })
+                    .Skip(offset)
+                    .Take(limit)
+                    .OrderByDescending(e => e.CreateDate)
+                    .ToListAsync();
+
+            return data;
+        }
     }
 }

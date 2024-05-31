@@ -87,5 +87,22 @@ namespace Quiz.Task.Service.Repositories
                                 .Take(limit)
                                 .ToListAsync();
         }
+
+        public async Task<int> CountOfPageFolderByUserId(int userId, int limit)
+        {
+            var totalRecords = await _context.Folder
+                                .Where(f => f.UserId == userId)
+                                .CountAsync();
+                                
+            return (int)Math.Ceiling((double)totalRecords / limit);
+        }
+
+        public async Task<int> CountOfPageFolderByClassId(int classId,int limit)
+        {
+            var totalRecords = await _context.Folder
+                                .Where(c => c.ClassId == classId)
+                                .CountAsync();
+            return (int)Math.Ceiling((double)totalRecords / limit);
+        }
     }
 }

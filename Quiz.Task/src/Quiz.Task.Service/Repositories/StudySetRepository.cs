@@ -144,7 +144,7 @@ namespace Quiz.Task.Service.Repositories
         public async Task<IEnumerable<StudySet>> GetByFolderIdWithPage(int folderId, int page, int limit)
         {
             var offset = (page - 1) * limit;
-             var query = from studySet in _context.StudySet
+            var query = from studySet in _context.StudySet
                     join folder_detail in _context.FolderDetail
                     on studySet.Id equals folder_detail.StudySetId
                     where folder_detail.FolderId.Equals(folderId) 
@@ -174,6 +174,27 @@ namespace Quiz.Task.Service.Repositories
                                 .Include(e => e.FolderDetails)
                                 .OrderByDescending(e => e.CreateDate)
                                 .ToListAsync();
+        }
+
+        public async Task<int> CountOfPageStudySetByUserId(int userId, int limit)
+        {
+            var totalRecords = await _context.StudySet
+                                .Include(e => e.User)
+                                .Include(e => e.Cards)
+                                .OrderByDescending(e => e.CreateDate)
+                                .Where(c => c.UserId == userId)
+                                .CountAsync();
+            return (int)Math.Ceiling((double)totalRecords / limit);
+        }
+
+        public async Task<int> CountOfPageStudySetByFolderId(int folderId, int limit)
+        {
+            var totalRecords = await(from studySet in _context.StudySet
+                    join folder_detail in _context.FolderDetail
+                    on studySet.Id equals folder_detail.StudySetId
+                    where folder_detail.FolderId.Equals(folderId) 
+                    select studySet).CountAsync();
+            return (int)Math.Ceiling((double)totalRecords / limit);
         }
     }
 }
