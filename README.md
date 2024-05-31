@@ -32,9 +32,11 @@ Import APIs by use `task-service-apis` file and `myuser-service-apis`.
 ![](https://res.cloudinary.com/dyhjqna2u/image/upload/v1717062510/yhgu7v57zir9lzzua7np.png)
 2. Choose `Select file or your folder` option
 ![](https://res.cloudinary.com/dyhjqna2u/image/upload/v1717061707/bb7brdsrllrefujr5hs0.png)
+
 **Result you receive after all**
+
 ![](https://res.cloudinary.com/dyhjqna2u/image/upload/v1717061980/fu6ywdl5njdgzk7882i5.png)
 
->Choose `View documentation` on each of API collections to see what things will happen with when you use API to do something.
+>Choose `View documentation` on each API collection to see what will happen when you use API to do something.
 
 
