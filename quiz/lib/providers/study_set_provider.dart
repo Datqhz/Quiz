@@ -3,34 +3,20 @@ import 'dart:async';
 
 import 'package:quiz/models/study_set.dart';
 
-class StudySetStream{
-   final StreamController<void> _controller = StreamController<void>.broadcast();
-
-  // Expose the stream
-  Stream<void> get stream => _controller.stream;
-
-  void notifyDataChanged() {
-    _controller.add(null); 
-  }
-  void dispose() {
-    _controller.close();
-  }
-}
-
 class StudySetListStream{
   
-   final StreamController<List<StudySet>> _controller = StreamController<List<StudySet>>.broadcast();
+   final StreamController<List<StudySetBrief>> _controller = StreamController<List<StudySetBrief>>.broadcast();
 
-  List<StudySet> currentData = [];
+  List<StudySetBrief> currentData = [];
 
   // Expose the stream
-  Stream<List<StudySet>> get stream => _controller.stream;
+  Stream<List<StudySetBrief>> get stream => _controller.stream;
 
-  void notifyDataChanged(StudySet studySet) {
-    List<StudySet> updatedList = currentData.where((item) => item.studySetId != studySet.studySetId).toList();
+  void notifyDataChanged(StudySetBrief studySet) {
+    List<StudySetBrief> updatedList = currentData.where((item) => item.studySetId != studySet.studySetId).toList();
     _controller.add(updatedList); 
   }
-  void initStream(List<StudySet> list) {
+  void initStream(List<StudySetBrief> list) {
     currentData = list;
     _controller.add(list); 
   }

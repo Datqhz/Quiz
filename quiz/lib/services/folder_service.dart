@@ -1,21 +1,21 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:http/http.dart';
-import 'package:quiz/models/study_set.dart';
+import 'package:quiz/models/folder.dart';
 import 'package:quiz/models/user.dart';
 import 'package:quiz/shared/global_variable.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
 
-class StudySetService {
-  Future<StudySet?> getStudySetById(int id) async {
+class FolderService {
+
+  Future<Folder?> getFolderById(int id) async {
     String? token = await getToken();
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
       "Authorization": "Bearer $token"
     };
     Response response = await get(
-        Uri.parse("${GlobalVariable.url}/api/study-set/$id"),
+        Uri.parse("${GlobalVariable.url}/api/folder/$id"),
         headers: headers);
     int statusCode = response.statusCode;
     if (statusCode != 200) {
@@ -23,11 +23,11 @@ class StudySetService {
     }
     final Map<String, dynamic> data = json.decode(response.body);
 
-    var studySet = StudySet.fromJson(data['dt']);
-    return studySet;
+    var folder = Folder.fromJson(data['dt']);
+    return folder;
   }
 
-  Future<bool> createStudySet(StudySetRequest studySet) async {
+  Future<bool> createFolder(FolderRequest folder) async {
     UserInfo? user = await getUserInfo();
     String? token = await getToken();
     Map<String, String> headers = {
@@ -35,15 +35,13 @@ class StudySetService {
       "Authorization": "Bearer $token"
     };
     Response response = await post(
-        Uri.parse("${GlobalVariable.url}/api/study-set"),
+        Uri.parse("${GlobalVariable.url}/api/folder"),
         headers: headers,
         body: jsonEncode(<String, dynamic>{
-          "studySetName": studySet.studySetName,
+          "folderName": folder.folderName,
           "userId": user!.userId,
-          "cards": studySet.cards
-              .map((card) => {'term': card.term, 'definition': card.definition})
-              .toList()
-        }));
+          "classId": folder.classId
+          }));
     int statusCode = response.statusCode;
     if (statusCode != 201) {
       return false;
@@ -51,9 +49,9 @@ class StudySetService {
     return true;
   }
 
-  Future<List<StudySetBrief>?> getAllStudySetByUserId(int id,
+  Future<List<Folder>?> getAllFolderOfClass(int id,
       {int page = 0, int limit = 0}) async {
-    String url = "${GlobalVariable.url}/api/study-set/user/$id";
+    String url = "${GlobalVariable.url}/api/folder/class/$id";
     if (!(page == 0 || limit == 0)) {
       url += "?page=$page&limit=$limit";
     }
@@ -68,15 +66,14 @@ class StudySetService {
       return null;
     }
     final Map<String, dynamic> data = json.decode(response.body);
-    List<StudySetBrief> list = (data['dt']['studySets'] as List)
-        .map((e) => StudySetBrief.fromJson(e))
-        .toList();
+    List<Folder> list =
+        (data['dt']['folders'] as List).map((e) => Folder.fromJson(e)).toList();
     return list;
   }
 
-  Future<List<StudySetBrief>?> getAllStudySetByFolderId(int id,
+  Future<List<Folder>?> getAllFolderOfUserId(int id,
       {int page = 0, int limit = 0}) async {
-    String url = "${GlobalVariable.url}/api/study-set/folder/$id";
+    String url = "${GlobalVariable.url}/api/folder/user/$id";
     if (!(page == 0 || limit == 0)) {
       url += "?page=$page&limit=$limit";
     }
@@ -91,9 +88,8 @@ class StudySetService {
       return null;
     }
     final Map<String, dynamic> data = json.decode(response.body);
-    List<StudySetBrief> list = (data['dt']['studySets'] as List)
-        .map((e) => StudySetBrief.fromJson(e))
-        .toList();
+    List<Folder> list =
+        (data['dt']['folders'] as List).map((e) => Folder.fromJson(e)).toList();
     return list;
   }
 }

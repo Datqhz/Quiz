@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/providers/user_provider.dart';
+import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/services/user_service.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class ChangeUsernameScreen extends StatefulWidget {
   ChangeUsernameScreen({super.key, required this.userStream});
-  CurrentUserStream userStream;
+  NotifyChangeStream userStream;
   @override
   State<ChangeUsernameScreen> createState() => _ChangeUsernameScreenState();
 }

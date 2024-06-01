@@ -17,7 +17,7 @@ namespace Quiz.Task.Service.Repositories
         {
             var data = await _context.Folder.ToListAsync();
             return data;
-        }   
+        }
         public async Task<IEnumerable<Folder>> GetAll(string query)
         {
             var data = await _context.Folder.ToListAsync();
@@ -54,14 +54,19 @@ namespace Quiz.Task.Service.Repositories
         // Get all Folder user has userId created
         public async Task<IEnumerable<Folder>> GetByUserId(int userId)
         {
-            return await _context.Folder.Where(c => c.UserId == userId)
+            return await _context.Folder.Include(e => e.Class)
+                                        .Include(e => e.User)
+                                        .Where(c => c.UserId == userId)
                                         .OrderByDescending(e => e.CreateDate)
                                         .ToListAsync();
         }
 
         public async Task<IEnumerable<Folder>> GetByClassId(int classId)
         {
-            return await _context.Folder.Where(c => c.ClassId == classId)
+            return await _context.Folder
+                                        .Include(e => e.Class)
+                                        .Include(e => e.User)
+                                        .Where(c => c.ClassId == classId)
                                         .OrderByDescending(e => e.CreateDate)
                                         .ToListAsync();
         }
@@ -70,6 +75,8 @@ namespace Quiz.Task.Service.Repositories
         {
             var offset = (page - 1) * limit;
             return await _context.Folder
+                                .Include(e => e.Class)
+                                .Include(e => e.User)
                                 .Where(f => f.UserId == userId)
                                 .OrderByDescending(e => e.CreateDate)
                                 .Skip(offset)
@@ -81,6 +88,8 @@ namespace Quiz.Task.Service.Repositories
         {
             var offset = (page - 1) * limit;
             return await _context.Folder
+                                .Include(e => e.Class)
+                                .Include(e => e.User)
                                 .Where(c => c.ClassId == classId)
                                 .OrderByDescending(e => e.CreateDate)
                                 .Skip(offset)
@@ -93,11 +102,11 @@ namespace Quiz.Task.Service.Repositories
             var totalRecords = await _context.Folder
                                 .Where(f => f.UserId == userId)
                                 .CountAsync();
-                                
+
             return (int)Math.Ceiling((double)totalRecords / limit);
         }
 
-        public async Task<int> CountOfPageFolderByClassId(int classId,int limit)
+        public async Task<int> CountOfPageFolderByClassId(int classId, int limit)
         {
             var totalRecords = await _context.Folder
                                 .Where(c => c.ClassId == classId)

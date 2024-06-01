@@ -24,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: 40,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
+                height: MediaQuery.of(context).size.height / 3.5,
               ),
               const Text(
                 "Cá nhân hóa trải nghiệm ghi nhớ của bạn ngay bây giờ.",
@@ -42,7 +42,10 @@ class WelcomeScreen extends StatelessWidget {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignUp()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUp()));
                   },
                   style: TextButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -89,16 +92,6 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(
                 height: 16,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: const Text(
-                  "Quên mật khẩu.",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color.fromARGB(255, 82, 142, 192),
-                  ),
-                ),
               ),
             ],
           ),

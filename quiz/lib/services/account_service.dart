@@ -26,7 +26,7 @@ class AccountService {
     }
     final Map<String, dynamic> data = json.decode(response.body);
 
-    var user = UserInfo.fromJson(data['dt']);
+    var user = UserInfo.mapInLogin(data['dt']);
     print("user name: ${user.username}");
     await storeUserInfo(user);
     var account = Account.fromJson(data['dt']);

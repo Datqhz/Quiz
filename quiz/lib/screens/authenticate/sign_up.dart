@@ -16,12 +16,9 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
-  ValueNotifier _isObscure = ValueNotifier(true);
-  ValueNotifier _passwordFocus = ValueNotifier(false);
-  ValueNotifier _emailFocus = ValueNotifier(false);
-  ValueNotifier _usernameFocus = ValueNotifier(false);
+  final ValueNotifier _isObscure = ValueNotifier(true);
+  final ValueNotifier _passwordFocus = ValueNotifier(false);
+  final ValueNotifier _emailFocus = ValueNotifier(false);
 
   bool validateEmail(String email) {
     RegExp regex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');

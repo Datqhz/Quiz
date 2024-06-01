@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/providers/user_provider.dart';
+import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/screens/ui/profile/setting.dart';
 import 'package:quiz/utilities/image_utils.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
@@ -8,7 +8,7 @@ import 'package:quiz/utilities/shared_preference_utils.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
-  CurrentUserStream userStream = CurrentUserStream();
+  NotifyChangeStream userStream = NotifyChangeStream();
 
   @override
   Widget build(BuildContext context) {

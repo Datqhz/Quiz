@@ -14,7 +14,7 @@ class UserInfo {
       this.accountId});
 
   Map<String, dynamic> toJson() => {
-        'userId': userId,
+        'id': userId,
         "userName": username,
         'image': image,
         'createDate': createDate,
@@ -22,12 +22,12 @@ class UserInfo {
         'accountId': accountId
       };
   factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
-        userId: json['userId'],
+        userId: json['id'],
         username: json['userName'],
         image: json['image'],
       );
-  static UserInfo mapInStudySet(Map<String, dynamic> json) => UserInfo(
-        userId: json['id'],
+  static UserInfo mapInLogin(Map<String, dynamic> json) => UserInfo(
+        userId: json['userId'],
         username: json['userName'],
         image: json['image'],
       );

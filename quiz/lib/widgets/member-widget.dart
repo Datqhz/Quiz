@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/models/member.dart';
+import 'package:quiz/utilities/image_utils.dart';
 
 class MemberWidget extends StatelessWidget {
-  const MemberWidget({super.key});
+  MemberWidget({super.key, required this.member});
 
+  Member member;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color.fromRGBO(46, 55, 86, 1),
+          color: const Color.fromRGBO(46, 55, 86, 1),
           borderRadius: BorderRadius.circular(8)
       ),
       child: Row(
@@ -23,13 +26,13 @@ class MemberWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
             child: CircleAvatar(
-              child: Image.asset("assets/images/img1.jpg"),
+              child: Image.memory(convertBase64ToUint8List(member.user.image)),
             ),
           ),
-          SizedBox(width: 18,),
+          const SizedBox(width: 18,),
           Text(
-            "hoqucojs1",
-            style: TextStyle(
+            member.user.username,
+            style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.white

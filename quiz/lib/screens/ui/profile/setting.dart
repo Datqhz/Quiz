@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz/models/account.dart';
 import 'package:quiz/providers/auth_provider.dart';
-import 'package:quiz/providers/user_provider.dart';
+import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/screens/ui/profile/change-password.dart';
 import 'package:quiz/screens/ui/profile/change-username.dart';
 import 'package:quiz/services/account_service.dart';
@@ -12,7 +11,7 @@ import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class SettingScreen extends StatelessWidget {
   SettingScreen({super.key, required this.userStream});
-  CurrentUserStream userStream;
+  NotifyChangeStream userStream;
   Widget optionType2Text(String title, String content) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

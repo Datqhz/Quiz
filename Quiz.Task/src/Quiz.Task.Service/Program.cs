@@ -17,17 +17,17 @@ builder.Services.AddHttpsRedirection(options =>
 });
 
 // Add services to the container.
-builder.Services.AddSingleton<TaskServiceContext, TaskServiceContext>();
-builder.Services.AddSingleton<IRepository<Account>, AccountRepository>();
-builder.Services.AddSingleton<AuthenticationHandler, AuthenticationHandler>();
-builder.Services.AddSingleton<ICardRepository, CardRepository>();
-builder.Services.AddSingleton<IClassRepository, ClassRepository>();
-builder.Services.AddSingleton<IFolderRepository, FolderRepository>();
-builder.Services.AddSingleton<IFolderDetailRepository, FolderDetailRepository>();
-builder.Services.AddSingleton<IMemberRepository, MemberRepository>();
-builder.Services.AddSingleton<IStudySetRepository, StudySetRepository>();
-builder.Services.AddSingleton<IRepository<Group>, GroupRepository>();
-builder.Services.AddSingleton<IRepository<UserInfo>, UserInfoRepository>();
+builder.Services.AddDbContext<TaskServiceContext>();
+builder.Services.AddTransient<IRepository<Account>, AccountRepository>();
+builder.Services.AddTransient<AuthenticationHandler, AuthenticationHandler>();
+builder.Services.AddTransient<ICardRepository, CardRepository>();
+builder.Services.AddTransient<IClassRepository, ClassRepository>();
+builder.Services.AddTransient<IFolderRepository, FolderRepository>();
+builder.Services.AddTransient<IFolderDetailRepository, FolderDetailRepository>();
+builder.Services.AddTransient<IMemberRepository, MemberRepository>();
+builder.Services.AddTransient<IStudySetRepository, StudySetRepository>();
+builder.Services.AddTransient<IRepository<Group>, GroupRepository>();
+builder.Services.AddTransient<IRepository<UserInfo>, UserInfoRepository>();
 builder.Services
     .AddAuthenticationSetting()
     .AddAuthorizationSetting()
