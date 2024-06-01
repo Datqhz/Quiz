@@ -81,7 +81,7 @@ namespace Quiz.Task.Service.Controllers
                 DT = new 
                 {
                     TotalPage = totalPage,
-                    StudySets = data.Select(studySet => studySet.AsDto()).ToList()
+                    StudySets = data.Select(studySet => studySet.AsBriefDto()).ToList()
                 }
             });
         }
@@ -256,8 +256,8 @@ namespace Quiz.Task.Service.Controllers
                 EM = "Get study set by id = " + id + " successful!",
                 DT = new 
                 {
-                    TotalPage = 0,
-                    StudySets = data.Select(studySet => studySet.AsDto()).ToList()
+                    TotalPage = totalPage,
+                    StudySets = data.Select(studySet => studySet.AsBriefDto()).ToList()
                 }
             });
         }
@@ -266,11 +266,11 @@ namespace Quiz.Task.Service.Controllers
         public async Task<IActionResult> FindByRegex([FromQuery] int userId, [FromQuery] string regex)
         {
             var data = await studySetRepository.GetByRegex(userId, regex);
-            return Ok(new ResponseModel<IEnumerable<StudySetDto>>
+            return Ok(new ResponseModel<IEnumerable<StudySetBriefDto>>
             {
                 EC = 200,
                 EM = "Get study set by regex = " + regex + " successful!",
-                DT = data.Select(studySet => studySet.AsDto()).ToList()
+                DT = data.Select(studySet => studySet.AsBriefDto()).ToList()
             });
         }
     }

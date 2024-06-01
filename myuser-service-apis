@@ -147,7 +147,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"email\": \"a@gmail.com\",\n  \"password\": \"123456\"\n}",
+											"raw": "{\n  \"email\": \"e@gmail.com\",\n  \"password\": \"123456\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
@@ -212,7 +212,7 @@
 												}
 											],
 											"cookie": [],
-											"body": "{\r\n    \"ec\": 200,\r\n    \"em\": \"Login successful!\",\r\n    \"dt\": {\r\n        \"userId\": \"<integer>\",\r\n        \"userName\": \"<string>\",\r\n        \"email\": \"<string>\",\r\n        \"token\": \"<string>\",\r\n        \"groupName\": \"<string>\"\r\n    }\r\n}"
+											"body": "{\r\n    \"ec\": 200,\r\n    \"em\": \"Login successful!\",\r\n    \"dt\": {\r\n        \"userId\": \"<integer>\",\r\n        \"userName\": \"<string>\",\r\n        \"email\": \"<string>\",\r\n        \"token\": \"<string>\",\r\n        \"groupName\": \"<string>\",\r\n        \"image\": \"<base64string>\",\r\n        \"accountId\": \"<integer>\"\r\n    }\r\n}"
 										},
 										{
 											"name": "Not Found",
@@ -396,7 +396,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"email\": \"c@gmail.com\",\n  \"password\": \"123456\",\n  \"username\": \"Jinbu\",\n  \"groupId\": \"1\"\n}",
+									"raw": "{\n  \"email\": \"d@gmail.com\",\n  \"password\": \"123456\",\n  \"username\": \"Hoshino\",\n  \"groupId\": \"1\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -541,7 +541,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZDAyNWNiNC0wNjQwLTQ5NWItOTA1MC1lMzExZDE2NTBlZjAiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTQyNzcxLCJleHAiOjE3MTcyMjkxNzEsImlhdCI6MTcxNzE0Mjc3MSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.JqOSnLQwvnbt76k9zWZldzI_C6H8bWIIaRRtTSJdspk",
 											"type": "string"
 										}
 									]
@@ -555,7 +555,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"id\": 3,\n  \"email\": \"c@gmail.com\",\n  \"password\": \"12345678\"\n}",
+									"raw": "{\n  \"id\": 5,\n  \"email\": \"d@gmail.com\",\n  \"oldpassword\": \"123456\",\n  \"newpassword\": \"12345678\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -643,7 +643,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"id\": 3,\n  \"email\": \"c@gmail.com\",\n  \"password\": \"12345678\"\n}",
+											"raw": "{\n  \"id\": 3,\n  \"email\": \"c@gmail.com\",\n  \"oldpassword\": \"12345678\",\n  \"newpassword\": \"123456\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",

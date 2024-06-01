@@ -51,12 +51,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/class/9",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/class/9",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"class",
@@ -166,12 +164,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/class/10",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/class/10",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"class",
@@ -209,12 +205,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/class/9",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/class/9",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"class",
@@ -264,7 +258,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZDIwODFmMi1jODA0LTQzODctYTJjNi1lYzlkZjJiYzAzMjEiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTIxNzA3LCJleHAiOjE3MTcyMDgxMDcsImlhdCI6MTcxNzEyMTcwNywiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.plRE71aqB0864cVsHMjdXP3twoR3wM4XIINkiLsA8vg",
 															"type": "string"
 														}
 													]
@@ -272,7 +266,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/class/user-joined/1",
+													"raw": "{{baseUrl}}/api/class/user-joined/1?page=1&limit=2",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -281,6 +275,16 @@
 														"class",
 														"user-joined",
 														"1"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "2"
+														}
 													]
 												},
 												"description": "API to get all classes user has id join in"
@@ -292,12 +296,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/class/user-joined/1",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/class/user-joined/1",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"class",
@@ -328,7 +330,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all class user join successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"className\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"description\": \"<string>\",\n            \"user\": {\n                \"id\": \"<integer>\",\n                \"userName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"image\": \"<base64string>\"\n            },\n            \"numOfFolder\": \"<integer>\",\n            \"numOfMember\": \"<integer>\"\n        },\n        ...\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all class user join successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"classes\": [\n            {\n                \"id\": \"<integer>\",\n                \"className\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"description\": \"<string>\",\n                \"user\": {\n                    \"id\": \"<integer>\",\n                    \"userName\": \"<string>\",\n                    \"createDate\": \"<datetime>\",\n                    \"image\": \"<base64string>\"\n                },\n                \"numOfFolder\": \"<integer>\",\n                \"numOfMember\": \"<integer>\"\n            },\n            ...\n        ]\n    }\n}"
 												}
 											]
 										}
@@ -473,12 +475,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/class",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/class",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"class"
@@ -579,12 +579,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/class",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/class",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"class"
@@ -771,12 +769,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/folder/13",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/folder/13",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"folder",
@@ -814,12 +810,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/folder/14",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/folder/14",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"folder",
@@ -888,12 +882,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/folder/14",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/folder/14",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"folder",
@@ -984,7 +976,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZDIwODFmMi1jODA0LTQzODctYTJjNi1lYzlkZjJiYzAzMjEiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTIxNzA3LCJleHAiOjE3MTcyMDgxMDcsImlhdCI6MTcxNzEyMTcwNywiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.plRE71aqB0864cVsHMjdXP3twoR3wM4XIINkiLsA8vg",
 															"type": "string"
 														}
 													]
@@ -992,7 +984,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/folder/user/1",
+													"raw": "{{baseUrl}}/api/folder/user/1?page=1&limit=2",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1001,6 +993,16 @@
 														"folder",
 														"user",
 														"1"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "2"
+														}
 													]
 												},
 												"description": "API to get all folders created by user has id is userId"
@@ -1012,12 +1014,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/folder/user/1?page=1&limit=2",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/folder/user/1?page=1&limit=2",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"folder",
@@ -1058,10 +1058,10 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<ingeter>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        },\n        ...\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"folders\": [\n            {\n                \"id\": \"<ingeter>\",\n                \"folderName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"class\": \"<ClassDto>\",\n                \"folderDetails\": null\n            },\n            ...\n        ]\n    }\n}"
 												},
 												{
-													"name": "/api/folder/user/:userId",
+													"name": "Success",
 													"originalRequest": {
 														"method": "GET",
 														"header": [],
@@ -1100,7 +1100,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"null|<ClassDto>\",\n            \"folderDetails\": null\n        },\n        ...\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by userId successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"folders\": [\n            {\n                \"id\": \"<integer>\",\n                \"folderName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"class\": \"null|<ClassDto>\",\n                \"folderDetails\": null\n            },\n            ...\n        ]\n    }\n}"
 												}
 											]
 										}
@@ -1122,7 +1122,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZDIwODFmMi1jODA0LTQzODctYTJjNi1lYzlkZjJiYzAzMjEiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTIxNzA3LCJleHAiOjE3MTcyMDgxMDcsImlhdCI6MTcxNzEyMTcwNywiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.plRE71aqB0864cVsHMjdXP3twoR3wM4XIINkiLsA8vg",
 															"type": "string"
 														}
 													]
@@ -1130,7 +1130,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/folder/class/2",
+													"raw": "{{baseUrl}}/api/folder/class/2?page=1&limit=2",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -1139,6 +1139,16 @@
 														"folder",
 														"class",
 														"2"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "2"
+														}
 													]
 												},
 												"description": "API to get all folders in class has id is classId"
@@ -1150,12 +1160,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/folder/class/2?page=1&limit=1",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/folder/class/2?page=1&limit=1",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"folder",
@@ -1196,7 +1204,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        }\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"folders\": [\n            {\n                \"id\": \"<integer>\",\n                \"folderName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"class\": \"<ClassDto>\",\n                \"folderDetails\": null\n            }\n        ]\n    }\n}"
 												},
 												{
 													"name": "Success",
@@ -1238,7 +1246,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"folderName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"class\": \"<ClassDto>\",\n            \"folderDetails\": null\n        }\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get all Folder by class id successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"folders\": [\n            {\n                \"id\": \"<integer>\",\n                \"folderName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"class\": \"<ClassDto>\",\n                \"folderDetails\": null\n            }\n        ]\n    }\n}"
 												}
 											]
 										}
@@ -1280,12 +1288,10 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:8000/api/folder",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/folder",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"folder"
@@ -1382,12 +1388,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/folder",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/folder",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"folder"
@@ -1598,12 +1602,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/folder",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/folder",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"folder"
@@ -1735,12 +1737,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/folder-detail/3",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/folder-detail/3",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"folder-detail",
@@ -1850,12 +1850,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/folder-detail/5",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/folder-detail/5",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"folder-detail",
@@ -1940,7 +1938,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0M2MxODI2My02NWY4LTQyMWYtYjRiMS01MmFhMjk0YzE3MDUiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MjAyODE0LCJleHAiOjE3MTcyODkyMTQsImlhdCI6MTcxNzIwMjgxNCwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.aN8b6a_t6y5RhMom035tUpgMzl3UIIviWvMGf4EQcb4",
 											"type": "string"
 										}
 									]
@@ -1954,7 +1952,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"folderId\": 13,\n  \"studySetId\": 18\n}",
+									"raw": "{\n  \"folderId\": 12,\n  \"studySetId\": 13\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -1996,12 +1994,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/folder-detail",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/folder-detail",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"folder-detail"
@@ -2137,12 +2133,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/member/11",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/member/11",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"member",
@@ -2252,12 +2246,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/member/14",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/member/14",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"member",
@@ -2376,12 +2368,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/member/class/2",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/member/class/2",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"member",
@@ -2454,12 +2444,10 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:8000/api/member",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/member",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"member"
@@ -2556,12 +2544,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/member",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/member",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"member"
@@ -2697,12 +2683,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/study-set/17",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/study-set/17",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"study-set",
@@ -2812,12 +2796,10 @@
 												"method": "DELETE",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/study-set/18",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/study-set/18",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"study-set",
@@ -2908,7 +2890,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZDIwODFmMi1jODA0LTQzODctYTJjNi1lYzlkZjJiYzAzMjEiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTIxNzA3LCJleHAiOjE3MTcyMDgxMDcsImlhdCI6MTcxNzEyMTcwNywiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.plRE71aqB0864cVsHMjdXP3twoR3wM4XIINkiLsA8vg",
 															"type": "string"
 														}
 													]
@@ -2916,7 +2898,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/study-set/user/1?page=1&limit=2",
+													"raw": "{{baseUrl}}/api/study-set/user/1?page=1&limit=1",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -2933,7 +2915,7 @@
 														},
 														{
 															"key": "limit",
-															"value": "2"
+															"value": "1"
 														}
 													]
 												},
@@ -2946,12 +2928,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/study-set/user/1?page=1&limit=2",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/study-set/user/1?page=1&limit=2",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"study-set",
@@ -2992,7 +2972,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 1 successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"cards\": [\n                \"<CardDto>\",\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 1 successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"studySets\": [\n            {\n                \"id\": \"<integer>\",\n                \"studySetName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"totalCards\": \"<integer>\"\n            },\n            ...\n        ]\n    }\n}"
 												}
 											]
 										}
@@ -3014,7 +2994,7 @@
 													"bearer": [
 														{
 															"key": "token",
-															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxZjJiMTZhNS00MmU4LTQ5NmUtYTlmZS1hZTY2YTU3YzM5NjIiLCJzdWIiOiJhQGdtYWlsLmNvbSIsImVtYWlsIjoiYUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiIxIiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MDMzNjM1LCJleHAiOjE3MTcxMjAwMzUsImlhdCI6MTcxNzAzMzYzNSwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.YyqEd5ekkbkDoY1jlJvhGbebrKJBNRUPaRxxbctmb6k",
+															"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5ZDIwODFmMi1jODA0LTQzODctYTJjNi1lYzlkZjJiYzAzMjEiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MTIxNzA3LCJleHAiOjE3MTcyMDgxMDcsImlhdCI6MTcxNzEyMTcwNywiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.plRE71aqB0864cVsHMjdXP3twoR3wM4XIINkiLsA8vg",
 															"type": "string"
 														}
 													]
@@ -3022,7 +3002,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "{{baseUrl}}/api/study-set/folder/13?page=1&limit=1",
+													"raw": "{{baseUrl}}/api/study-set/folder/12?page=1&limit=1",
 													"host": [
 														"{{baseUrl}}"
 													],
@@ -3030,7 +3010,7 @@
 														"api",
 														"study-set",
 														"folder",
-														"13"
+														"12"
 													],
 													"query": [
 														{
@@ -3052,12 +3032,10 @@
 														"method": "GET",
 														"header": [],
 														"url": {
-															"raw": "http://localhost:8000/api/study-set/folder/13?page=1&limit=1",
-															"protocol": "http",
+															"raw": "{{baseUrl}}/api/study-set/folder/13?page=1&limit=1",
 															"host": [
-																"localhost"
+																"{{baseUrl}}"
 															],
-															"port": "8000",
 															"path": [
 																"api",
 																"study-set",
@@ -3098,7 +3076,7 @@
 														}
 													],
 													"cookie": [],
-													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 13 successful!\",\n    \"dt\": [\n        {\n            \"id\": \"<integer>\",\n            \"studySetName\": \"<string>\",\n            \"createDate\": \"<datetime>\",\n            \"user\": \"<UserDto>\",\n            \"cards\": [\n                \"<CardDto>\",\n                ...\n            ]\n        },\n        ...\n    ]\n}"
+													"body": "{\n    \"ec\": 200,\n    \"em\": \"Get study set by id = 13 successful!\",\n    \"dt\": {\n        \"totalPage\": \"<integer>\",\n        \"studySets\": [\n            {\n                \"id\": \"<integer>\",\n                \"studySetName\": \"<string>\",\n                \"createDate\": \"<datetime>\",\n                \"user\": \"<UserDto>\",\n                \"totalCards\": \"<integer>\"\n            },\n            ...\n        ]\n        }\n}"
 												}
 											]
 										}
@@ -3154,12 +3132,10 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "http://localhost:8000/api/study-set/find?userId=1&regex=te",
-													"protocol": "http",
+													"raw": "{{baseUrl}}/api/study-set/find?userId=1&regex=te",
 													"host": [
-														"localhost"
+														"{{baseUrl}}"
 													],
-													"port": "8000",
 													"path": [
 														"api",
 														"study-set",
@@ -3239,12 +3215,10 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:8000/api/study-set",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/study-set",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"study-set"
@@ -3341,12 +3315,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/study-set",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/study-set",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"study-set"
@@ -3502,12 +3474,10 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:8000/api/study-set",
-											"protocol": "http",
+											"raw": "{{baseUrl}}/api/study-set",
 											"host": [
-												"localhost"
+												"{{baseUrl}}"
 											],
-											"port": "8000",
 											"path": [
 												"api",
 												"study-set"
@@ -3601,6 +3571,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0M2MxODI2My02NWY4LTQyMWYtYjRiMS01MmFhMjk0YzE3MDUiLCJzdWIiOiJlQGdtYWlsLmNvbSIsImVtYWlsIjoiZUBnbWFpbC5jb20iLCJhY2NvdW50aWQiOiI0IiwiZ3JvdXAiOiJ0ZWFjaGVyIiwibmJmIjoxNzE3MjAyODE0LCJleHAiOjE3MTcyODkyMTQsImlhdCI6MTcxNzIwMjgxNCwiaXNzIjoiUXVpei5NaWNyb3NlcnZpY2UiLCJhdWQiOiIwOTBkZjM1ZmRjYTQ3YjAxYzgwYWU4NzE4ZTA3MWE2NzZiMmI0MmFjNzg5ZGUyODQ2YzUwZTBjMjljM2JjODlkIn0.aN8b6a_t6y5RhMom035tUpgMzl3UIIviWvMGf4EQcb4",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",

@@ -1,6 +1,7 @@
 namespace Quiz.Task.Service.ResponseDtos
 {
     public record StudySetDto(int Id, string StudySetName, DateTime CreateDate, UserDto User, List<CardDto> Cards);
+    public record StudySetBriefDto(int Id, string StudySetName, DateTime CreateDate, UserDto User, int TotalCards);
     public record UserDto(int Id, string UserName, DateTime CreateDate, byte[] Image);
     public record CardDto(int Id, string Term, string Definition);
     public record ClassDto(int Id, string ClassName, DateTime CreateDate, string Description, UserDto User, int NumOfFolder, int NumOfMember);
