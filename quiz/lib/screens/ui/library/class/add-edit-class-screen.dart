@@ -4,15 +4,16 @@ import 'package:quiz/models/class.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/services/class_service.dart';
 
-class CreateClassScreen extends StatefulWidget {
-  CreateClassScreen({super.key, required this.classStream});
+class AddEditClassScreen extends StatefulWidget {
+  AddEditClassScreen({super.key, required this.classStream, this.eClass});
 
   NotifyChangeStream classStream;
+  Class? eClass;
   @override
-  State<CreateClassScreen> createState() => _CreateClassScreenState();
+  State<AddEditClassScreen> createState() => _AddEditClassScreenState();
 }
 
-class _CreateClassScreenState extends State<CreateClassScreen> {
+class _AddEditClassScreenState extends State<AddEditClassScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameController = TextEditingController();
@@ -28,6 +29,11 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.eClass != null) {
+      _nameController.text = widget.eClass!.className;
+      _desController.text = widget.eClass!.description;
+    }
+
     _focusClassNameNode.addListener(() {
       _classNameFocus.value = true;
       _classDesFocus.value = false;
@@ -77,20 +83,29 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           ClassRequest classRequest = ClassRequest(
-                              classId: 0,
+                              classId: widget.eClass != null
+                                  ? widget.eClass!.classId
+                                  : 0,
                               className: _nameController.text.trim(),
                               description: _desController.text.trim());
                           print(_nameController.text.trim());
-                          bool rs =
-                              await ClassService().createClass(classRequest);
+                          bool rs;
+                          if (widget.eClass != null) {
+                            rs = await ClassService().modifyClass(classRequest);
+                          } else {
+                            rs = await ClassService().createClass(classRequest);
+                          }
+
                           if (rs) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 width:
                                     2.6 * MediaQuery.of(context).size.width / 4,
                                 behavior: SnackBarBehavior.floating,
-                                content: const Text(
-                                  'Tạo lớp thành công.',
+                                content: Text(
+                                  widget.eClass != null
+                                      ? 'Cập nhật lớp thành công.'
+                                      : 'Tạo lớp thành công.',
                                   textAlign: TextAlign.center,
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -107,7 +122,7 @@ class _CreateClassScreenState extends State<CreateClassScreen> {
                                     2.6 * MediaQuery.of(context).size.width / 4,
                                 behavior: SnackBarBehavior.floating,
                                 content: const Text(
-                                  'Xảy ra lỗi trong quá trình tạo.',
+                                  'Xảy ra lỗi trong quá trình thực hiện.',
                                   textAlign: TextAlign.center,
                                 ),
                                 shape: RoundedRectangleBorder(

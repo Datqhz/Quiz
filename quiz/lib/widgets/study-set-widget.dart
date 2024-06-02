@@ -6,10 +6,10 @@ import 'package:quiz/screens/ui/study-set-screen.dart';
 import 'package:quiz/utilities/image_utils.dart';
 
 class StudySetWidget extends StatelessWidget {
-  StudySetWidget({super.key, required this.itemColor, required this.studySet});
+  StudySetWidget({super.key, required this.itemColor, required this.studySet, required this.studySetStream});
   Color itemColor;
   StudySetBrief studySet;
-  NotifyChangeStream studySetStream = NotifyChangeStream();
+  NotifyChangeStream studySetStream;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

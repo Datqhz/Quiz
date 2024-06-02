@@ -48,6 +48,46 @@ class ClassService {
     }
     return true;
   }
+
+Future<bool> modifyClass(ClassRequest classRequest) async {
+    UserInfo? user = await getUserInfo();
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await put(
+        Uri.parse("${GlobalVariable.url}/api/class"),
+        headers: headers,
+        body: jsonEncode(<String, dynamic>{
+          "id": classRequest.classId,
+          "className": classRequest.className,
+          "description": classRequest.description
+          }));
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return false;
+    }
+    return true;
+  }
+
+
+Future<bool> deleteClass(int classId) async {
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await delete(
+        Uri.parse("${GlobalVariable.url}/api/class/$classId"),
+        headers: headers);
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return false;
+    }
+    return true;
+  }
+
   Future<List<Class>?> getAllClassUserIdJoined(int id,
       {int page = 0, int limit = 0}) async {
     String url = "${GlobalVariable.url}/api/class/user-joined/$id";

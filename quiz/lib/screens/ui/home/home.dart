@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             MaterialPageRoute(
                 builder: (context) => ClassScreen(
-                      e_class: e_class,
+                      classId: e_class.classId,
                       classStream: classStream,
                     )));
       },

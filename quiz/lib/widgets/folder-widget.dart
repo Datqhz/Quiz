@@ -19,7 +19,8 @@ class FolderWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => FolderScreen(
-                      folder: folder,
+                      folderId: folder.folderId,
+                      folderStream: listFolderStream,
                     )));
       },
       child: Container(

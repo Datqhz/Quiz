@@ -52,3 +52,13 @@ class StudySetRequest {
       required this.cards});
 }
 
+class StudySetModify {
+  int studySetId;
+  String studySetName;
+  List<CardModify> cards;
+  StudySetModify(
+      {required this.studySetId,
+      required this.studySetName,
+      required this.cards});
+}
+

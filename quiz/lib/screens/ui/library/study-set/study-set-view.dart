@@ -43,7 +43,7 @@ class _StudySetViewState extends State<StudySetView> {
   List<Widget> _loadStudySets() {
     List<Widget> rs = [];
     for (var studySet in studySets.value) {
-      rs.add(StudySetWidget(itemColor: Colors.transparent, studySet: studySet));
+      rs.add(StudySetWidget(itemColor: Colors.transparent, studySet: studySet, studySetStream: widget.studySetStream,));
       rs.add(const SizedBox(
         height: 8,
       ));

@@ -25,7 +25,24 @@ namespace Quiz.Task.Service.Repositories
         }
         public async Task<Folder> GetById(int id)
         {
-            return await _context.Folder.FindAsync(id);
+            var folderWithClass = await _context.Folder
+                .Where(f => f.Id== id && f.ClassId != null)
+                .Include(f => f.User)
+                .Include(f => f.Class)
+                .FirstOrDefaultAsync();
+
+            // Get folders where ClassId is null and exclude Class
+            var folderWithoutClass = await _context.Folder
+                .Where(f => f.Id == id && f.ClassId == null)
+                .Include(f => f.User)
+                .OrderByDescending(f => f.CreateDate)
+                .FirstOrDefaultAsync();
+            if(folderWithoutClass!= null){
+                return folderWithoutClass;
+            }
+#pragma warning disable CS8603 // Possible null reference return.
+            return folderWithClass;
+#pragma warning restore CS8603 // Possible null reference return.
         }
         public async Task<Folder> Insert(Folder entity)
         {
@@ -54,43 +71,65 @@ namespace Quiz.Task.Service.Repositories
         // Get all Folder user has userId created
         public async Task<IEnumerable<Folder>> GetByUserId(int userId)
         {
-            return await _context.Folder.Include(e => e.Class)
-                                        .Include(e => e.User)
-                                        .Where(c => c.UserId == userId)
-                                        .OrderByDescending(e => e.CreateDate)
-                                        .ToListAsync();
+            var foldersWithClass = await _context.Folder
+                .Where(f => f.UserId == userId && f.ClassId != null)
+                .Include(f => f.User)
+                .Include(f => f.Class)
+                .OrderByDescending(f => f.CreateDate)
+                .ToListAsync();
+
+            // Get folders where ClassId is null and exclude Class
+            var foldersWithoutClass = await _context.Folder
+                .Where(f => f.UserId == userId && f.ClassId == null)
+                .Include(f => f.User)
+                .OrderByDescending(f => f.CreateDate)
+                .ToListAsync();
+
+            // Combine both results
+            var allFolders = foldersWithClass.Concat(foldersWithoutClass).ToList();
+            return allFolders;
         }
 
         public async Task<IEnumerable<Folder>> GetByClassId(int classId)
         {
             return await _context.Folder
-                                        .Include(e => e.Class)
-                                        .Include(e => e.User)
-                                        .Where(c => c.ClassId == classId)
-                                        .OrderByDescending(e => e.CreateDate)
+                                        .Where(f => f.ClassId != null && f.ClassId == classId)
+                                        .Include(f => f.User)
+                                        .Include(f => f.Class)
+                                        .OrderByDescending(f => f.CreateDate)
                                         .ToListAsync();
         }
 
         public async Task<IEnumerable<Folder>> GetByUserIdWithPage(int userId, int page, int limit)
         {
             var offset = (page - 1) * limit;
-            return await _context.Folder
-                                .Include(e => e.Class)
-                                .Include(e => e.User)
-                                .Where(f => f.UserId == userId)
-                                .OrderByDescending(e => e.CreateDate)
-                                .Skip(offset)
-                                .Take(limit)
-                                .ToListAsync();
+
+            var foldersWithClass = _context.Folder
+                .Where(f => f.UserId == userId && f.ClassId != null)
+                .Include(f => f.User)
+                .Include(f => f.Class);
+
+            // Get folders where ClassId is null and exclude Class
+            var foldersWithoutClass = _context.Folder
+                .Where(f => f.UserId == userId && f.ClassId == null)
+                .Include(f => f.User);
+            var combinedQuery = foldersWithClass.Union(foldersWithoutClass)
+                .OrderByDescending(f => f.CreateDate);
+            var pagedResult = await combinedQuery
+                .Skip(offset)
+                .Take(limit)
+                .ToListAsync();
+
+            return pagedResult;
         }
 
         public async Task<IEnumerable<Folder>> GetByClassIdWithPage(int classId, int page, int limit)
         {
             var offset = (page - 1) * limit;
             return await _context.Folder
-                                .Include(e => e.Class)
-                                .Include(e => e.User)
-                                .Where(c => c.ClassId == classId)
+                                .Where(f => f.ClassId != null && f.ClassId == classId)
+                                .Include(f => f.User)
+                                .Include(f => f.Class)
                                 .OrderByDescending(e => e.CreateDate)
                                 .Skip(offset)
                                 .Take(limit)

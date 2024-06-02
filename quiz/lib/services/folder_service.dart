@@ -7,7 +7,6 @@ import 'package:quiz/shared/global_variable.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
 
 class FolderService {
-
   Future<Folder?> getFolderById(int id) async {
     String? token = await getToken();
     Map<String, String> headers = {
@@ -34,16 +33,52 @@ class FolderService {
       'Content-Type': 'application/json; charset=UTF-8',
       "Authorization": "Bearer $token"
     };
-    Response response = await post(
-        Uri.parse("${GlobalVariable.url}/api/folder"),
-        headers: headers,
-        body: jsonEncode(<String, dynamic>{
-          "folderName": folder.folderName,
-          "userId": user!.userId,
-          "classId": folder.classId
-          }));
+    Response response =
+        await post(Uri.parse("${GlobalVariable.url}/api/folder"),
+            headers: headers,
+            body: jsonEncode(<String, dynamic>{
+              "folderName": folder.folderName,
+              "userId": user!.userId,
+              "classId": folder.classId
+            }));
     int statusCode = response.statusCode;
     if (statusCode != 201) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> modifyFolder(FolderRequest folder) async {
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await put(Uri.parse("${GlobalVariable.url}/api/folder"),
+        headers: headers,
+        body: jsonEncode(<String, dynamic>{
+          "id": folder.folderId,
+          "folderName": folder.folderName,
+          "classId": folder.classId
+        }));
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> deleteFolder(int folderId) async {
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await delete(
+        Uri.parse("${GlobalVariable.url}/api/folder/$folderId"),
+        headers: headers);
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
       return false;
     }
     return true;

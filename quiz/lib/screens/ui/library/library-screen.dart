@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz/models/folder.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/screens/ui/library/class/class-view.dart';
-import 'package:quiz/screens/ui/library/class/create-class-screen.dart';
+import 'package:quiz/screens/ui/library/class/add-edit-class-screen.dart';
 import 'package:quiz/screens/ui/library/folder/folder-view.dart';
 import 'package:quiz/screens/ui/library/study-set/create-study-set-screen.dart';
 import 'package:quiz/screens/ui/library/study-set/study-set-view.dart';
@@ -320,7 +320,7 @@ class _LibraryScreenState extends State<LibraryScreen>
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          CreateClassScreen(classStream: classStream,)));
+                                          AddEditClassScreen(classStream: classStream,)));
                             }
                           },
                           icon: const Icon(

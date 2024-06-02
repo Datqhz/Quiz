@@ -17,8 +17,8 @@ class ClassWidget extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    ClassScreen(e_class: e_class, classStream: classStream)));
+                builder: (context) => ClassScreen(
+                    classId: e_class.classId, classStream: classStream)));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),

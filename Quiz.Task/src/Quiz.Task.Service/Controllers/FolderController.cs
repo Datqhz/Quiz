@@ -202,8 +202,6 @@ namespace Quiz.Task.Service.Controllers
                 totalPages = await folderRepository.CountOfPageFolderByUserId(userId, (int)limit);
                 data = await folderRepository.GetByUserIdWithPage(userId, (int)page, (int)limit);
             }
-            int count = data.Count();
-            Console.WriteLine($"num of data: {count}");
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,

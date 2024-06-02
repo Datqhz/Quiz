@@ -1,17 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:quiz/models/card.dart';
 import 'package:quiz/models/study_set.dart';
-import 'package:quiz/models/user.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
-import 'package:quiz/providers/study_set_provider.dart';
+import 'package:quiz/screens/ui/library/study-set/modify-study-set.dart';
 import 'package:quiz/services/study_set_service.dart';
 import 'package:quiz/utilities/image_utils.dart';
-import 'package:quiz/utilities/shared_preference_utils.dart';
 import 'package:quiz/widgets/flash-card.dart';
 
 class StudySetScreen extends StatefulWidget {
@@ -25,20 +22,16 @@ class StudySetScreen extends StatefulWidget {
 }
 
 class _StudySetScreenState extends State<StudySetScreen> {
-  int _termIdx = 0;
   int _sortOption = 0;
   ValueNotifier<StudySet?> studySet = ValueNotifier(null);
-  NotifyChangeStream personalStream = NotifyChangeStream();
 
   Future<void> fetchData() async {
-    UserInfo? user = await getUserInfo();
     studySet.value = await StudySetService().getStudySetById(widget.studySetId);
   }
 
   @override
   void initState() {
     super.initState();
-    personalStream.notifyDataChanged();
   }
 
   Widget _termCard(MyCard card) {
@@ -134,21 +127,50 @@ class _StudySetScreenState extends State<StudySetScreen> {
         child: AppBar(
           elevation: 0,
           backgroundColor: const Color.fromRGBO(10, 8, 45, 1),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.ellipsis_vertical,
-                  color: Colors.white,
-                  size: 24,
-                ))
+          actions: <Widget>[
+            PopupMenuButton<int>(
+              icon: const Icon(
+                CupertinoIcons.ellipsis_vertical,
+                color: Colors.white,
+                size: 18,
+              ),
+              color: Colors.black,
+              onSelected: (value) async {
+                if (value == 1) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ModifyStudySet(
+                              changeStream: widget.studySetStream,
+                              studySet: studySet.value!)));
+                }else if(value == 2){
+                  
+                }
+              },
+              itemBuilder: (BuildContext context) => [
+                const PopupMenuItem<int>(
+                  value: 1,
+                  child: Text(
+                    "Chỉnh sửa",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const PopupMenuItem<int>(
+                  value: 2,
+                  child: Text(
+                    "Xóa",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
       backgroundColor: const Color.fromRGBO(46, 55, 86, 1),
       body: SafeArea(
         child: StreamBuilder(
-          stream: personalStream.stream,
+          stream: widget.studySetStream.stream,
           builder: (context, snapshot) {
             return FutureBuilder(
               future: fetchData(),
@@ -175,11 +197,7 @@ class _StudySetScreenState extends State<StudySetScreen> {
                                 viewportFraction: 0.8,
                                 enlargeCenterPage: true,
                                 autoPlayCurve: Curves.fastOutSlowIn,
-                                onPageChanged: (index, reason) {
-                                  // setState(() {
-                                  //   _termIdx = index;
-                                  // });
-                                }),
+                                onPageChanged: (index, reason) {}),
                           ),
                           const SizedBox(
                             height: 16,
