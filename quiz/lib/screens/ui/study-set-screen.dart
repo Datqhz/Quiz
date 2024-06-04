@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:quiz/models/card.dart';
 import 'package:quiz/models/study_set.dart';
+import 'package:quiz/models/user.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/screens/ui/library/study-set/modify-study-set.dart';
 import 'package:quiz/services/study_set_service.dart';
+import 'package:quiz/shared/global_variable.dart';
 import 'package:quiz/utilities/image_utils.dart';
 import 'package:quiz/widgets/flash-card.dart';
 
@@ -136,15 +138,172 @@ class _StudySetScreenState extends State<StudySetScreen> {
               ),
               color: Colors.black,
               onSelected: (value) async {
-                if (value == 1) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ModifyStudySet(
-                              changeStream: widget.studySetStream,
-                              studySet: studySet.value!)));
-                }else if(value == 2){
-                  
+                if (GlobalVariable.currentUId == studySet.value!.user.userId) {
+                  if (value == 1) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ModifyStudySet(
+                                changeStream: widget.studySetStream,
+                                studySet: studySet.value!)));
+                  } else if (value == 2) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            elevation: 0,
+                            backgroundColor:
+                                const Color.fromRGBO(46, 55, 86, 1),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              height: 180,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const Text(
+                                    "Xóa thư mục",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    "Bạn có thực sự muốn xóa học phần \"${studySet.value!.studySetName}\" không?",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  ),
+                                  const Expanded(
+                                      child: SizedBox(
+                                    height: 1,
+                                  )),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 10),
+                                          textStyle: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  153, 162, 232, 1)),
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                        child: const Text(
+                                          "HỦY",
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 40,
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          bool rs = await StudySetService()
+                                              .deleteStudySet(
+                                                  studySet.value!.studySetId);
+                                          if (rs) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                width: 2.6 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: const Text(
+                                                  'Xóa học phần thành công',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14)),
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                              ),
+                                            );
+                                            widget.studySetStream
+                                                .notifyDataChanged();
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                width: 2.6 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: const Text(
+                                                  'Xảy ra lỗi trong quá trình xóa',
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14)),
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                              ),
+                                            );
+                                            Navigator.pop(context);
+                                          }
+                                        },
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 10),
+                                          textStyle: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromRGBO(
+                                                  15, 40, 232, 1)),
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                        child: const Text(
+                                          "CÓ",
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      width: 2.6 * MediaQuery.of(context).size.width / 4,
+                      behavior: SnackBarBehavior.floating,
+                      content: const Text(
+                        'Bạn không thể thao tác trên học phần này',
+                        textAlign: TextAlign.center,
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
                 }
               },
               itemBuilder: (BuildContext context) => [

@@ -152,5 +152,31 @@ namespace Quiz.Task.Service.Repositories
                                 .CountAsync();
             return (int)Math.Ceiling((double)totalRecords / limit);
         }
+
+        public async Task<IEnumerable<Folder>> GetByUserIdAndNotInClass(int userId)
+        {
+            return await _context.Folder
+                .Where(f => f.UserId == userId && f.ClassId == null)
+                .Include(f => f.User)
+                .OrderByDescending(f => f.CreateDate)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Folder>> GetByUserIdAndNotContainStudySet(int userId, int studySetId)
+        {
+             var data = await(from folder in _context.Folder
+                    where folder.UserId == userId && 
+                    !folder.FolderDetails.Any(fd => fd.StudySetId == studySetId)
+                    select new Folder
+                    {
+                        Id = folder.Id,
+                        FolderName = folder.FolderName,
+                        CreateDate = folder.CreateDate,
+                        User = folder.User,
+
+                    })
+                    .ToListAsync();
+            return data;
+        }
     }
 }

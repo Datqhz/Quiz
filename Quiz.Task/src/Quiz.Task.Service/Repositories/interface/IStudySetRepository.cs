@@ -9,6 +9,7 @@ namespace Quiz.Task.Service.Repository
         Task<IEnumerable<StudySet>> GetByFolderId(int folderId);
         Task<IEnumerable<StudySet>> GetByUserIdWithPage(int userId, int page, int limit);
         Task<IEnumerable<StudySet>> GetByFolderIdWithPage(int folderId, int page, int limit);
+        Task<IEnumerable<StudySet>> GetAllByUserIdAndNotInFolderId(int userId, int folderId);
         Task<int> CountOfPageStudySetByUserId(int userId, int limit);
         Task<int> CountOfPageStudySetByFolderId(int folderId,  int limit);
         Task<IEnumerable<StudySet>> GetByRegex(int userId, string regex);

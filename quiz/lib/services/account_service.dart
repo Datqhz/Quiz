@@ -32,6 +32,7 @@ class AccountService {
     var account = Account.fromJson(data['dt']);
     await storeAccount(account);
     await storeToken(data['dt']['token']);
+    GlobalVariable.currentUId = user.userId;
     return true;
   }
 

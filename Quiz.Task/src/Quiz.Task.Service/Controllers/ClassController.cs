@@ -174,5 +174,17 @@ namespace Quiz.Task.Service.Controllers
                 }
             });
         }
+         [HttpGet("user-own/{id}")]
+        public async Task<IActionResult> GetClassesUserOwn(int id)
+        {
+            IEnumerable<Class> classes;
+            classes = await classRepository.GetByOwnerId(id);
+            return Ok(new ResponseModel<List<ClassDto>>
+            {
+                EC = 200,
+                EM = "Get all class user own successful!",
+                DT = classes.Select(e => e.AsDto()).ToList()
+            });
+        }
     }
 }

@@ -74,7 +74,7 @@ class StudySetService {
     return true;
   }
 
-Future<bool> deleteStudySet(int studySetId) async {
+  Future<bool> deleteStudySet(int studySetId) async {
     String? token = await getToken();
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',

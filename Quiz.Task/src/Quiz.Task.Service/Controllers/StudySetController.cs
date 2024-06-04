@@ -85,6 +85,19 @@ namespace Quiz.Task.Service.Controllers
                 }
             });
         }
+        [HttpGet("user-nfolder")]
+        // Get all study set created by user has userId and it not in folder has folder id
+        public async Task<IActionResult> GetByUserIdAndNotInFolderId([FromQuery] int userId, [FromQuery] int folderId)
+        {
+            IEnumerable<StudySet> data;
+            data = await studySetRepository.GetAllByUserIdAndNotInFolderId(userId, folderId);
+            return Ok(new ResponseModel<List<StudySetBriefDto>>
+            {
+                EC = 200,
+                EM = $"Get study set by id = {userId} and not folder id {folderId} in successful!",
+                DT = data.Select(studySet => studySet.AsBriefDto()).ToList()
+            });
+        }
         // Create study set
         [HttpPost]
         public async Task<ActionResult> CreateStudySet(CreateStudySetDto studySetDto)

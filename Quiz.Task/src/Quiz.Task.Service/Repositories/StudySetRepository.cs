@@ -39,7 +39,7 @@ namespace Quiz.Task.Service.Repositories
                                 .OrderByDescending(e => e.CreateDate)
                                 .ToListAsync();
             return data;
-        }   
+        }
         public async Task<IEnumerable<StudySet>> GetAll(string query)
         {
             var data = await _context.StudySet.ToListAsync();
@@ -56,7 +56,7 @@ namespace Quiz.Task.Service.Repositories
                                     StudySetName = e.StudySetName,
                                     CreateDate = e.CreateDate,
                                     UserId = e.UserId,
-                                    
+
                                     User = new UserInfo
                                     {
                                         Id = e.User.Id,
@@ -111,19 +111,19 @@ namespace Quiz.Task.Service.Repositories
         public async Task<IEnumerable<StudySet>> GetByFolderId(int folderId)
         {
             var query = from studySet in _context.StudySet
-                    join folder_detail in _context.FolderDetail
-                    on studySet.Id equals folder_detail.StudySetId
-                    where folder_detail.FolderId.Equals(folderId) 
-                    select new StudySet
-                    {
-                        Id = studySet.Id,
-                        StudySetName = studySet.StudySetName,
-                        CreateDate = studySet.CreateDate,
-                        User = studySet.User,
-                        UserId = studySet.UserId,
-                        Cards = studySet.Cards,
-                        FolderDetails = studySet.FolderDetails,
-                    };
+                        join folder_detail in _context.FolderDetail
+                        on studySet.Id equals folder_detail.StudySetId
+                        where folder_detail.FolderId.Equals(folderId)
+                        select new StudySet
+                        {
+                            Id = studySet.Id,
+                            StudySetName = studySet.StudySetName,
+                            CreateDate = studySet.CreateDate,
+                            User = studySet.User,
+                            UserId = studySet.UserId,
+                            Cards = studySet.Cards,
+                            FolderDetails = studySet.FolderDetails,
+                        };
             return await query
                                 .OrderByDescending(e => e.CreateDate)
                                 .ToListAsync();
@@ -145,19 +145,19 @@ namespace Quiz.Task.Service.Repositories
         {
             var offset = (page - 1) * limit;
             var query = from studySet in _context.StudySet
-                    join folder_detail in _context.FolderDetail
-                    on studySet.Id equals folder_detail.StudySetId
-                    where folder_detail.FolderId.Equals(folderId) 
-                    select new StudySet
-                    {
-                        Id = studySet.Id,
-                        StudySetName = studySet.StudySetName,
-                        CreateDate = studySet.CreateDate,
-                        User = studySet.User,
-                        UserId = studySet.UserId,
-                        Cards = studySet.Cards,
-                        FolderDetails = studySet.FolderDetails,
-                    };
+                        join folder_detail in _context.FolderDetail
+                        on studySet.Id equals folder_detail.StudySetId
+                        where folder_detail.FolderId.Equals(folderId)
+                        select new StudySet
+                        {
+                            Id = studySet.Id,
+                            StudySetName = studySet.StudySetName,
+                            CreateDate = studySet.CreateDate,
+                            User = studySet.User,
+                            UserId = studySet.UserId,
+                            Cards = studySet.Cards,
+                            FolderDetails = studySet.FolderDetails,
+                        };
             return await query
                                 .OrderByDescending(e => e.CreateDate)
                                 .Skip(offset)
@@ -189,12 +189,32 @@ namespace Quiz.Task.Service.Repositories
 
         public async Task<int> CountOfPageStudySetByFolderId(int folderId, int limit)
         {
-            var totalRecords = await(from studySet in _context.StudySet
-                    join folder_detail in _context.FolderDetail
-                    on studySet.Id equals folder_detail.StudySetId
-                    where folder_detail.FolderId.Equals(folderId) 
-                    select studySet).CountAsync();
+            var totalRecords = await (from studySet in _context.StudySet
+                                      join folder_detail in _context.FolderDetail
+                                      on studySet.Id equals folder_detail.StudySetId
+                                      where folder_detail.FolderId.Equals(folderId)
+                                      select studySet).CountAsync();
             return (int)Math.Ceiling((double)totalRecords / limit);
+        }
+
+        public async Task<IEnumerable<StudySet>> GetAllByUserIdAndNotInFolderId(int userId, int folderId)
+        {
+            var query = from studySet in _context.StudySet
+                            where studySet.UserId == userId && 
+                                !studySet.FolderDetails.Any(fd => fd.FolderId == folderId)
+                            select new StudySet
+                            {
+                                Id = studySet.Id,
+                                StudySetName = studySet.StudySetName,
+                                CreateDate = studySet.CreateDate,
+                                User = studySet.User,
+                                UserId = studySet.UserId,
+                                Cards = studySet.Cards,
+                                FolderDetails = studySet.FolderDetails,
+                            };
+            return await query
+                                .OrderByDescending(e => e.CreateDate)
+                                .ToListAsync();
         }
     }
 }

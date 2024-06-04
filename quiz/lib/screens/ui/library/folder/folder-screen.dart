@@ -4,8 +4,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:quiz/models/folder.dart';
 import 'package:quiz/models/study_set.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
+import 'package:quiz/screens/ui/library/study-set/choose-study-set-screen.dart';
 import 'package:quiz/services/folder_service.dart';
 import 'package:quiz/services/study_set_service.dart';
+import 'package:quiz/shared/global_variable.dart';
 import 'package:quiz/utilities/image_utils.dart';
 import 'package:quiz/widgets/study-set-widget.dart';
 
@@ -17,7 +19,7 @@ class FolderScreen extends StatelessWidget {
 
   ValueNotifier<List<StudySetBrief>?> studySets = ValueNotifier([]);
   ValueNotifier<Folder?> folder = ValueNotifier(null);
-
+  final ValueNotifier<int> _selectedOption = ValueNotifier(1);
   NotifyChangeStream studySetStream = NotifyChangeStream();
 
   final _formKey = GlobalKey<FormState>();
@@ -47,6 +49,95 @@ class FolderScreen extends StatelessWidget {
     return rs;
   }
 
+  void _showDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ValueListenableBuilder(
+            valueListenable: _selectedOption,
+            builder: (context, value, child) {
+              return AlertDialog(
+                backgroundColor: const Color.fromRGBO(46, 55, 86, 1),
+                title: const Text(
+                  "Tạo mới",
+                  style: TextStyle(color: Colors.white),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    RadioListTile<int>(
+                      title: const Text(
+                        "Có sẵn",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: 1,
+                      groupValue: _selectedOption.value,
+                      onChanged: (int? value) {
+                        _selectedOption.value = value!;
+                      },
+                    ),
+                    RadioListTile<int>(
+                      title: const Text(
+                        "Tạo mới",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: 2,
+                      groupValue: _selectedOption.value,
+                      onChanged: (int? value) {
+                        _selectedOption.value = value!;
+                      },
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(153, 162, 232, 1)),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    child: const Text(
+                      "HỦY",
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (_selectedOption.value == 1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChooseStudySetScreen(
+                                    folder: folder.value!,
+                                    folderStream: studySetStream)));
+                      }
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
+                      textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(153, 162, 232, 1)),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    child: const Text(
+                      "OK",
+                    ),
+                  ),
+                ],
+              );
+            });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,20 +160,208 @@ class FolderScreen extends StatelessWidget {
               ),
               color: Colors.black,
               onSelected: (value) async {
-                if (value == 1) {
-                  _controller.text = folder.value!.folderName;
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Dialog(
-                          elevation: 0,
-                          backgroundColor: const Color.fromRGBO(46, 55, 86, 1),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 12),
-                            height: 250,
-                            child: Form(
-                              key: _formKey,
+                if (GlobalVariable.currentUId == folder.value!.user.userId) {
+                  if (value == 1) {
+                    _controller.text = folder.value!.folderName;
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            elevation: 0,
+                            backgroundColor:
+                                const Color.fromRGBO(46, 55, 86, 1),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              height: 250,
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    const Text(
+                                      "Tạo thư mục",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    ),
+                                    TextFormField(
+                                      controller: _controller,
+                                      decoration: InputDecoration(
+                                          hintText: 'Tên thư mục',
+                                          hintStyle: TextStyle(
+                                              color: Colors.white
+                                                  .withOpacity(0.6),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400),
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white
+                                                      .withOpacity(0.6),
+                                                  width: 1)),
+                                          focusedBorder:
+                                              const UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Color.fromRGBO(
+                                                          65, 63, 212, 1),
+                                                      width: 2))),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        decoration: TextDecoration.none,
+                                        decorationThickness: 0,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Vui lòng nhập tên thư mục";
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    const Expanded(
+                                        child: SizedBox(
+                                      height: 1,
+                                    )),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 10),
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    153, 162, 232, 1)),
+                                            backgroundColor: Colors.transparent,
+                                          ),
+                                          child: const Text(
+                                            "HỦY",
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 40,
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              FolderRequest request =
+                                                  FolderRequest(
+                                                      folderId: folder
+                                                          .value!.folderId,
+                                                      folderName: _controller
+                                                          .text
+                                                          .trim(),
+                                                      userId: 0,
+                                                      classId: 0);
+                                              bool rs = await FolderService()
+                                                  .modifyFolder(request);
+                                              if (rs) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    width: 2.6 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        4,
+                                                    behavior: SnackBarBehavior
+                                                        .floating,
+                                                    content: const Text(
+                                                      'Cập nhật thư mục thành công',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        14)),
+                                                    duration: const Duration(
+                                                        seconds: 2),
+                                                  ),
+                                                );
+                                                folderStream
+                                                    .notifyDataChanged();
+                                                Navigator.pop(context);
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    width: 2.6 *
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        4,
+                                                    behavior: SnackBarBehavior
+                                                        .floating,
+                                                    content: const Text(
+                                                      'Xảy ra lỗi trong quá trình cập nhật',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        14)),
+                                                    duration: const Duration(
+                                                        seconds: 2),
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 10),
+                                            textStyle: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    153, 162, 232, 1)),
+                                            backgroundColor: Colors.transparent,
+                                          ),
+                                          child: const Text(
+                                            "LƯU",
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  } else if (value == 2) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            elevation: 0,
+                            backgroundColor:
+                                const Color.fromRGBO(46, 55, 86, 1),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              height: 180,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,48 +370,21 @@ class FolderScreen extends StatelessWidget {
                                     height: 20,
                                   ),
                                   const Text(
-                                    "Tạo thư mục",
+                                    "Xóa thư mục",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white),
                                   ),
-                                  TextFormField(
-                                    controller: _controller,
-                                    decoration: InputDecoration(
-                                        hintText: 'Tên thư mục',
-                                        hintStyle: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.6),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400),
-                                        enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white
-                                                    .withOpacity(0.6),
-                                                width: 1)),
-                                        focusedBorder:
-                                            const UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color.fromRGBO(
-                                                        65, 63, 212, 1),
-                                                    width: 2))),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      decoration: TextDecoration.none,
-                                      decorationThickness: 0,
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Vui lòng nhập tên thư mục";
-                                      }
-                                      return null;
-                                    },
-                                  ),
                                   const SizedBox(
-                                    height: 20,
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    "Bạn có thực sự muốn xóa thư mục \"${folder.value!.folderName}\" không?",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
                                   ),
                                   const Expanded(
                                       child: SizedBox(
@@ -164,67 +416,59 @@ class FolderScreen extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () async {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            FolderRequest request =
-                                                FolderRequest(
-                                                    folderId:
-                                                        folder.value!.folderId,
-                                                    folderName:
-                                                        _controller.text.trim(),
-                                                    userId: 0,
-                                                    classId: 0);
-                                            bool rs = await FolderService()
-                                                .modifyFolder(request);
-                                            if (rs) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  width: 2.6 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  behavior:
-                                                      SnackBarBehavior.floating,
-                                                  content: const Text(
-                                                    'Cập nhật thư mục thành công',
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14)),
-                                                  duration: const Duration(
-                                                      seconds: 2),
+                                          bool rs = await FolderService()
+                                              .deleteFolder(
+                                                  folder.value!.folderId);
+                                          if (rs) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                width: 2.6 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: const Text(
+                                                  'Xóa thư mục thành công',
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                              );
-                                              folderStream.notifyDataChanged();
-                                              Navigator.pop(context);
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  width: 2.6 *
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  behavior:
-                                                      SnackBarBehavior.floating,
-                                                  content: const Text(
-                                                    'Xảy ra lỗi trong quá trình cập nhật',
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14)),
-                                                  duration: const Duration(
-                                                      seconds: 2),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14)),
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                              ),
+                                            );
+                                            folderStream.notifyDataChanged();
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                width: 2.6 *
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: const Text(
+                                                  'Xảy ra lỗi trong quá trình xóa',
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                              );
-                                            }
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14)),
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                              ),
+                                            );
+                                            Navigator.pop(context);
                                           }
                                         },
                                         style: TextButton.styleFrom(
@@ -234,11 +478,11 @@ class FolderScreen extends StatelessWidget {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromRGBO(
-                                                  153, 162, 232, 1)),
+                                                  15, 40, 232, 1)),
                                           backgroundColor: Colors.transparent,
                                         ),
                                         child: const Text(
-                                          "LƯU",
+                                          "CÓ",
                                         ),
                                       )
                                     ],
@@ -246,10 +490,26 @@ class FolderScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      });
-                } else if (value == 2) {}
+                          );
+                        });
+                  } else if (value == 3) {
+                    _showDialog(context);
+                  } else {}
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      width: 2.6 * MediaQuery.of(context).size.width / 4,
+                      behavior: SnackBarBehavior.floating,
+                      content: const Text(
+                        'Bạn không thể thao tác trên thư mục này',
+                        textAlign: TextAlign.center,
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                }
               },
               itemBuilder: (BuildContext context) => [
                 const PopupMenuItem<int>(
@@ -265,7 +525,21 @@ class FolderScreen extends StatelessWidget {
                     "Xóa",
                     style: TextStyle(color: Colors.red),
                   ),
-                )
+                ),
+                const PopupMenuItem<int>(
+                  value: 3,
+                  child: Text(
+                    "Thêm học phần",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const PopupMenuItem<int>(
+                  value: 4,
+                  child: Text(
+                    "Thêm vào lớp",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
             ),
           ],

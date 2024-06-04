@@ -72,7 +72,7 @@ Future<bool> modifyClass(ClassRequest classRequest) async {
   }
 
 
-Future<bool> deleteClass(int classId) async {
+  Future<bool> deleteClass(int classId) async {
     String? token = await getToken();
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',

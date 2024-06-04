@@ -213,6 +213,31 @@ namespace Quiz.Task.Service.Controllers
                 }
             });
         }
+              // Get all folder created by user has userId
+        [HttpGet("user/{userId}/non-class")]
+        public async Task<IActionResult> GetAllFolderByUserIdAndNotInClass(int userId)
+        {
+            IEnumerable<Folder> data;
+            data = await folderRepository.GetByUserId(userId);
+            return Ok(new ResponseModel<List<FolderDto>>
+            {
+                EC = 200,
+                EM = "Get all Folder by userId and not in class successful!",
+                DT = data.Select(Folder => Folder.AsDto()).ToList()
+            });
+        }
+        [HttpGet("user/{userId}/study-set")]
+        public async Task<IActionResult> GetAllFolderByUserIdAndNotContainStudySet(int userId, [FromQuery] int studySetId)
+        {
+            IEnumerable<Folder> data;
+            data = await folderRepository.GetByUserIdAndNotContainStudySet(userId, studySetId);
+            return Ok(new ResponseModel<List<FolderDto>>
+            {
+                EC = 200,
+                EM = "Get all Folder by userId and not contain study set successful!",
+                DT = data.Select(Folder => Folder.AsDto()).ToList()
+            });
+        }
         // Get all folder in class has classId
         [HttpGet("class/{classId}")]
         public async Task<IActionResult> GetAllFolderByClassId(int classId, [FromQuery] int? page = null, [FromQuery] int? limit = null)

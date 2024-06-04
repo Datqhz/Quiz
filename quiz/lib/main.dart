@@ -5,9 +5,7 @@ import 'package:quiz/screens/wrapper.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (context) => AuthProvider(),
-    child: const MyApp()
-  ));
+      create: (context) => AuthProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

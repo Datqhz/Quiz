@@ -119,5 +119,15 @@ namespace Quiz.Task.Service.Repositories
 
             return data;
         }
+
+        public async Task<IEnumerable<Class>> GetByOwnerId(int userId)
+        {
+            return await _context.Class
+                                .Include(e => e.User)
+                                .Include(e => e.Folders)
+                                .Include(e => e.Members)
+                                .Where(e => e.UserId == userId)
+                                .ToListAsync();
+        }
     }
 }
