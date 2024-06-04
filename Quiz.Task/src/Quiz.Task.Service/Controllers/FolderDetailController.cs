@@ -1,3 +1,4 @@
+using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Quiz.Common.Repository;
@@ -88,6 +89,37 @@ namespace Quiz.Task.Service.Controllers
                 DT = created_FolderDetail.AsDto()
             };
             return CreatedAtAction(nameof(GetById), new { id = created_FolderDetail.Id }, res);
+        }
+        [HttpPost("multiple")]
+        public async Task<IActionResult> CreateMultiFolderDetail(List<CreateFolderDetailDto> createFolderDetailDtos)
+        {
+            using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)){
+                List<FolderDetail> details = new List<FolderDetail>();
+                foreach(var detail in createFolderDetailDtos){
+                    var created_FolderDetail = await folderDetailRepository.Insert(new FolderDetail
+                    {
+                        FolderId = detail.FolderId,
+                        StudySetId = detail.StudySetId
+                    });
+                    if (created_FolderDetail == null)
+                    {
+                        return BadRequest(new ResponseModel<string>
+                        {
+                            EC = 500,
+                            EM = "Something wrong in process!",
+                            DT = ""
+                        });
+                    }
+                    details.Add(created_FolderDetail);  
+                }
+                 var res = new ResponseModel<List<FolderDetailDto>>
+                {
+                    EC = 201,
+                    EM = "Create multiple folder detail record successful!",
+                    DT = details.Select(fd => fd.AsDto()).ToList()
+                };
+                return Created("", res);
+            }
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFolderDetail(int id)

@@ -8,67 +8,68 @@ import 'package:quiz/models/study_set.dart';
 import 'package:quiz/models/user.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/services/folder_detail_service.dart';
+import 'package:quiz/services/folder_service.dart';
 import 'package:quiz/services/study_set_service.dart';
 import 'package:quiz/shared/colors.dart';
 import 'package:quiz/utilities/image_utils.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
+import 'package:quiz/widgets/folder-tick-widget.dart';
 import 'package:quiz/widgets/study-set-tick-widget.dart';
 
-class ChooseStudySetScreen extends StatefulWidget {
-  ChooseStudySetScreen(
-      {super.key, required this.folder, required this.folderStream});
+class ChooseFolderScreen extends StatefulWidget {
+  ChooseFolderScreen({super.key, required this.studySet});
 
-  NotifyChangeStream folderStream;
-  Folder folder;
+  StudySet studySet;
   @override
-  State<ChooseStudySetScreen> createState() => _ChooseStudySetScreenState();
+  State<ChooseFolderScreen> createState() => _ChooseFolderScreenState();
 }
 
-class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
-  ValueNotifier studySets = ValueNotifier([]);
-  ValueNotifier<List<StudySetBrief>> choosedStudySets = ValueNotifier([]);
-  ValueNotifier studySetSelectedCount = ValueNotifier(0);
+class _ChooseFolderScreenState extends State<ChooseFolderScreen> {
+  ValueNotifier folders = ValueNotifier([]);
+  ValueNotifier<List<Folder>> choosedFolders = ValueNotifier([]);
+  ValueNotifier folderSelectedCount = ValueNotifier(0);
 
   Future<void> fetchData() async {
     UserInfo? user = await getUserInfo();
-    studySets.value = await StudySetService()
-        .getAllStudySetByUserIdAndNotInFolder(
-            user!.userId, widget.folder.folderId);
+    folders.value = await FolderService()
+        .getAllFolderOfUserIdAndNotContainStudySet(
+            user!.userId, widget.studySet.studySetId);
   }
 
-  void _addStudySet(StudySetBrief studySet) {
-    if (!choosedStudySets.value.contains(studySet)) {
-      var temp = choosedStudySets.value;
-      temp.add(studySet);
-      choosedStudySets.value = temp;
-      studySetSelectedCount.value = studySetSelectedCount.value + 1;
+  void _addFolder(Folder folder) {
+    if (!choosedFolders.value.contains(folder)) {
+      var temp = choosedFolders.value;
+      temp.add(folder);
+      choosedFolders.value = temp;
+      folderSelectedCount.value = folderSelectedCount.value + 1;
     }
   }
 
-  void _removeStudySet(StudySetBrief studySet) {
-    if (choosedStudySets.value.contains(studySet)) {
-      var temp = choosedStudySets.value;
-      temp.remove(studySet);
-      choosedStudySets.value = temp;
-      studySetSelectedCount.value = studySetSelectedCount.value - 1;
+  void _removeFolder(Folder folder) {
+    if (choosedFolders.value.contains(folder)) {
+      var temp = choosedFolders.value;
+      temp.remove(folder);
+      choosedFolders.value = temp;
+      folderSelectedCount.value = folderSelectedCount.value - 1;
     }
   }
 
   Future<bool> _saveData() async {
     List<int> studySetIds = [];
-    for (var element in choosedStudySets.value) {
-      studySetIds.add(element.studySetId);
+    for (var element in choosedFolders.value) {
+      studySetIds.add(element.folderId);
     }
-    return await FolderDetailService().addStudySetsToFolder(studySetIds, widget.folder.folderId);
+    return await FolderDetailService()
+        .addStudySetsToFolder(studySetIds, widget.studySet.studySetId);
   }
 
-  List<Widget> _loadStudySets() {
+  List<Widget> _loadFolders() {
     List<Widget> rs = [];
-    for (var studySet in studySets.value) {
-      rs.add(StudySetTickWidget(
-        studySet: studySet,
-        choosed: _addStudySet,
-        unChoosed: _removeStudySet,
+    for (var folder in folders.value) {
+      rs.add(FolderTickWidget(
+        folder: folder,
+        choosed: _addFolder,
+        unChoosed: _removeFolder,
       ));
       rs.add(const SizedBox(
         height: 8,
@@ -105,7 +106,7 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 16),
-                                child: Column(children: _loadStudySets()),
+                                child: Column(children: _loadFolders()),
                               )
                             ],
                           ),
@@ -142,7 +143,7 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                               width: 8,
                             ),
                             const Text(
-                              'Chọn học phần',
+                              'Chọn thư mục',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
@@ -173,7 +174,7 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                           Row(
                             children: [
                               Text(
-                                widget.folder.folderName,
+                                widget.studySet.studySetName,
                                 style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -198,14 +199,14 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                                     borderRadius: BorderRadius.circular(15)),
                                 child: CircleAvatar(
                                   child: Image.memory(convertBase64ToUint8List(
-                                      widget.folder.user.image)),
+                                      widget.studySet.user.image)),
                                 ),
                               ),
                               const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                widget.folder.user.username,
+                                widget.studySet.user.username,
                                 style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
@@ -217,7 +218,7 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                             height: 16,
                           ),
                           ValueListenableBuilder(
-                              valueListenable: studySetSelectedCount,
+                              valueListenable: folderSelectedCount,
                               builder: (context, value, snapshot) {
                                 return Text(
                                   "$value đã chọn",

@@ -109,4 +109,21 @@ Future<bool> modifyClass(ClassRequest classRequest) async {
         (data['dt']['classes'] as List).map((e) => Class.fromJson(e)).toList();
     return list;
   }
+   Future<List<Class>?> getAllClassByOwnerId(int id) async {
+    String url = "${GlobalVariable.url}/api/class/user-own/$id";
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await get(Uri.parse(url), headers: headers);
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return null;
+    }
+    final Map<String, dynamic> data = json.decode(response.body);
+    List<Class> list =
+        (data['dt'] as List).map((e) => Class.fromJson(e)).toList();
+    return list;
+  }
 }

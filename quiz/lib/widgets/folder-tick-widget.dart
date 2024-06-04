@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/models/folder.dart';
 import 'package:quiz/models/study_set.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/screens/ui/study-set-screen.dart';
 import 'package:quiz/utilities/image_utils.dart';
 
-class StudySetTickWidget extends StatelessWidget {
-  StudySetTickWidget(
+class FolderTickWidget extends StatelessWidget {
+  FolderTickWidget(
       {super.key,
-      required this.studySet,
+      required this.folder,
       required this.choosed,
       required this.unChoosed});
   Function choosed;
   Function unChoosed;
-  StudySetBrief studySet;
+  Folder folder;
   final ValueNotifier _isChecked = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class StudySetTickWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                studySet.studySetName,
+                folder.folderName,
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -51,23 +52,15 @@ class StudySetTickWidget extends StatelessWidget {
                       value: value,
                       onChanged: (bool? isChecked) {
                         if (isChecked!) {
-                          choosed(studySet);
+                          choosed(folder);
                         } else {
-                          unChoosed(studySet);
+                          unChoosed(folder);
                         }
                         _isChecked.value = isChecked;
                       },
                     );
                   }),
             ],
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            "${studySet.totalCards} thuật ngữ",
-            style: const TextStyle(
-                fontSize: 13, fontWeight: FontWeight.w500, color: Colors.white),
           ),
           const SizedBox(
             height: 20,
@@ -83,14 +76,14 @@ class StudySetTickWidget extends StatelessWidget {
                     BoxDecoration(borderRadius: BorderRadius.circular(15)),
                 child: CircleAvatar(
                   child: Image.memory(
-                      convertBase64ToUint8List(studySet.user.image)),
+                      convertBase64ToUint8List(folder.user.image)),
                 ),
               ),
               const SizedBox(
                 width: 8,
               ),
               Text(
-                studySet.user.username,
+                folder.user.username,
                 style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

@@ -6,9 +6,10 @@ import 'package:quiz/providers/notify_change_provider.dart';
 import 'package:quiz/services/study_set_service.dart';
 
 class CreateStudySet extends StatefulWidget {
-  CreateStudySet({super.key, required this.changeStream});
+  CreateStudySet({super.key, required this.changeStream, this.folderId});
 
   NotifyChangeStream changeStream;
+  int? folderId;
   @override
   State<CreateStudySet> createState() => _CreateStudySetState();
 }
@@ -29,6 +30,9 @@ class _CreateStudySetState extends State<CreateStudySet> {
         studySetId: 0,
         studySetName: _nameController.text.trim(),
         cards: mycards);
+    if(widget.folderId!=null){
+      return await StudySetService().createStudySetAndAddToFolder(studySet, widget.folderId!);
+    }
     return await StudySetService().createStudySet(studySet);
   }
 

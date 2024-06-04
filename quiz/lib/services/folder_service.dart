@@ -127,4 +127,42 @@ class FolderService {
         (data['dt']['folders'] as List).map((e) => Folder.fromJson(e)).toList();
     return list;
   }
+
+  Future<List<Folder>?> getAllFolderOfUserIdAndNotContainStudySet(
+      int id, int studySetId) async {
+    String url =
+        "${GlobalVariable.url}/api/folder/user/$id/study-set?studySetId=$studySetId";
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await get(Uri.parse(url), headers: headers);
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return null;
+    }
+    final Map<String, dynamic> data = json.decode(response.body);
+    List<Folder> list =
+        (data['dt'] as List).map((e) => Folder.fromJson(e)).toList();
+    return list;
+  }
+
+  Future<List<Folder>?> getAllFolderByUserIdAndNotInAnyClass(int id) async {
+    String url = "${GlobalVariable.url}/api/folder/user/$id/non-class";
+    String? token = await getToken();
+    Map<String, String> headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer $token"
+    };
+    Response response = await get(Uri.parse(url), headers: headers);
+    int statusCode = response.statusCode;
+    if (statusCode != 200) {
+      return null;
+    }
+    final Map<String, dynamic> data = json.decode(response.body);
+    List<Folder> list =
+        (data['dt'] as List).map((e) => Folder.fromJson(e)).toList();
+    return list;
+  }
 }
