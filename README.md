@@ -25,7 +25,7 @@
     ```
     - Connect to `quiz-mysql` server with connection info:
     > hostname: 127.0.0.1;
-    > port 3306;
+    > port 3308;
     > usename: root;
     > password: your password setup in `.env` file
     - Create new databases with name `TaskService` and `UserService`.
