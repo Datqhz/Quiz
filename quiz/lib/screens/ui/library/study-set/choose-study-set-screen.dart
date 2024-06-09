@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:quiz/models/folder.dart';
+import 'package:quiz/models/folder_detail.dart';
 import 'package:quiz/models/study_set.dart';
 import 'package:quiz/models/user.dart';
 import 'package:quiz/providers/notify_change_provider.dart';
@@ -55,11 +56,12 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
   }
 
   Future<bool> _saveData() async {
-    List<int> studySetIds = [];
+    List<FolderDetail> folderDetails = [];
     for (var element in choosedStudySets.value) {
-      studySetIds.add(element.studySetId);
+      folderDetails.add(FolderDetail(
+          folderId: widget.folder.folderId, studySetId: element.studySetId));
     }
-    return await FolderDetailService().addStudySetsToFolder(studySetIds, widget.folder.folderId);
+    return await FolderDetailService().addStudySetsToFolder(folderDetails);
   }
 
   List<Widget> _loadStudySets() {
@@ -154,7 +156,44 @@ class _ChooseStudySetScreenState extends State<ChooseStudySetScreen> {
                             )),
                             TextButton(
                               onPressed: () async {
-                                _saveData();
+                                bool rs = await _saveData();
+                                if (rs) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      width: 2.6 *
+                                          MediaQuery.of(context).size.width /
+                                          4,
+                                      behavior: SnackBarBehavior.floating,
+                                      content: const Text(
+                                        'Lưu thành công.',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(14)),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                  widget.folderStream.notifyDataChanged();
+                                  Navigator.pop(context);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      width: 2.6 *
+                                          MediaQuery.of(context).size.width /
+                                          4,
+                                      behavior: SnackBarBehavior.floating,
+                                      content: const Text(
+                                        'Xảy ra lỗi trong quá trình lưu.',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(14)),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
                               },
                               style: TextButton.styleFrom(
                                   backgroundColor: Colors.transparent),

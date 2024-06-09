@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<UserServiceContext>();
 builder.Services.AddSingleton<AuthenticationHandler, AuthenticationHandler>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
-builder.Services.AddTransient<IRepository<UserInfo>, UserInfoRepository>();
+builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 builder.Services.AddTransient<IRepository<Group>, GroupRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

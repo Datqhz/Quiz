@@ -1,6 +1,7 @@
 # Quiz
 ## Requirements
 * Docker Desktop - Step by step to install [here](https://docs.docker.com/engine/install/).
+* Flutter SDK
 
 ## Getting started
 ### Installation
@@ -18,13 +19,39 @@
     docker-compose build
     ```
 3. **Setup database**
+    - Run `images` quiz-mysql
     ```
+    docker-compose up quiz-mysql
     ```
-4. **Run all images as container**
+    - Connect to `quiz-mysql` server with connection info:
+    > hostname: 127.0.0.1;
+    > port 3306;
+    > usename: root;
+    > password: your password setup in `.env` file
+    - Create new databases with name `TaskService` and `UserService`.
+    - Run script file for each databases (task-service-script for TaskService and myuser-service-script for UserService)
+4. **Run all images as containers**
     ```
-    docker-compose up
+    docker-compose up -d
     ```
     wait a minutes for all container start
+5. **Setup front-end**
+    - Go to `root` directory
+    ```
+    cd..
+    ```
+    - Navigate to `quiz` directory
+    ```
+    cd \quiz
+    ```
+    - Install all dependencies
+    ```
+    flutter pub get
+    ```
+    - Run the flutter app
+    ```
+    flutter run
+    ```
 ### API Documentation
 To approach all APIs of mine. You need **Postman** to do this, [here](https://www.postman.com/) is how to getting start to use **Postman**.
 Import APIs by use `task-service-apis` file and `myuser-service-apis`.

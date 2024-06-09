@@ -29,12 +29,14 @@ namespace Quiz.Task.Service.Repositories
                 .Where(f => f.Id== id && f.ClassId != null)
                 .Include(f => f.User)
                 .Include(f => f.Class)
+                .Include(f => f.FolderDetails)
                 .FirstOrDefaultAsync();
 
             // Get folders where ClassId is null and exclude Class
             var folderWithoutClass = await _context.Folder
                 .Where(f => f.Id == id && f.ClassId == null)
                 .Include(f => f.User)
+                .Include(f => f.FolderDetails)
                 .OrderByDescending(f => f.CreateDate)
                 .FirstOrDefaultAsync();
             if(folderWithoutClass!= null){
@@ -75,6 +77,7 @@ namespace Quiz.Task.Service.Repositories
                 .Where(f => f.UserId == userId && f.ClassId != null)
                 .Include(f => f.User)
                 .Include(f => f.Class)
+                .Include(f => f.FolderDetails)
                 .OrderByDescending(f => f.CreateDate)
                 .ToListAsync();
 
@@ -82,6 +85,7 @@ namespace Quiz.Task.Service.Repositories
             var foldersWithoutClass = await _context.Folder
                 .Where(f => f.UserId == userId && f.ClassId == null)
                 .Include(f => f.User)
+                .Include(f => f.FolderDetails)
                 .OrderByDescending(f => f.CreateDate)
                 .ToListAsync();
 
@@ -96,6 +100,7 @@ namespace Quiz.Task.Service.Repositories
                                         .Where(f => f.ClassId != null && f.ClassId == classId)
                                         .Include(f => f.User)
                                         .Include(f => f.Class)
+                                        .Include(f => f.FolderDetails)
                                         .OrderByDescending(f => f.CreateDate)
                                         .ToListAsync();
         }
@@ -107,12 +112,14 @@ namespace Quiz.Task.Service.Repositories
             var foldersWithClass = _context.Folder
                 .Where(f => f.UserId == userId && f.ClassId != null)
                 .Include(f => f.User)
-                .Include(f => f.Class);
+                .Include(f => f.Class)
+                .Include(f => f.FolderDetails);
 
             // Get folders where ClassId is null and exclude Class
             var foldersWithoutClass = _context.Folder
                 .Where(f => f.UserId == userId && f.ClassId == null)
-                .Include(f => f.User);
+                .Include(f => f.User)
+                .Include(f => f.FolderDetails);
             var combinedQuery = foldersWithClass.Union(foldersWithoutClass)
                 .OrderByDescending(f => f.CreateDate);
             var pagedResult = await combinedQuery
@@ -130,6 +137,7 @@ namespace Quiz.Task.Service.Repositories
                                 .Where(f => f.ClassId != null && f.ClassId == classId)
                                 .Include(f => f.User)
                                 .Include(f => f.Class)
+                                .Include(f => f.FolderDetails)
                                 .OrderByDescending(e => e.CreateDate)
                                 .Skip(offset)
                                 .Take(limit)
@@ -158,6 +166,7 @@ namespace Quiz.Task.Service.Repositories
             return await _context.Folder
                 .Where(f => f.UserId == userId && f.ClassId == null)
                 .Include(f => f.User)
+                .Include(f => f.FolderDetails)
                 .OrderByDescending(f => f.CreateDate)
                 .ToListAsync();
         }
@@ -173,7 +182,7 @@ namespace Quiz.Task.Service.Repositories
                         FolderName = folder.FolderName,
                         CreateDate = folder.CreateDate,
                         User = folder.User,
-
+                        FolderDetails = folder.FolderDetails,
                     })
                     .ToListAsync();
             return data;

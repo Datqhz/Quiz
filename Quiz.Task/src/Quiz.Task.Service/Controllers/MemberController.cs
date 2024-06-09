@@ -47,7 +47,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound( new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Member has id  doesn't exsist",
+                    EM = "Member has id doesn't exist",
                     DT = ""
                 });
             }
@@ -68,7 +68,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound( new ResponseModel<string>
                     {
                         EC = 404,
-                        EM = "User has id doesn't exsits!",
+                        EM = "User has id doesn't exits!",
                         DT = ""
                     });
             }
@@ -78,7 +78,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound( new ResponseModel<string>
                     {
                         EC = 404,
-                        EM = "Class has id doesn't exsits!",
+                        EM = "Class has id doesn't exits!",
                         DT = ""
                     });
             }
@@ -99,7 +99,7 @@ namespace Quiz.Task.Service.Controllers
             var res = new ResponseModel<MemberDto>
                 {
                     EC = 201,
-                    EM = "Create study set successful!" ,
+                    EM = "Create Member record successful!" ,
                     DT = created_Member.AsDto()
                 };
             return CreatedAtAction(nameof(GetById), new {id = created_Member.Id}, res);
@@ -114,7 +114,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Member has id doesn't exsits!",
+                    EM = "Member has id doesn't exits!",
                     DT = ""
                 });
             }
@@ -134,7 +134,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok( new ResponseModel<IEnumerable<MemberDto>>
             {
                 EC = 200,
-                EM = "Get all Member successful!",
+                EM = "Get all members successful!",
                 DT = data.Select(member => member.AsDto()).ToList()
             });
         }

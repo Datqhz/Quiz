@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:quiz/models/folder_detail.dart';
 import 'package:quiz/shared/global_variable.dart';
 import 'package:quiz/utilities/shared_preference_utils.dart';
 
@@ -24,6 +25,7 @@ class FolderDetailService {
     }
     return true;
   }
+
   Future<bool> addStudySetToFolders(int studySetId, List<int> folderIds) async {
     String? token = await getToken();
     Map<String, String> headers = {
@@ -35,7 +37,7 @@ class FolderDetailService {
             headers: headers,
             body: jsonEncode(<String, dynamic>{
               "studySetId": studySetId,
-              "folderIds": folderIds.toList(),
+              "folderId": folderIds.toList(),
             }));
     int statusCode = response.statusCode;
     if (statusCode != 201) {
@@ -43,19 +45,20 @@ class FolderDetailService {
     }
     return true;
   }
-    Future<bool> addStudySetsToFolder(List<int> studySetIds,  int folderId) async {
+
+  Future<bool> addStudySetsToFolder(List<FolderDetail> folderDetails) async {
+    List<Map<String, int>> list = folderDetails
+        .map((e) => {"folderId": e.folderId, "studySetId": e.studySetId})
+        .toList();
     String? token = await getToken();
     Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
       "Authorization": "Bearer $token"
     };
-    Response response =
-        await post(Uri.parse("${GlobalVariable.url}/api/folder-detail/studySets"),
-            headers: headers,
-            body: jsonEncode(<String, dynamic>{
-              "studySetIds": studySetIds,
-              "folderId": folderId,
-            }));
+    Response response = await post(
+        Uri.parse("${GlobalVariable.url}/api/folder-detail/multiple"),
+        headers: headers,
+        body: jsonEncode(list));
     int statusCode = response.statusCode;
     if (statusCode != 201) {
       return false;

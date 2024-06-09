@@ -42,7 +42,7 @@ namespace Quiz.Task.Service.Extensions
         {
             return new FolderDto(folder.Id, folder.FolderName,
              folder.CreateDate, folder.User?.AsDto(), folder.Class?.AsDto(),
-             folder.FolderDetails?.Select(folderDetail => folderDetail.AsDto()).ToList());
+             folder.FolderDetails?.Count());
         }
         public static FolderDetailDto AsDto(this FolderDetail folderDetail)
         {

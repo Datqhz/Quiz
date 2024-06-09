@@ -19,7 +19,8 @@ namespace Quiz.Task.Service.Controllers
         private readonly IStudySetRepository studySetRepository;
         private readonly ICardRepository cardRepository;
         private readonly IRepository<UserInfo> userRepository;
-        public StudySetController(IStudySetRepository studySetRepository, ICardRepository cardRepository, IRepository<UserInfo> userRepository){
+        public StudySetController(IStudySetRepository studySetRepository, ICardRepository cardRepository, IRepository<UserInfo> userRepository)
+        {
             this.studySetRepository = studySetRepository;
             this.cardRepository = cardRepository;
             this.userRepository = userRepository;
@@ -34,7 +35,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<IEnumerable<StudySetDto>>
             {
                 EC = 200,
-                EM = "Get all study-set successful!",
+                EM = "Get all study-sets successful!",
                 DT = rs
             });
         }
@@ -48,7 +49,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Study set has id doesn't exsits!",
+                    EM = "Study set has id doesn't exits!",
                     DT = ""
                 }
                 );
@@ -66,10 +67,11 @@ namespace Quiz.Task.Service.Controllers
         {
             int totalPage = 0;
             IEnumerable<StudySet> data;
-            if(page == null || limit == null)
+            if (page == null || limit == null)
             {
-                data  = await studySetRepository.GetByUserId(id);
-            }else 
+                data = await studySetRepository.GetByUserId(id);
+            }
+            else
             {
                 totalPage = await studySetRepository.CountOfPageStudySetByUserId(id, (int)limit);
                 data = await studySetRepository.GetByUserIdWithPage(id, (int)page, (int)limit);
@@ -77,8 +79,8 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,
-                EM = "Get study set by id = " + id + " successful!",
-                DT = new 
+                EM = "Get study sets by userid = " + id + " successful!",
+                DT = new
                 {
                     TotalPage = totalPage,
                     StudySets = data.Select(studySet => studySet.AsBriefDto()).ToList()
@@ -94,7 +96,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<List<StudySetBriefDto>>
             {
                 EC = 200,
-                EM = $"Get study set by id = {userId} and not folder id {folderId} in successful!",
+                EM = $"Get study sets by user id = {userId} and not folder id {folderId} in successful!",
                 DT = data.Select(studySet => studySet.AsBriefDto()).ToList()
             });
         }
@@ -103,16 +105,16 @@ namespace Quiz.Task.Service.Controllers
         public async Task<ActionResult> CreateStudySet(CreateStudySetDto studySetDto)
         {
             var user = await userRepository.GetById(studySetDto.UserId);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "User doesn't exsits!" ,
+                    EM = "User doesn't exits!",
                     DT = ""
                 });
             }
-            using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 // insert new study set into database
                 var studySet = await studySetRepository.Insert(new StudySet
@@ -123,7 +125,8 @@ namespace Quiz.Task.Service.Controllers
 
                 });
                 // insert all new card into database
-                foreach (var card in studySetDto.Cards){
+                foreach (var card in studySetDto.Cards)
+                {
                     var created_card = await cardRepository.Insert(new Card
                     {
                         Term = card.Term,
@@ -135,10 +138,10 @@ namespace Quiz.Task.Service.Controllers
                 scope.Complete();
                 // map study set to study set dto
                 var dto = studySet.AsDto();
-                return CreatedAtAction(nameof(GetById), new {id = studySet.Id}, new ResponseModel<StudySetDto>
+                return CreatedAtAction(nameof(GetById), new { id = studySet.Id }, new ResponseModel<StudySetDto>
                 {
                     EC = 201,
-                    EM = "Create study set successful!" ,
+                    EM = "Create study set successful!",
                     DT = dto
                 });
             }
@@ -149,15 +152,17 @@ namespace Quiz.Task.Service.Controllers
         {
             // try find study set has id
             var studySet = await studySetRepository.GetById(studySetDto.Id);
-            if(studySet == null){
+            if (studySet == null)
+            {
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Study set has id doesn't exsits!" ,
+                    EM = "Study set has id doesn't exits!",
                     DT = ""
                 });
             }
-            using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            Console.WriteLine(studySetDto.ToString());
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 // Update study set info
                 var rs_studySet = await studySetRepository.Update(new StudySet
@@ -169,8 +174,11 @@ namespace Quiz.Task.Service.Controllers
                 });
                 rs_studySet.Cards = new List<Card>();
                 // Update cards in study set
-                foreach (var card in studySetDto.Cards){
-                    if(card.Task == 0)// create new card
+                Console.WriteLine("update 1");
+                foreach (var card in studySetDto.Cards)
+                {
+                    Console.WriteLine("update 2");
+                    if (card.Task == 0)// create new card
                     {
                         var created_card = await cardRepository.Insert(new Card
                         {
@@ -179,46 +187,49 @@ namespace Quiz.Task.Service.Controllers
                             StudySetId = rs_studySet.Id
                         });
                         rs_studySet.Cards.Add(created_card);
-                    }else if(card.Task == 1)//upate card exsits
+                    }
+                    else if (card.Task == 1)//upate card exsits
                     {
                         var updated_card = await cardRepository.GetById(card.Id);
-                        if (updated_card == null){
+                        if (updated_card == null)
+                        {
                             return NotFound(new ResponseModel<string>
                             {
                                 EC = 404,
-                                EM = "Something wrong when process update card!" ,
+                                EM = "Something wrong when process update card!",
                                 DT = ""
                             });
                         }
                         updated_card.Term = card.Term;
                         updated_card.Definition = card.Definition;
-                        await cardRepository.Update(new Card {
-                            Term = updated_card.Term,
-                            Definition = updated_card.Definition
-                        });
+                        await cardRepository.Update(updated_card);
                         rs_studySet.Cards.Add(updated_card);
-                    }else if(card.Task == 2)// delete card
+                    }
+                    else if (card.Task == 2)// delete card
                     {
                         var temp_card = await cardRepository.GetById(card.Id);
-                        if (temp_card == null){
+                        if (temp_card == null)
+                        {
                             return NotFound(new ResponseModel<string>
                             {
                                 EC = 404,
-                                EM = "Something wrong when process update card!" ,
+                                EM = "Something wrong when process update card!",
                                 DT = ""
                             });
                         }
                         await cardRepository.Delete(card.Id);
-                    }else // 4 -> nothing
+                    }
+                    else // 4 -> nothing
                     {
                         continue;
                     }
                 }
+                Console.WriteLine("update 3");
                 scope.Complete();
                 return Ok(new ResponseModel<StudySetDto>
                 {
                     EC = 200,
-                    EM = "Update study set successful!" ,
+                    EM = "Update study set successful!",
                     DT = studySet.AsDto()
                 });
             }
@@ -227,14 +238,15 @@ namespace Quiz.Task.Service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            using(var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 var studySet = await studySetRepository.GetById(id);
-                if (studySet == null){
+                if (studySet == null)
+                {
                     return NotFound(new ResponseModel<string>
                     {
                         EC = 404,
-                        EM = "Study set has id doesn't exsits" ,
+                        EM = "Study set has id doesn't exits",
                         DT = ""
                     });
                 }
@@ -242,11 +254,11 @@ namespace Quiz.Task.Service.Controllers
                 await studySetRepository.Delete(id);
                 scope.Complete();
                 return Ok(new ResponseModel<StudySetDto>
-                    {
-                        EC = 200,
-                        EM = "Delete study set successful!" ,
-                        DT = studySet.AsDto()
-                    });
+                {
+                    EC = 200,
+                    EM = "Delete study set successful!",
+                    DT = studySet.AsDto()
+                });
             }
         }
         // Get all study set by folder id
@@ -255,10 +267,11 @@ namespace Quiz.Task.Service.Controllers
         {
             int totalPage = 0;
             IEnumerable<StudySet> data;
-            if(page == null || limit == null)
+            if (page == null || limit == null)
             {
-                data  = await studySetRepository.GetByFolderId(id);
-            }else 
+                data = await studySetRepository.GetByFolderId(id);
+            }
+            else
             {
                 totalPage = await studySetRepository.CountOfPageStudySetByFolderId(id, (int)limit);
                 data = await studySetRepository.GetByFolderIdWithPage(id, (int)page, (int)limit);
@@ -266,8 +279,8 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,
-                EM = "Get study set by id = " + id + " successful!",
-                DT = new 
+                EM = "Get study sets by id = " + id + " successful!",
+                DT = new
                 {
                     TotalPage = totalPage,
                     StudySets = data.Select(studySet => studySet.AsBriefDto()).ToList()
@@ -282,7 +295,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<IEnumerable<StudySetBriefDto>>
             {
                 EC = 200,
-                EM = "Get study set by regex = " + regex + " successful!",
+                EM = "Get study sets by regex = " + regex + " successful!",
                 DT = data.Select(studySet => studySet.AsBriefDto()).ToList()
             });
         }

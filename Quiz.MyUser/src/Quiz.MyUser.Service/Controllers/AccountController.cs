@@ -21,12 +21,12 @@ namespace Quiz.MyUser.Service.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountRepository accountRepository;
-        private readonly IRepository<UserInfo> userRepository;
+        private readonly IUserInfoRepository userRepository;
         private readonly IRepository<Group> groupRepository;
         private readonly AuthenticationHandler authHandler;
         private readonly IPublishEndpoint publishEndpoint;
         private byte[] defaultImg = Convert.FromBase64String(GlobalVariable.defaultImg);
-        public AccountController(IAccountRepository accountRepository, IRepository<UserInfo> userRepository,
+        public AccountController(IAccountRepository accountRepository, IUserInfoRepository userRepository,
          IRepository<Group> groupRepository,AuthenticationHandler authHandler, IPublishEndpoint publishEndpoint){
             this.accountRepository = accountRepository;
             this.userRepository = userRepository;

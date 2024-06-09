@@ -39,7 +39,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<IEnumerable<FolderDto>>
             {
                 EC = 200,
-                EM = "Get all Folder successful!",
+                EM = "Get all folders successful!",
                 DT = data.Select(Folder => Folder.AsDto()).ToList()
             });
         }
@@ -53,14 +53,14 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Folder has id  doesn't exsist",
+                    EM = $"Folder has id {id} doesn't exist",
                     DT = ""
                 });
             }
             return Ok(new ResponseModel<FolderDto>
             {
                 EC = 200,
-                EM = "Get Folder successful!",
+                EM = "Get folder successful!",
                 DT = data.AsDto()
             });
         }
@@ -75,7 +75,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "User has id doesn't exsits!",
+                    EM = $"User has id = {createFolderDto.UserId} doesn't exits!",
                     DT = ""
                 });
             }
@@ -87,7 +87,7 @@ namespace Quiz.Task.Service.Controllers
                     return NotFound(new ResponseModel<string>
                     {
                         EC = 404,
-                        EM = "Class has id doesn't exsits!",
+                        EM = $"Class has id = {createFolderDto.ClassId} doesn't exits!",
                         DT = ""
                     });
                 }
@@ -123,7 +123,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Folder has id doesn't exsits!",
+                    EM = $"Folder has id = {updateFolderDto.Id} doesn't exits!",
                     DT = ""
                 });
             }
@@ -135,7 +135,7 @@ namespace Quiz.Task.Service.Controllers
                     return NotFound(new ResponseModel<string>
                     {
                         EC = 404,
-                        EM = "Class has id doesn't exsits!",
+                        EM = $"Class has id = {updateFolderDto.ClassId} doesn't exits!",
                         DT = ""
                     });
                 }
@@ -165,7 +165,7 @@ namespace Quiz.Task.Service.Controllers
                 return Ok(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Folder has id doesn't exsits!",
+                    EM = $"Folder has id = {id} doesn't exits!",
                     DT = ""
                 });
             }
@@ -205,7 +205,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,
-                EM = "Get all Folder by userId successful!",
+                EM = "Get all folders by userId successful!",
                 DT = new
                 {
                     TotalPage = totalPages,
@@ -218,11 +218,11 @@ namespace Quiz.Task.Service.Controllers
         public async Task<IActionResult> GetAllFolderByUserIdAndNotInClass(int userId)
         {
             IEnumerable<Folder> data;
-            data = await folderRepository.GetByUserId(userId);
+            data = await folderRepository.GetByUserIdAndNotInClass(userId);
             return Ok(new ResponseModel<List<FolderDto>>
             {
                 EC = 200,
-                EM = "Get all Folder by userId and not in class successful!",
+                EM = "Get all folders by userId and not in class successful!",
                 DT = data.Select(Folder => Folder.AsDto()).ToList()
             });
         }
@@ -234,7 +234,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<List<FolderDto>>
             {
                 EC = 200,
-                EM = "Get all Folder by userId and not contain study set successful!",
+                EM = "Get all folders by userId and not contain study set successful!",
                 DT = data.Select(Folder => Folder.AsDto()).ToList()
             });
         }
@@ -256,7 +256,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,
-                EM = "Get all Folder by class id successful!",
+                EM = "Get all folders by class id successful!",
                 DT = new
                 {
                     TotalPage = totalPages,

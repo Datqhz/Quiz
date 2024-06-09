@@ -34,14 +34,14 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "FolderDetail has id  doesn't exsist",
+                    EM = $"FolderDetail has id =  {id} doesn't exsist",
                     DT = ""
                 });
             }
             return Ok(new ResponseModel<FolderDetailDto>
             {
                 EC = 200,
-                EM = "Get FolderDetail successful!",
+                EM = "Get folderDetail successful!",
                 DT = data.AsDto()
             });
         }
@@ -54,7 +54,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Folder has id doesn't exsits!",
+                    EM = $"Folder has id = {createFolderDetailDto.FolderId} doesn't exits!",
                     DT = ""
                 });
             }
@@ -64,7 +64,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Study set has id doesn't exsits!",
+                    EM = $"Study set has id = {createFolderDetailDto.StudySetId} doesn't exits!",
                     DT = ""
                 });
             }
@@ -112,6 +112,7 @@ namespace Quiz.Task.Service.Controllers
                     }
                     details.Add(created_FolderDetail);  
                 }
+                scope.Complete();
                  var res = new ResponseModel<List<FolderDetailDto>>
                 {
                     EC = 201,
@@ -130,7 +131,7 @@ namespace Quiz.Task.Service.Controllers
                 return Ok(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "FolderDetail has id doesn't exsits!",
+                    EM = "FolderDetail has id doesn't exits!",
                     DT = ""
                 });
             }
@@ -138,7 +139,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<FolderDetailDto>
             {
                 EC = 200,
-                EM = "Delete FolderDetail successful!",
+                EM = "Delete folderDetail successful!",
                 DT = deleted_FolderDetail.AsDto()
             });
         }

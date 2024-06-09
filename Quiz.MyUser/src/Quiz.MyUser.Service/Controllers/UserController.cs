@@ -9,6 +9,7 @@ using Quiz.MyUser.Contract;
 using Quiz.MyUser.Service.Dtos;
 using Quiz.MyUser.Service.Extensions;
 using Quiz.MyUser.Service.Models;
+using Quiz.MyUser.Service.Repository;
 
 namespace Quiz.MyUser.Service.Controllers
 {
@@ -18,9 +19,9 @@ namespace Quiz.MyUser.Service.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly IRepository<UserInfo> repository;
+        private readonly IUserInfoRepository repository;
         private readonly IPublishEndpoint publishEndpoint;
-        public UserController(IRepository<UserInfo> repository, IPublishEndpoint publishEndpoint)
+        public UserController(IUserInfoRepository repository, IPublishEndpoint publishEndpoint)
         {
             this.repository = repository;
             this.publishEndpoint = publishEndpoint;
@@ -97,6 +98,18 @@ namespace Quiz.MyUser.Service.Controllers
                     DT = rs_user.AsDto()
                 });
             }
+        }
+
+        [HttpGet("find")]
+        public async Task<IActionResult> FindByName([FromQuery] string regex)
+        {
+            var data = await repository.FindByRegex(regex);
+            return Ok(new ResponseModel<IEnumerable<UserInfo>>
+            {
+                EC = 200,
+                EM = "Get user contain regex" + regex + " successful!",
+                DT = data
+            });
         }
     }
 }

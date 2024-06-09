@@ -13,7 +13,7 @@ namespace Quiz.Task.Service.DBContexts
         public DbSet<Folder> Folder { get; set; }
         public DbSet<FolderDetail> FolderDetail { get; set; }
         public DbSet<Member> Member { get; set; }
-        public DbSet<StudySet> StudySet{ get; set; }
+        public DbSet<StudySet> StudySet { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +21,7 @@ namespace Quiz.Task.Service.DBContexts
             {
                 string ROOT_PASSWORD = Environment.GetEnvironmentVariable("DATABASE_ROOT_PASSWORD");
                 optionsBuilder.UseMySQL($"server=quiz-mysql;port=3306;database=TaskService;user=root;password={ROOT_PASSWORD}");
+                optionsBuilder.EnableSensitiveDataLogging(true);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,7 +48,7 @@ namespace Quiz.Task.Service.DBContexts
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.UserName).IsRequired();
                 entity.Property(e => e.Image).IsRequired();
-                entity.Property(e => e.CreateDate).HasDefaultValue<DateTime>(DateTime.Now);
+                entity.Property(e => e.CreateDate).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
                 entity.HasOne(e => e.Group)
                     .WithMany(g => g.Users)
                     .HasForeignKey(e => e.GroupId);
@@ -72,7 +73,7 @@ namespace Quiz.Task.Service.DBContexts
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.ClassName).IsRequired();
                 entity.Property(e => e.UserId).IsRequired();
-                entity.Property(e => e.CreateDate).HasDefaultValue<DateTime>(DateTime.Now);
+                entity.Property(e => e.CreateDate).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
                 entity.HasOne(e => e.User)
                     .WithMany(u => u.Classes)
                     .HasForeignKey(e => e.UserId);
@@ -84,7 +85,7 @@ namespace Quiz.Task.Service.DBContexts
                 entity.Property(e => e.FolderName).IsRequired();
                 entity.Property(e => e.UserId).IsRequired();
                 entity.Property(e => e.ClassId).IsRequired(false);
-                entity.Property(e => e.CreateDate).HasDefaultValue<DateTime>(DateTime.Now);
+                entity.Property(e => e.CreateDate).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
                 entity.HasOne(e => e.User)
                     .WithMany(u => u.Folders)
                     .HasForeignKey(e => e.UserId);
@@ -104,7 +105,7 @@ namespace Quiz.Task.Service.DBContexts
                     .HasForeignKey(e => e.StudySetId);
                 entity.HasOne(e => e.Folder)
                     .WithMany(u => u.FolderDetails)
-                    .HasForeignKey(e => e.FolderId);         
+                    .HasForeignKey(e => e.FolderId);
             });
             modelBuilder.Entity<Member>(entity =>
             {
@@ -117,7 +118,7 @@ namespace Quiz.Task.Service.DBContexts
                     .HasForeignKey(e => e.UserId);
                 entity.HasOne(e => e.Class)
                     .WithMany(u => u.Members)
-                    .HasForeignKey(e => e.ClassId);         
+                    .HasForeignKey(e => e.ClassId);
             });
             modelBuilder.Entity<StudySet>(entity =>
             {
@@ -125,7 +126,7 @@ namespace Quiz.Task.Service.DBContexts
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.UserId).IsRequired();
                 entity.Property(e => e.StudySetName).IsRequired();
-                entity.Property(e => e.CreateDate).HasDefaultValue<DateTime>(DateTime.Now);
+                entity.Property(e => e.CreateDate).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
                 entity.HasOne(e => e.User)
                     .WithMany(u => u.StudySets)
                     .HasForeignKey(e => e.UserId);

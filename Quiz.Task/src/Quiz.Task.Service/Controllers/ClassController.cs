@@ -34,7 +34,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok( new ResponseModel<IEnumerable<ClassDto>>
             {
                 EC = 200,
-                EM = "Get all class successful!",
+                EM = "Get all classes successful!",
                 DT = data.Select(e_class => e_class.AsDto()).ToList()
             });
         }
@@ -47,14 +47,14 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound( new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Class has id  doesn't exsist",
+                    EM = $"Class has id = {id}  doesn't exist",
                     DT = ""
                 });
             }
             return Ok( new ResponseModel<ClassDto>
             {
                 EC = 200,
-                EM = "Get all class successful!",
+                EM = "Get class by id successful!",
                 DT = data.AsDto()
             });
         }
@@ -68,7 +68,7 @@ namespace Quiz.Task.Service.Controllers
                 return NotFound(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "User has id doesn't exsits!",
+                    EM = $"User has id = {createClassDto.UserId} doesn't exits!",
                     DT = ""
                 });
             }
@@ -114,7 +114,7 @@ namespace Quiz.Task.Service.Controllers
                 return Ok(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Class has id doesn't exsits!",
+                    EM = $"Class has id = {updateClassDto.Id} doesn't exits!",
                     DT = ""
                 });
             }
@@ -138,7 +138,7 @@ namespace Quiz.Task.Service.Controllers
                 return Ok(new ResponseModel<string>
                 {
                     EC = 404,
-                    EM = "Class has id doesn't exsits!",
+                    EM = $"Class has id = {id} doesn't exits!",
                     DT = ""
                 });
             }
@@ -167,7 +167,7 @@ namespace Quiz.Task.Service.Controllers
             return Ok(new ResponseModel<Object>
             {
                 EC = 200,
-                EM = "Get all class user join successful!",
+                EM = "Get all classes user join successful!",
                 DT = new {
                     TotalPage = NumOfPage,
                     Classes = classes.Select(e => e.AsDto()).ToList()
